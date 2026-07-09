@@ -33,12 +33,41 @@
     .user-pill{font-size:.85rem;opacity:.8;margin-right:8px}
 
 
-.mobile-photo-reveal{display:none}
+
+
 @media (max-width:650px){
-  .mobile-photo-reveal{
-    display:block;
-    height:58vh;
-    background:url("hero.jpg") center center/cover no-repeat;
+  .hero{
+    min-height:100vh;
+    position:sticky;
+    top:0;
+    z-index:2;
+    overflow:hidden;
+    transition:background-size .4s ease, background-position .4s ease;
+  }
+
+  .hero.scrolled-focus{
+    background:
+      linear-gradient(rgba(20,18,16,.08),rgba(20,18,16,.12)),
+      url("hero.jpg") center center/cover no-repeat;
+  }
+
+  .hero.scrolled-focus h1,
+  .hero.scrolled-focus p,
+  .hero.scrolled-focus .kiss-btn{
+    opacity:0;
+    transform:translateY(-18px);
+    pointer-events:none;
+  }
+
+  .hero h1,
+  .hero p,
+  .hero .kiss-btn{
+    transition:opacity .35s ease, transform .35s ease;
+  }
+
+  .topbar{
+    position:relative;
+    z-index:3;
   }
 }
 
@@ -139,7 +168,6 @@
 <div class="app-shell">
 <div class="stars"></div>
 <header class="hero"><span class="heart">♡</span><span class="heart">♥</span><span class="heart">♡</span><div><h1>Deepii & Klarii's Bucket List</h1><p>“One adventure at a time, one memory forever.”</p><button class="kiss-btn" onclick="sendKiss()">Send a Kiss 💋</button></div></header>
-<div class="mobile-photo-reveal" aria-hidden="true"></div>
 <div class="topbar"><nav><div class="brand">∞ Deepii & Klarii</div><div class="navlinks"><a href="#list">Bucket List</a><a href="#memories">Memory Wall</a><a href="#notes">Love Notes</a></div><span class="user-pill" id="signedInUser"></span><button class="toggle" onclick="toggleDark()">Dark Mode</button><button class="toggle" id="logoutBtn">Log Out</button></nav></div>
 <main class="wrap">
 <section class="section grid" id="stats"><div class="card"><h3>Total dreams</h3><h2 id="total">0</h2></div><div class="card"><h3>Adventures completed</h3><h2 id="completed">0</h2></div><div class="card"><h3>Percentage completed</h3><h2 id="percent">0%</h2><div class="progress"><div id="bar" class="bar"></div></div></div></section>
@@ -561,6 +589,32 @@ function sendKiss(){
  setTimeout(()=>{glow.remove();kiss.remove();},1800);
 }
 window.sendKiss=sendKiss;
+
+
+
+function handleMobileHeroScroll(){
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+
+  const isMobile = window.matchMedia('(max-width: 650px)').matches;
+  if (!isMobile) {
+    hero.classList.remove('scrolled-focus');
+    return;
+  }
+
+  const scrollY = window.scrollY || window.pageYOffset;
+  const heroHeight = hero.offsetHeight || window.innerHeight;
+
+  if (scrollY > heroHeight * 0.16 && scrollY < heroHeight * 0.82) {
+    hero.classList.add('scrolled-focus');
+  } else {
+    hero.classList.remove('scrolled-focus');
+  }
+}
+
+window.addEventListener('scroll', handleMobileHeroScroll, { passive: true });
+window.addEventListener('resize', handleMobileHeroScroll);
+handleMobileHeroScroll();
 
 
 const loginBtn = document.getElementById("loginBtn");
