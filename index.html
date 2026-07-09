@@ -246,6 +246,16 @@
   }
 }
 
+  
+.overlay-list .item.completing{
+  animation: dreamCompleteFade 1.25s ease forwards;
+}
+@keyframes dreamCompleteFade{
+  0%{opacity:1;transform:scale(1)}
+  45%{opacity:1;transform:scale(1.025)}
+  100%{opacity:0;transform:translateY(18px) scale(.96)}
+}
+
   </style>
 </head>
 <body>
@@ -399,11 +409,18 @@ async function delItem(id) {
 window.delItem = delItem;
 
 async function completeItem(id) {
+  confetti();
+  heartsBurst();
+
+  const overlayItem = document.querySelector(`[data-overlay-item-id="${id}"]`);
+  if (overlayItem) {
+    overlayItem.classList.add('completing');
+    await new Promise(resolve => setTimeout(resolve, 900));
+  }
+
   await updateDoc(doc(db, 'bucketItems', id), {
     s: 'Completed'
   });
-
-  confetti();
 }
 window.completeItem = completeItem;
 
@@ -471,7 +488,11 @@ function setFilter(category, button) {
 window.setFilter = setFilter;
 
 
+let currentOverlayStatus = null;
+
 function openSectionPage(status) {
+  currentOverlayStatus = status;
+
   const overlay = document.getElementById('sectionOverlay');
   const overlayTitle = document.getElementById('overlayTitle');
   const overlayList = document.getElementById('overlayList');
@@ -479,7 +500,9 @@ function openSectionPage(status) {
   const statusItems = items.filter(item => item.s === status && (filter === 'All' || item.c === filter));
 
   overlayTitle.textContent = status;
-  overlayList.innerHTML = statusItems.map(item => `<div class="item">${itemHTML(item)}</div>`).join('');
+  overlayList.innerHTML = statusItems.length
+    ? statusItems.map(item => `<div class="item" data-overlay-item-id="${item.id}">${itemHTML(item)}</div>`).join('')
+    : `<p>No ${status.toLowerCase()} dreams here yet.</p>`;
 
   overlay.classList.add('open');
   overlay.setAttribute('aria-hidden', 'false');
@@ -492,6 +515,7 @@ function closeSectionPage() {
   overlay.classList.remove('open');
   overlay.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+  currentOverlayStatus = null;
 }
 window.closeSectionPage = closeSectionPage;
 
@@ -629,6 +653,20 @@ function tick() {
 
 setInterval(tick, 60000);
 
+
+function heartsBurst() {
+  for (let i = 0; i < 34; i++) {
+    const heart = document.createElement('div');
+    heart.className = 'falling-heart';
+    heart.textContent = ['♥','💗','💖','♡'][i % 4];
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = (16 + Math.random() * 20) + 'px';
+    heart.style.animationDelay = (Math.random() * .45) + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 3400);
+  }
+}
+
 function confetti() {
   for (let i = 0; i < 60; i++) {
     const confettiPiece = document.createElement('div');
@@ -696,6 +734,9 @@ function startFirestoreListeners() {
       .sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
 
     render();
+    if (currentOverlayStatus && document.getElementById('sectionOverlay').classList.contains('open')) {
+      openSectionPage(currentOverlayStatus);
+    }
   });
 
   unsubscribeLoveNotes = onSnapshot(collection(db, 'loveNotes'), snapshot => {
