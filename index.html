@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deepii & Klarii's Bucket List</title>
+  <style>
+    :root{--cream:#fff8ee;--white:#fffdf8;--sage:#9cad8f;--sage2:#6f8068;--blush:#e8b7b7;--beige:#e8d8c5;--ink:#3e342c;--gold:#d6a85f;--navy:#101827;--card:rgba(255,255,255,.62);--shadow:0 20px 60px rgba(75,55,38,.14)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at top left,#ffe8ee,transparent 30%),linear-gradient(135deg,var(--cream),#f4eadf);color:var(--ink);overflow-x:hidden}body.dark{background:radial-gradient(circle at top left,#2c2440,transparent 30%),linear-gradient(135deg,#0d1324,#172238);color:#fff4de}h1,h2,h3{font-family:Georgia,serif;font-weight:500}.stars{position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:52px 52px;opacity:.35;animation:float 18s linear infinite}.hero{min-height:68vh;background:linear-gradient(rgba(20,18,16,.45),rgba(20,18,16,.55)),url("hero.jpg") center center/cover no-repeat;display:grid;place-items:center;text-align:center;color:white;padding:30px;position:relative}.hero h1{font-size:clamp(2.4rem,8vw,5.8rem);margin:0;text-shadow:0 8px 30px rgba(0,0,0,.35)}.hero p{font-size:clamp(1rem,3vw,1.5rem)}.heart{position:absolute;animation:rise 6s ease-in-out infinite;color:#ffd6df;font-size:24px}.heart:nth-child(1){left:12%;bottom:15%;animation-delay:0s}.heart:nth-child(2){left:72%;bottom:30%;animation-delay:1s}.heart:nth-child(3){left:86%;bottom:12%;animation-delay:2s}.wrap{width:min(1150px,92%);margin:auto}.topbar{position:sticky;top:0;z-index:5;backdrop-filter:blur(18px);background:rgba(255,248,238,.72);border-bottom:1px solid rgba(255,255,255,.35)}body.dark .topbar{background:rgba(13,19,36,.72)}nav{display:flex;justify-content:space-between;align-items:center;padding:14px 4%;gap:12px;flex-wrap:wrap}.brand{font-family:Georgia,serif;font-size:1.25rem}.navlinks a,.toggle{border:0;background:rgba(255,255,255,.48);padding:10px 14px;border-radius:999px;margin:4px;color:inherit;text-decoration:none;cursor:pointer}.section{padding:58px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}.card{background:var(--card);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.5);border-radius:28px;padding:22px;box-shadow:var(--shadow);transition:.3s}body.dark .card{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12)}.card:hover{transform:translateY(-4px)}input,select,textarea{width:100%;border:1px solid rgba(120,100,80,.18);background:rgba(255,255,255,.75);border-radius:16px;padding:13px;margin:7px 0;color:#3e342c}textarea{min-height:90px}.btn{border:0;border-radius:999px;padding:12px 18px;background:linear-gradient(135deg,var(--sage),var(--blush));color:white;cursor:pointer;font-weight:700;box-shadow:0 10px 25px rgba(160,120,120,.22)}.btn.small{padding:8px 12px;font-size:.85rem}.filters{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.filter{border:1px solid rgba(120,100,80,.16);background:rgba(255,255,255,.42);border-radius:999px;padding:8px 12px;cursor:pointer}.filter.active{background:var(--sage);color:white}.item{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;border-radius:20px;padding:14px;margin:10px 0;background:rgba(255,255,255,.48)}body.dark .item{background:rgba(255,255,255,.08)}.done{text-decoration:line-through;opacity:.65}.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(156,173,143,.22);font-size:.8rem}.progress{height:13px;background:rgba(255,255,255,.5);border-radius:99px;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--sage),var(--gold));transition:1s}.timeline{border-left:2px dashed var(--blush);padding-left:20px}.milestone{margin:18px 0;position:relative}.milestone:before{content:'∞';position:absolute;left:-33px;background:var(--cream);color:var(--blush);font-weight:bold}.note{background:#fff3a8;color:#5a4820;transform:rotate(-1deg);font-family:'Comic Sans MS',cursive;border-radius:10px;padding:18px;min-height:120px}.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}.photo{aspect-ratio:1;border-radius:22px;background:linear-gradient(135deg,#f3d6d6,#dce5d2);display:grid;place-items:center;text-align:center;padding:10px;overflow:hidden}.photo img{width:100%;height:100%;object-fit:cover}.countdown{font-size:clamp(2rem,8vw,4.5rem);font-family:Georgia,serif;color:var(--sage2)}body.dark .countdown{color:var(--gold)}footer{text-align:center;padding:40px;opacity:.8}.confetti{position:fixed;width:10px;height:10px;top:-10px;z-index:1000;animation:fall 1.8s linear forwards}@keyframes rise{50%{transform:translateY(-35px) scale(1.2);opacity:.8}}@keyframes float{to{background-position:52px 52px}}@keyframes fall{to{transform:translateY(105vh) rotate(720deg);opacity:0}}@media(max-width:650px){.hero{min-height:58vh}.section{padding:36px 0}.navlinks{display:none}.card{border-radius:22px}.dog{font-size:90px}}
+  </style>
+</head>
+<body>
+<div class="stars"></div>
+<header class="hero"><span class="heart">♡</span><span class="heart">♥</span><span class="heart">♡</span><div><h1>Deepii & Klarii's Bucket List</h1><p>“One adventure at a time, one memory forever.”</p></div></header>
+<div class="topbar"><nav><div class="brand">∞ Deepii & Klarii</div><div class="navlinks"><a href="#list">Bucket List</a><a href="#memories">Memory Wall</a><a href="#notes">Love Notes</a></div><button class="toggle" onclick="toggleDark()">Dark Mode</button></nav></div>
+<main class="wrap">
+<section class="section grid" id="stats"><div class="card"><h3>Total dreams</h3><h2 id="total">0</h2></div><div class="card"><h3>Adventures completed</h3><h2 id="completed">0</h2></div><div class="card"><h3>Percentage completed</h3><h2 id="percent">0%</h2><div class="progress"><div id="bar" class="bar"></div></div></div></section>
+<section class="section" id="list"><h2>Our Bucket List</h2><p>Dreaming, planning, completing, and choosing each other every day.</p><div class="card"><input id="title" placeholder="Add a new dream..."/><select id="category"><option>Travel</option><option>Relationship</option><option>Food</option><option>Experiences</option><option>Memories</option><option>Adventures</option><option>Future Home</option><option>Family</option><option>Random Dreams</option></select><select id="status"><option>Dreaming</option><option>Planned</option><option>Completed</option></select><button class="btn" onclick="addItem()">Add Dream</button></div><div class="filters" id="filters"></div><div class="grid"><div class="card"><h3>Dreaming</h3><div id="Dreaming"></div></div><div class="card"><h3>Planned</h3><div id="Planned"></div></div><div class="card"><h3>Completed</h3><div id="Completed"></div></div></div></section>
+<section class="section" id="memories"><h2>Memory Wall</h2><div class="card"><input type="file" id="photoInput" accept="image/*"/><input id="photoCaption" placeholder="Caption for this memory"/><button class="btn" onclick="addPhoto()">Add Memory</button></div><div class="gallery" id="gallery"></div></section>
+<section class="section"><h2>Countdown Until Our Next Visit</h2><div class="card"><input type="date" id="visitDate" onchange="saveVisit()"/><div class="countdown" id="countdown">Set a date</div></div></section>
+<section class="section" id="notes"><h2>Love Notes</h2><div class="card"><textarea id="noteText" placeholder="Leave a small note..."></textarea><button class="btn" onclick="addNote()">Leave Note</button></div><div class="grid" id="notesGrid"></div></section>
+</main><footer>Long distance is only temporary. Every completed adventure brings you closer to home. ∞♡</footer>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  doc,
+  setDoc,
+  updateDoc,
+  deleteDoc,
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+/*
+  STEP 1:
+  Replace the values below with your Firebase web app config.
+
+  STEP 2:
+  In Firebase → Firestore Database → Rules, use this temporary testing rule:
+
+  rules_version = '2';
+
+  service cloud.firestore {
+    match /databases/{database}/documents {
+      match /{document=**} {
+        allow read, write: if true;
+      }
+    }
+  }
+*/
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCJKAIoJACssrVwyNkaEGUlV4P37PwQgbE",
+  authDomain: "deepii-klarii-bucket-list.firebaseapp.com",
+  projectId: "deepii-klarii-bucket-list",
+  storageBucket: "deepii-klarii-bucket-list.firebasestorage.app",
+  messagingSenderId: "200052244146",
+  appId: "1:200052244146:web:a19dd7c2d41b18dcea53ab",
+  measurementId: "G-ZMS6QVGQC8"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const cats = ['All','Travel','Relationship','Food','Experiences','Memories','Adventures','Future Home','Family','Random Dreams'];
+const icons = {
+  Travel:'✈️',
+  Relationship:'♡',
+  Food:'🍝',
+  Experiences:'✨',
+  Memories:'📷',
+  Adventures:'🧭',
+  'Future Home':'🏡',
+  Family:'🌷',
+  'Random Dreams':'🌙'
+};
+
+let items = [];
+let notes = [];
+let photos = [];
+let filter = 'All';
+
+const totalEl = document.getElementById('total');
+const completedEl = document.getElementById('completed');
+const percentEl = document.getElementById('percent');
+const barEl = document.getElementById('bar');
+const filtersEl = document.getElementById('filters');
+const noteTextEl = document.getElementById('noteText');
+const notesGridEl = document.getElementById('notesGrid');
+const photoInputEl = document.getElementById('photoInput');
+const photoCaptionEl = document.getElementById('photoCaption');
+const galleryEl = document.getElementById('gallery');
+const visitDateEl = document.getElementById('visitDate');
+const countdownEl = document.getElementById('countdown');
+
+function escapeHTML(value) {
+  return String(value || '').replace(/[&<>"']/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  }[char]));
+}
+
+function toggleDark() {
+  document.body.classList.toggle('dark');
+  localStorage.dk_dark = document.body.classList.contains('dark');
+}
+window.toggleDark = toggleDark;
+
+if (localStorage.dk_dark === 'true') {
+  document.body.classList.add('dark');
+}
+
+async function addItem() {
+  const titleInput = document.getElementById('title');
+  const categoryInput = document.getElementById('category');
+  const statusInput = document.getElementById('status');
+
+  const title = titleInput.value.trim();
+  if (!title) return;
+
+  await addDoc(collection(db, 'bucketItems'), {
+    t: title,
+    c: categoryInput.value,
+    s: statusInput.value,
+    createdAt: Date.now()
+  });
+
+  titleInput.value = '';
+}
+window.addItem = addItem;
+
+async function editItem(id) {
+  const currentItem = items.find(item => item.id === id);
+  if (!currentItem) return;
+
+  const newTitle = prompt('Edit this dream:', currentItem.t);
+  if (!newTitle || !newTitle.trim()) return;
+
+  await updateDoc(doc(db, 'bucketItems', id), {
+    t: newTitle.trim()
+  });
+}
+window.editItem = editItem;
+
+async function delItem(id) {
+  await deleteDoc(doc(db, 'bucketItems', id));
+}
+window.delItem = delItem;
+
+async function completeItem(id) {
+  await updateDoc(doc(db, 'bucketItems', id), {
+    s: 'Completed'
+  });
+
+  confetti();
+}
+window.completeItem = completeItem;
+
+function render() {
+  ['Dreaming','Planned','Completed'].forEach(status => {
+    document.getElementById(status).innerHTML = '';
+  });
+
+  items.forEach(item => {
+    if (filter !== 'All' && item.c !== filter) return;
+
+    const div = document.createElement('div');
+    div.className = 'item';
+
+    div.innerHTML = `
+      <div>
+        <b class="${item.s === 'Completed' ? 'done' : ''}">
+          ${icons[item.c] || '♡'} ${escapeHTML(item.t)}
+        </b>
+        <br>
+        <span class="pill">${escapeHTML(item.c)}</span>
+      </div>
+      <div>
+        <button class="btn small" onclick="editItem('${item.id}')">Edit</button>
+        <button class="btn small" onclick="delItem('${item.id}')">Delete</button>
+        ${item.s !== 'Completed' ? `<button class="btn small" onclick="completeItem('${item.id}')">Done</button>` : ''}
+      </div>
+    `;
+
+    const column = document.getElementById(item.s);
+    if (column) column.appendChild(div);
+  });
+
+  const completedCount = items.filter(item => item.s === 'Completed').length;
+  const percent = items.length ? Math.round((completedCount / items.length) * 100) : 0;
+
+  totalEl.textContent = items.length;
+  completedEl.textContent = completedCount;
+  percentEl.textContent = percent + '%';
+  barEl.style.width = percent + '%';
+}
+
+function setFilter(category, button) {
+  filter = category;
+  document.querySelectorAll('.filter').forEach(btn => btn.classList.remove('active'));
+  button.classList.add('active');
+  render();
+}
+window.setFilter = setFilter;
+
+filtersEl.innerHTML = cats.map(category => `
+  <button class="filter ${category === 'All' ? 'active' : ''}" onclick="setFilter('${category}', this)">
+    ${category}
+  </button>
+`).join('');
+
+async function addNote() {
+  const text = noteTextEl.value.trim();
+  if (!text) return;
+
+  await addDoc(collection(db, 'loveNotes'), {
+    text,
+    createdAt: Date.now()
+  });
+
+  noteTextEl.value = '';
+}
+window.addNote = addNote;
+
+async function removeNote(id) {
+  await deleteDoc(doc(db, 'loveNotes', id));
+}
+window.removeNote = removeNote;
+
+function renderNotes() {
+  notesGridEl.innerHTML = notes.map(note => `
+    <div class="note">
+      ${escapeHTML(note.text)}
+      <br><br>
+      <button class="btn small" onclick="removeNote('${note.id}')">Remove</button>
+    </div>
+  `).join('');
+}
+
+async function addPhoto() {
+  const file = photoInputEl.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = async () => {
+    await addDoc(collection(db, 'memories'), {
+      src: reader.result,
+      cap: photoCaptionEl.value.trim(),
+      createdAt: Date.now()
+    });
+
+    photoCaptionEl.value = '';
+    photoInputEl.value = '';
+  };
+
+  reader.readAsDataURL(file);
+}
+window.addPhoto = addPhoto;
+
+async function removePhoto(id) {
+  await deleteDoc(doc(db, 'memories', id));
+}
+window.removePhoto = removePhoto;
+
+function renderPhotos() {
+  galleryEl.innerHTML = photos.map(photo => `
+    <div class="photo">
+      <div>
+        <img src="${photo.src}" alt="${escapeHTML(photo.cap || 'A completed adventure')}">
+        <p>${escapeHTML(photo.cap || 'A completed adventure')}</p>
+        <button class="btn small" onclick="removePhoto('${photo.id}')">Remove</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function saveVisit() {
+  await setDoc(doc(db, 'settings', 'visit'), {
+    date: visitDateEl.value
+  });
+  tick();
+}
+window.saveVisit = saveVisit;
+
+function tick() {
+  if (!visitDateEl.value) {
+    countdownEl.textContent = 'Set a date';
+    return;
+  }
+
+  const difference = new Date(visitDateEl.value) - new Date();
+  const days = Math.max(0, Math.ceil(difference / 86400000));
+  countdownEl.textContent = days + ' days';
+}
+
+setInterval(tick, 60000);
+
+function confetti() {
+  for (let i = 0; i < 60; i++) {
+    const confettiPiece = document.createElement('div');
+    confettiPiece.className = 'confetti';
+    confettiPiece.style.left = Math.random() * 100 + 'vw';
+    confettiPiece.style.background = ['#e8b7b7','#9cad8f','#d6a85f','#fff3a8'][i % 4];
+    confettiPiece.style.animationDelay = Math.random() * .5 + 's';
+    document.body.appendChild(confettiPiece);
+    setTimeout(() => confettiPiece.remove(), 2200);
+  }
+}
+
+async function addDefaultItemsIfEmpty(snapshot) {
+  if (!snapshot.empty || localStorage.dk_seeded_firebase === 'true') return;
+
+  localStorage.dk_seeded_firebase = 'true';
+
+  await setDoc(doc(db, 'bucketItems', 'default-sunset'), {
+    t: 'Watch a sunset together',
+    c: 'Memories',
+    s: 'Dreaming',
+    createdAt: 1
+  });
+
+  await setDoc(doc(db, 'bucketItems', 'default-trip'), {
+    t: 'Take our first big trip',
+    c: 'Travel',
+    s: 'Planned',
+    createdAt: 2
+  });
+
+  await setDoc(doc(db, 'bucketItems', 'default-home'), {
+    t: 'Build our future home traditions',
+    c: 'Future Home',
+    s: 'Dreaming',
+    createdAt: 3
+  });
+}
+
+onSnapshot(collection(db, 'bucketItems'), async snapshot => {
+  await addDefaultItemsIfEmpty(snapshot);
+
+  items = snapshot.docs
+    .map(document => ({ id: document.id, ...document.data() }))
+    .sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
+
+  render();
+});
+
+onSnapshot(collection(db, 'loveNotes'), snapshot => {
+  notes = snapshot.docs
+    .map(document => ({ id: document.id, ...document.data() }))
+    .sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
+
+  renderNotes();
+});
+
+onSnapshot(collection(db, 'memories'), snapshot => {
+  photos = snapshot.docs
+    .map(document => ({ id: document.id, ...document.data() }))
+    .sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
+
+  renderPhotos();
+});
+
+onSnapshot(doc(db, 'settings', 'visit'), snapshot => {
+  if (snapshot.exists()) {
+    visitDateEl.value = snapshot.data().date || '';
+  }
+  tick();
+});
+</script>
+</body>
+</html>
