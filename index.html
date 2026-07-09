@@ -22,6 +22,9 @@
 
 .kiss-btn{margin-top:18px;border:0;border-radius:999px;padding:13px 22px;background:rgba(255,255,255,.22);color:white;font-weight:700;backdrop-filter:blur(12px);cursor:pointer;box-shadow:0 12px 35px rgba(255,180,200,.35);transition:.3s}.kiss-btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.3)}.kiss-flash{position:fixed;inset:0;background:radial-gradient(circle,rgba(255,210,220,.95),rgba(255,180,200,.45),transparent);z-index:9998;pointer-events:none;animation:kissGlow 1.8s ease forwards}.big-kiss{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);font-size:clamp(5rem,18vw,12rem);z-index:9999;animation:kissPop 1.8s ease forwards;pointer-events:none}.falling-heart,.season-piece{position:fixed;top:-30px;z-index:9999;pointer-events:none}.falling-heart{animation:heartFall 3s linear forwards}.season-layer{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}.season-piece{z-index:1;opacity:.75;animation:seasonFall linear forwards}@keyframes kissGlow{0%{opacity:0}25%{opacity:1}100%{opacity:0}}@keyframes kissPop{0%{transform:translate(-50%,-50%) scale(.3) rotate(-10deg);opacity:0}35%{transform:translate(-50%,-50%) scale(1.15) rotate(5deg);opacity:1}100%{transform:translate(-50%,-50%) scale(.9) rotate(0deg);opacity:0}}@keyframes heartFall{to{transform:translateY(105vh) rotate(360deg);opacity:0}}@keyframes seasonFall{to{transform:translateY(105vh) rotate(360deg);opacity:0}}
 
+
+.skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}.skip-link:focus{left:16px;top:16px;width:auto;height:auto;z-index:10000;background:#fff;color:#3e342c;padding:12px 16px;border-radius:999px;box-shadow:var(--shadow)}button,a,input,select,textarea{font:inherit}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--gold);outline-offset:3px}.heartbeat-wrap{margin-top:18px;display:flex;justify-content:center;align-items:center;gap:10px;font-family:Georgia,serif;font-size:clamp(1.1rem,3vw,1.45rem);color:#fff;text-shadow:0 5px 20px rgba(0,0,0,.35)}.heartbeat{display:inline-block;color:#ffd1dc;animation:heartbeat 1.8s ease-in-out infinite;filter:drop-shadow(0 0 16px rgba(255,180,200,.65))}.closing-progress{height:18px;background:rgba(255,255,255,.58);border-radius:999px;overflow:hidden;margin:18px 0 10px}.closing-bar{height:100%;width:0;background:linear-gradient(90deg,var(--blush),var(--sage),var(--gold));transition:1s ease}.closing-meta{font-size:.98rem;opacity:.85}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@keyframes heartbeat{0%,100%{transform:scale(1)}14%{transform:scale(1.22)}28%{transform:scale(1)}42%{transform:scale(1.15)}70%{transform:scale(1)}}@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.season-layer,.falling-heart,.season-piece,.confetti{display:none!important}}
+
 @media (max-width: 650px) {
   .wrap {
     width: 94%;
@@ -106,26 +109,27 @@
   </style>
 </head>
 <body>
+<a class="skip-link" href="#mainContent">Skip to main content</a>
 <div id="authScreen" class="auth-screen">
   <div class="card auth-card">
     <h1>Deepii & Klarii</h1>
     <p>Sign in to open your private bucket list.</p>
-    <input id="loginEmail" type="email" placeholder="Email address" autocomplete="email" />
-    <input id="loginPassword" type="password" placeholder="Password" autocomplete="current-password" />
+    <label class="sr-only" for="loginEmail">Email address</label><input id="loginEmail" type="email" placeholder="Email address" autocomplete="email" />
+    <label class="sr-only" for="loginPassword">Password</label><input id="loginPassword" type="password" placeholder="Password" autocomplete="current-password" />
     <button class="btn" id="loginBtn">Sign In</button>
-    <div id="authError" class="auth-error"></div>
+    <div id="authError" class="auth-error" role="alert" aria-live="polite"></div>
   </div>
 </div>
 <div class="app-shell">
 <div class="stars"></div>
-<header class="hero"><span class="heart">♡</span><span class="heart">♥</span><span class="heart">♡</span><div><h1>Deepii & Klarii's Bucket List</h1><p>“One adventure at a time, one memory forever.”</p><button class="kiss-btn" onclick="sendKiss()">Send a Kiss 💋</button></div></header>
+<header class="hero"><span class="heart" aria-hidden="true">♡</span><span class="heart" aria-hidden="true">♥</span><span class="heart" aria-hidden="true">♡</span><div><h1>Deepii & Klarii's Bucket List</h1><p>“One adventure at a time, one memory forever.”</p><div class="heartbeat-wrap" aria-label="Deepii loves Klarii">Deepii <span class="heartbeat" aria-hidden="true">♥</span> Klarii</div><button class="kiss-btn" onclick="sendKiss()" aria-label="Send a kiss animation and sound">Send a Kiss 💋</button></div></header>
 <div class="topbar"><nav><div class="brand">∞ Deepii & Klarii</div><div class="navlinks"><a href="#list">Bucket List</a><a href="#memories">Memory Wall</a><a href="#notes">Love Notes</a></div><span class="user-pill" id="signedInUser"></span><button class="toggle" onclick="toggleDark()">Dark Mode</button><button class="toggle" id="logoutBtn">Log Out</button></nav></div>
-<main class="wrap">
+<main class="wrap" id="mainContent">
 <section class="section grid" id="stats"><div class="card"><h3>Total dreams</h3><h2 id="total">0</h2></div><div class="card"><h3>Adventures completed</h3><h2 id="completed">0</h2></div><div class="card"><h3>Percentage completed</h3><h2 id="percent">0%</h2><div class="progress"><div id="bar" class="bar"></div></div></div></section>
-<section class="section" id="list"><h2>Our Bucket List</h2><p>Dreaming, planning, completing, and choosing each other every day.</p><div class="card"><input id="title" placeholder="Add a new dream..."/><select id="category"><option>Travel</option><option>Relationship</option><option>Food</option><option>Experiences</option><option>Memories</option><option>Adventures</option><option>Future Home</option><option>Family</option><option>Random Dreams</option></select><select id="status"><option>Dreaming</option><option>Planned</option><option>Completed</option></select><button class="btn" onclick="addItem()">Add Dream</button></div><div class="filters" id="filters"></div><div class="grid"><div class="card"><h3>Dreaming</h3><div id="Dreaming"></div></div><div class="card"><h3>Planned</h3><div id="Planned"></div></div><div class="card"><h3>Completed</h3><div id="Completed"></div></div></div></section>
-<section class="section" id="memories"><h2>Memory Wall</h2><div class="card"><input type="file" id="photoInput" accept="image/*"/><input id="photoCaption" placeholder="Caption for this memory"/><button class="btn" onclick="addPhoto()">Add Memory</button></div><div class="gallery" id="gallery"></div></section>
-<section class="section"><h2>Countdown Until Our Next Visit</h2><div class="card"><input type="date" id="visitDate" onchange="saveVisit()"/><div class="countdown" id="countdown">Set a date</div></div></section>
-<section class="section" id="notes"><h2>Love Notes</h2><div class="card"><textarea id="noteText" placeholder="Leave a small note..."></textarea><button class="btn" onclick="addNote()">Leave Note</button></div><div class="grid" id="notesGrid"></div></section>
+<section class="section" id="list"><h2>Our Bucket List</h2><p>Dreaming, planning, completing, and choosing each other every day.</p><div class="card"><label class="sr-only" for="title">Add a new dream</label><input id="title" placeholder="Add a new dream..." aria-label="Add a new dream"/><label class="sr-only" for="category">Dream category</label><select id="category" aria-label="Dream category"><option>Travel</option><option>Relationship</option><option>Food</option><option>Experiences</option><option>Memories</option><option>Adventures</option><option>Future Home</option><option>Family</option><option>Random Dreams</option></select><label class="sr-only" for="status">Dream status</label><select id="status" aria-label="Dream status"><option>Dreaming</option><option>Planned</option><option>Completed</option></select><button class="btn" onclick="addItem()">Add Dream</button></div><div class="filters" id="filters"></div><div class="grid"><div class="card"><h3>Dreaming</h3><div id="Dreaming"></div></div><div class="card"><h3>Planned</h3><div id="Planned"></div></div><div class="card"><h3>Completed</h3><div id="Completed"></div></div></div></section>
+<section class="section" id="memories"><h2>Memory Wall</h2><div class="card"><label class="sr-only" for="photoInput">Upload a memory photo</label><input type="file" id="photoInput" accept="image/*" aria-label="Upload a memory photo"/><label class="sr-only" for="photoCaption">Memory caption</label><input id="photoCaption" placeholder="Caption for this memory" aria-label="Memory caption"/><button class="btn" onclick="addPhoto()">Add Memory</button></div><div class="gallery" id="gallery"></div></section>
+<section class="section" aria-labelledby="closingTitle"><h2 id="closingTitle">❤️ Closing the Distance - Countdown Until We Meet Again</h2><div class="card"><label for="visitDate">Set the date we meet again</label><input type="date" id="visitDate" onchange="saveVisit()" aria-describedby="closingMeta"/><div class="countdown" id="countdown" aria-live="polite">Set a date</div><div class="closing-progress" role="progressbar" aria-label="Closing the distance progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="closingBar" class="closing-bar"></div></div><p class="closing-meta" id="closingMeta">Every day brings us closer.</p></div></section>
+<section class="section" id="notes"><h2>Love Notes</h2><div class="card"><label class="sr-only" for="noteText">Love note</label><textarea id="noteText" placeholder="Leave a small note..." aria-label="Love note"></textarea><button class="btn" onclick="addNote()">Leave Note</button></div><div class="grid" id="notesGrid"></div></section>
 </main><footer>Long distance is only temporary. Every completed adventure brings you closer to home. ∞♡</footer>
 </div>
 <script type="module">
@@ -186,6 +190,9 @@ const photoCaptionEl = document.getElementById('photoCaption');
 const galleryEl = document.getElementById('gallery');
 const visitDateEl = document.getElementById('visitDate');
 const countdownEl = document.getElementById('countdown');
+const closingBarEl = document.getElementById('closingBar');
+const closingProgressEl = document.querySelector('.closing-progress');
+const closingMetaEl = document.getElementById('closingMeta');
 
 function escapeHTML(value) {
   return String(value || '').replace(/[&<>"']/g, char => ({
@@ -273,9 +280,9 @@ function render() {
         <span class="pill">${escapeHTML(item.c)}</span>
       </div>
       <div>
-        <button class="btn small" onclick="editItem('${item.id}')">Edit</button>
-        <button class="btn small" onclick="delItem('${item.id}')">Delete</button>
-        ${item.s !== 'Completed' ? `<button class="btn small" onclick="completeItem('${item.id}')">Done</button>` : ''}
+        <button class="btn small" onclick="editItem('${item.id}')" aria-label="Edit ${escapeHTML(item.t)}">Edit</button>
+        <button class="btn small" onclick="delItem('${item.id}')" aria-label="Delete ${escapeHTML(item.t)}">Delete</button>
+        ${item.s !== 'Completed' ? `<button class="btn small" onclick="completeItem('${item.id}')" aria-label="Mark ${escapeHTML(item.t)} as completed">Done</button>` : ''}
       </div>
     `;
 
@@ -301,7 +308,7 @@ function setFilter(category, button) {
 window.setFilter = setFilter;
 
 filtersEl.innerHTML = cats.map(category => `
-  <button class="filter ${category === 'All' ? 'active' : ''}" onclick="setFilter('${category}', this)">
+  <button class="filter ${category === 'All' ? 'active' : ''}" onclick="setFilter('${category}', this)" aria-label="Filter by ${category}">
     ${category}
   </button>
 `).join('');
@@ -409,6 +416,8 @@ function renderPhotos() {
 }
 
 async function saveVisit() {
+  localStorage.dk_closing_start = new Date().toISOString();
+
   await setDoc(doc(db, 'settings', 'visit'), {
     date: visitDateEl.value
   });
@@ -419,12 +428,30 @@ window.saveVisit = saveVisit;
 function tick() {
   if (!visitDateEl.value) {
     countdownEl.textContent = 'Set a date';
+    if (closingBarEl) closingBarEl.style.width = '0%';
+    if (closingProgressEl) closingProgressEl.setAttribute('aria-valuenow', '0');
+    if (closingMetaEl) closingMetaEl.textContent = 'Every day brings us closer.';
     return;
   }
 
-  const difference = new Date(visitDateEl.value) - new Date();
+  const today = new Date();
+  const meetDate = new Date(visitDateEl.value + 'T23:59:59');
+  const difference = meetDate - today;
   const days = Math.max(0, Math.ceil(difference / 86400000));
-  countdownEl.textContent = days + ' days';
+
+  countdownEl.textContent = days === 1 ? '1 day left' : days + ' days left';
+
+  const savedStart = localStorage.dk_closing_start || new Date().toISOString();
+  if (!localStorage.dk_closing_start) localStorage.dk_closing_start = savedStart;
+
+  const startDate = new Date(savedStart);
+  const totalJourney = Math.max(1, meetDate - startDate);
+  const completedJourney = Math.min(totalJourney, Math.max(0, today - startDate));
+  const progress = days === 0 ? 100 : Math.round((completedJourney / totalJourney) * 100);
+
+  if (closingBarEl) closingBarEl.style.width = progress + '%';
+  if (closingProgressEl) closingProgressEl.setAttribute('aria-valuenow', String(progress));
+  if (closingMetaEl) closingMetaEl.textContent = progress + '% closer to being together again.';
 }
 
 setInterval(tick, 60000);
@@ -563,7 +590,12 @@ function currentSeason() {
   return { pieces: ['❄️','✨'], speed: [10000, 16000] };
 }
 
+let seasonAnimationStarted = false;
+
 function startSeasonAnimation() {
+  if (seasonAnimationStarted) return;
+  seasonAnimationStarted = true;
+
   let layer = document.querySelector('.season-layer');
 
   if (!layer) {
@@ -572,7 +604,7 @@ function startSeasonAnimation() {
     document.body.appendChild(layer);
   }
 
-  setInterval(() => {
+  const seasonInterval = setInterval(() => {
     if (!document.body.classList.contains('logged-in')) return;
 
     const season = currentSeason();
@@ -587,10 +619,12 @@ function startSeasonAnimation() {
 
     layer.appendChild(piece);
     setTimeout(() => piece.remove(), duration + 500);
-  }, 900);
-}
+  }, 450);
 
-startSeasonAnimation();
+  setTimeout(() => {
+    clearInterval(seasonInterval);
+  }, 6500);
+}
 
 
 const loginBtn = document.getElementById("loginBtn");
@@ -627,6 +661,7 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     document.body.classList.add("logged-in");
     if (signedInUser) signedInUser.textContent = user.email || "Signed in";
+    startSeasonAnimation();
     startFirestoreListeners();
   } else {
     stopFirestoreListeners();
