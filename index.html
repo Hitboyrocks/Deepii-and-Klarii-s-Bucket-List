@@ -37,25 +37,40 @@
 
 @media (max-width:650px){
   .hero{
-    min-height:100vh;
-    position:sticky;
-    top:0;
-    z-index:2;
+    min-height:118vh;
+    display:grid;
+    place-items:center;
+    position:relative;
     overflow:hidden;
-    transition:background-size .4s ease, background-position .4s ease;
+    background:
+      linear-gradient(rgba(20,18,16,.35),rgba(20,18,16,.45)),
+      url("hero.jpg") center center/cover no-repeat;
   }
 
-  .hero.scrolled-focus{
-    background:
-      linear-gradient(rgba(20,18,16,.08),rgba(20,18,16,.12)),
-      url("hero.jpg") center center/cover no-repeat;
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:url("hero.jpg") center center/cover no-repeat;
+    opacity:0;
+    transition:opacity .35s ease;
+    z-index:0;
+  }
+
+  .hero.scrolled-focus::after{
+    opacity:1;
+  }
+
+  .hero > *{
+    position:relative;
+    z-index:1;
   }
 
   .hero.scrolled-focus h1,
   .hero.scrolled-focus p,
   .hero.scrolled-focus .kiss-btn{
     opacity:0;
-    transform:translateY(-18px);
+    transform:translateY(-22px);
     pointer-events:none;
   }
 
@@ -66,8 +81,7 @@
   }
 
   .topbar{
-    position:relative;
-    z-index:3;
+    position:static;
   }
 }
 
@@ -602,10 +616,10 @@ function handleMobileHeroScroll(){
     return;
   }
 
-  const scrollY = window.scrollY || window.pageYOffset;
-  const heroHeight = hero.offsetHeight || window.innerHeight;
+  const rect = hero.getBoundingClientRect();
+  const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
 
-  if (scrollY > heroHeight * 0.16 && scrollY < heroHeight * 0.82) {
+  if (rect.top < -viewportHeight * 0.12 && rect.bottom > viewportHeight * 0.28) {
     hero.classList.add('scrolled-focus');
   } else {
     hero.classList.remove('scrolled-focus');
