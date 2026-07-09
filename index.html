@@ -20,6 +20,22 @@
 @keyframes kissPop{0%{opacity:0;transform:translate(-50%,-50%) scale(.4)}30%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}100%{opacity:0}}
 @keyframes heartFall{to{transform:translateY(105vh) rotate(360deg);opacity:0}}
 
+
+.see-more-link{display:inline-block;margin-top:12px;color:var(--sage2);font-weight:700;text-decoration:none;cursor:pointer}.see-more-link:hover{text-decoration:underline}body.dark .see-more-link{color:var(--gold)}
+.section-overlay{position:fixed;inset:0;z-index:9000;display:none;background:linear-gradient(rgba(20,18,16,.62),rgba(20,18,16,.72)),url("hero.jpg") center center/cover no-repeat;overflow-y:auto;padding:28px 0}
+.section-overlay.open{display:block}
+.section-overlay:before{content:"";position:fixed;inset:0;background:inherit;filter:blur(10px);transform:scale(1.05);z-index:-2}
+.section-overlay:after{content:"";position:fixed;inset:0;background:rgba(20,18,16,.45);z-index:-1}
+.overlay-inner{width:min(920px,92%);margin:40px auto 80px;color:white}
+.overlay-card{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.24);backdrop-filter:blur(18px);border-radius:30px;padding:24px;box-shadow:0 20px 70px rgba(0,0,0,.28)}
+.overlay-head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}
+.overlay-head h2{margin:0;color:white}
+.overlay-close{border:0;border-radius:999px;padding:10px 14px;background:rgba(255,255,255,.22);color:white;cursor:pointer;font-weight:700}
+.overlay-list .item{background:rgba(255,255,255,.18);color:white;border:1px solid rgba(255,255,255,.14)}
+.overlay-list .pill{background:rgba(255,255,255,.22)}
+.overlay-list .btn.small{box-shadow:none}
+@media(max-width:650px){.section-overlay{padding:16px 0}.overlay-inner{margin:22px auto 70px}.overlay-card{padding:18px;border-radius:24px}.overlay-head{align-items:flex-start}.overlay-head h2{font-size:2rem}}
+
     .auth-screen{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at top left,#ffe8ee,transparent 30%),linear-gradient(135deg,var(--cream),#f4eadf)}
     body.dark .auth-screen{background:radial-gradient(circle at top left,#2c2440,transparent 30%),linear-gradient(135deg,#0d1324,#172238)}
     .auth-card{width:min(430px,94vw);text-align:center}
@@ -254,6 +270,17 @@
 <section class="section"><h2>Countdown Until Our Next Visit</h2><div class="card"><input type="date" id="visitDate" onchange="saveVisit()"/><div class="countdown" id="countdown">Set a date</div></div></section>
 <section class="section" id="notes"><h2>Love Notes</h2><div class="card"><textarea id="noteText" placeholder="Leave a small note..."></textarea><button class="btn" onclick="addNote()">Leave Note</button></div><div class="grid" id="notesGrid"></div></section>
 </main><footer>Long distance is only temporary. Every completed adventure brings you closer to home. ∞♡</footer>
+<div class="section-overlay" id="sectionOverlay" aria-hidden="true">
+  <div class="overlay-inner">
+    <div class="overlay-card">
+      <div class="overlay-head">
+        <h2 id="overlayTitle">Bucket List</h2>
+        <button class="overlay-close" onclick="closeSectionPage()">Close</button>
+      </div>
+      <div class="overlay-list" id="overlayList"></div>
+    </div>
+  </div>
+</div>
 </div>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
@@ -380,34 +407,50 @@ async function completeItem(id) {
 }
 window.completeItem = completeItem;
 
+function itemHTML(item) {
+  return `
+    <div>
+      <b class="${item.s === 'Completed' ? 'done' : ''}">
+        ${icons[item.c] || '♡'} ${escapeHTML(item.t)}
+      </b>
+      <br>
+      <span class="pill">${escapeHTML(item.c)}</span>
+    </div>
+    <div>
+      <button class="btn small" onclick="editItem('${item.id}')">Edit</button>
+      <button class="btn small" onclick="delItem('${item.id}')">Delete</button>
+      ${item.s !== 'Completed' ? `<button class="btn small" onclick="completeItem('${item.id}')">Done</button>` : ''}
+    </div>
+  `;
+}
+
 function render() {
   ['Dreaming','Planned','Completed'].forEach(status => {
     document.getElementById(status).innerHTML = '';
   });
 
-  items.forEach(item => {
-    if (filter !== 'All' && item.c !== filter) return;
+  ['Dreaming','Planned','Completed'].forEach(status => {
+    const column = document.getElementById(status);
+    const statusItems = items.filter(item => item.s === status && (filter === 'All' || item.c === filter));
 
-    const div = document.createElement('div');
-    div.className = 'item';
+    statusItems.slice(0, 2).forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'item';
+      div.innerHTML = itemHTML(item);
+      if (column) column.appendChild(div);
+    });
 
-    div.innerHTML = `
-      <div>
-        <b class="${item.s === 'Completed' ? 'done' : ''}">
-          ${icons[item.c] || '♡'} ${escapeHTML(item.t)}
-        </b>
-        <br>
-        <span class="pill">${escapeHTML(item.c)}</span>
-      </div>
-      <div>
-        <button class="btn small" onclick="editItem('${item.id}')">Edit</button>
-        <button class="btn small" onclick="delItem('${item.id}')">Delete</button>
-        ${item.s !== 'Completed' ? `<button class="btn small" onclick="completeItem('${item.id}')">Done</button>` : ''}
-      </div>
-    `;
-
-    const column = document.getElementById(item.s);
-    if (column) column.appendChild(div);
+    if (statusItems.length > 2) {
+      const seeMore = document.createElement('a');
+      seeMore.href = '#';
+      seeMore.className = 'see-more-link';
+      seeMore.textContent = `See more ${status.toLowerCase()} dreams`;
+      seeMore.onclick = event => {
+        event.preventDefault();
+        openSectionPage(status);
+      };
+      if (column) column.appendChild(seeMore);
+    }
   });
 
   const completedCount = items.filter(item => item.s === 'Completed').length;
@@ -426,6 +469,36 @@ function setFilter(category, button) {
   render();
 }
 window.setFilter = setFilter;
+
+
+function openSectionPage(status) {
+  const overlay = document.getElementById('sectionOverlay');
+  const overlayTitle = document.getElementById('overlayTitle');
+  const overlayList = document.getElementById('overlayList');
+
+  const statusItems = items.filter(item => item.s === status && (filter === 'All' || item.c === filter));
+
+  overlayTitle.textContent = status;
+  overlayList.innerHTML = statusItems.map(item => `<div class="item">${itemHTML(item)}</div>`).join('');
+
+  overlay.classList.add('open');
+  overlay.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+window.openSectionPage = openSectionPage;
+
+function closeSectionPage() {
+  const overlay = document.getElementById('sectionOverlay');
+  overlay.classList.remove('open');
+  overlay.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+window.closeSectionPage = closeSectionPage;
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') closeSectionPage();
+});
+
 
 filtersEl.innerHTML = cats.map(category => `
   <button class="filter ${category === 'All' ? 'active' : ''}" onclick="setFilter('${category}', this)">
