@@ -27,30 +27,61 @@
 
 @media (max-width: 650px) {
   .hero {
-    align-items: end;
-    place-items: end center;
-    background-position: center top;
-    padding: 24px 18px 34px;
+    min-height: auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 62vh 18px 24px;
+    background:
+      linear-gradient(rgba(20,18,16,.08), rgba(20,18,16,.18)),
+      url("hero.jpg") center top / contain no-repeat,
+      linear-gradient(135deg,var(--cream),#f4eadf);
+    color: var(--ink);
+  }
+
+  body.dark .hero {
+    background:
+      linear-gradient(rgba(20,18,16,.08), rgba(20,18,16,.18)),
+      url("hero.jpg") center top / contain no-repeat,
+      linear-gradient(135deg,#0d1324,#172238);
+    color: #fff4de;
   }
 
   .hero-content {
     width: min(94%, 520px);
-    padding: 16px 14px;
-    border-radius: 24px;
-    background: linear-gradient(rgba(20,18,16,.34), rgba(20,18,16,.48));
-    backdrop-filter: blur(4px);
+    padding: 18px 16px;
+    border-radius: 26px;
+    background: rgba(255,255,255,.72);
+    color: var(--ink);
+    backdrop-filter: blur(14px);
+    box-shadow: var(--shadow);
+  }
+
+  body.dark .hero-content {
+    background: rgba(255,255,255,.09);
+    color: #fff4de;
   }
 
   .hero h1 {
     font-size: 2rem;
+    color: inherit;
+    text-shadow: none;
+  }
+
+  .hero p {
+    color: inherit;
   }
 
   .heartbeat-wrap {
     margin-top: 10px;
+    color: inherit;
+    text-shadow: none;
   }
 
   .kiss-btn {
     margin-top: 12px;
+    background: linear-gradient(135deg,var(--sage),var(--blush));
+    color: white;
   }
 
   .navlinks {
@@ -71,11 +102,6 @@
 
   .wrap {
     width: 94%;
-  }
-
-  .hero {
-    min-height: 52vh;
-    padding: 24px 18px;
   }
 
   .hero h1 {
