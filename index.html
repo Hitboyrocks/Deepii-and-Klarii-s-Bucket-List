@@ -19,7 +19,83 @@
     body.logged-in .auth-screen{display:none}
     .user-pill{font-size:.85rem;opacity:.8;margin-right:8px}
 
-@media(max-width:650px){.hero{min-height:58vh}.section{padding:36px 0}.navlinks{display:none}.card{border-radius:22px}.dog{font-size:90px}}
+@media (max-width: 650px) {
+  .wrap {
+    width: 94%;
+  }
+
+  .hero {
+    min-height: 52vh;
+    padding: 24px 18px;
+  }
+
+  .hero h1 {
+    font-size: 2.4rem;
+    line-height: 1.05;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  nav {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .brand {
+    width: 100%;
+  }
+
+  .navlinks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .navlinks a,
+  .toggle,
+  .filter,
+  .btn {
+    min-height: 44px;
+  }
+
+  .section {
+    padding: 34px 0;
+  }
+
+  .card {
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .item {
+    flex-direction: column;
+  }
+
+  .item > div:last-child {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .photo {
+    border-radius: 18px;
+  }
+
+  .countdown {
+    font-size: 2.4rem;
+  }
+}.section{padding:36px 0}.navlinks{display:none}.card{border-radius:22px}.dog{font-size:90px}}
   </style>
 </head>
 <body>
