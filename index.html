@@ -19,6 +19,9 @@
     body.logged-in .auth-screen{display:none}
     .user-pill{font-size:.85rem;opacity:.8;margin-right:8px}
 
+
+.kiss-btn{margin-top:18px;border:0;border-radius:999px;padding:13px 22px;background:rgba(255,255,255,.22);color:white;font-weight:700;backdrop-filter:blur(12px);cursor:pointer;box-shadow:0 12px 35px rgba(255,180,200,.35);transition:.3s}.kiss-btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.3)}.kiss-flash{position:fixed;inset:0;background:radial-gradient(circle,rgba(255,210,220,.95),rgba(255,180,200,.45),transparent);z-index:9998;pointer-events:none;animation:kissGlow 1.8s ease forwards}.big-kiss{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);font-size:clamp(5rem,18vw,12rem);z-index:9999;animation:kissPop 1.8s ease forwards;pointer-events:none}.falling-heart,.season-piece{position:fixed;top:-30px;z-index:9999;pointer-events:none}.falling-heart{animation:heartFall 3s linear forwards}.season-layer{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}.season-piece{z-index:1;opacity:.75;animation:seasonFall linear forwards}@keyframes kissGlow{0%{opacity:0}25%{opacity:1}100%{opacity:0}}@keyframes kissPop{0%{transform:translate(-50%,-50%) scale(.3) rotate(-10deg);opacity:0}35%{transform:translate(-50%,-50%) scale(1.15) rotate(5deg);opacity:1}100%{transform:translate(-50%,-50%) scale(.9) rotate(0deg);opacity:0}}@keyframes heartFall{to{transform:translateY(105vh) rotate(360deg);opacity:0}}@keyframes seasonFall{to{transform:translateY(105vh) rotate(360deg);opacity:0}}
+
 @media (max-width: 650px) {
   .wrap {
     width: 94%;
@@ -43,16 +46,23 @@
     text-align: center;
   }
 
+  .topbar {
+    position: static;
+  }
+
   .brand {
     width: 100%;
   }
 
-  .navlinks,
-  .user-pill,
-  .toggle {
-    display: none;
+  .navlinks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
   }
 
+  .navlinks a,
+  .toggle,
   .filter,
   .btn {
     min-height: 44px;
@@ -108,7 +118,7 @@
 </div>
 <div class="app-shell">
 <div class="stars"></div>
-<header class="hero"><span class="heart">♡</span><span class="heart">♥</span><span class="heart">♡</span><div><h1>Deepii & Klarii's Bucket List</h1><p>“One adventure at a time, one memory forever.”</p></div></header>
+<header class="hero"><span class="heart">♡</span><span class="heart">♥</span><span class="heart">♡</span><div><h1>Deepii & Klarii's Bucket List</h1><p>“One adventure at a time, one memory forever.”</p><button class="kiss-btn" onclick="sendKiss()">Send a Kiss 💋</button></div></header>
 <div class="topbar"><nav><div class="brand">∞ Deepii & Klarii</div><div class="navlinks"><a href="#list">Bucket List</a><a href="#memories">Memory Wall</a><a href="#notes">Love Notes</a></div><span class="user-pill" id="signedInUser"></span><button class="toggle" onclick="toggleDark()">Dark Mode</button><button class="toggle" id="logoutBtn">Log Out</button></nav></div>
 <main class="wrap">
 <section class="section grid" id="stats"><div class="card"><h3>Total dreams</h3><h2 id="total">0</h2></div><div class="card"><h3>Adventures completed</h3><h2 id="completed">0</h2></div><div class="card"><h3>Percentage completed</h3><h2 id="percent">0%</h2><div class="progress"><div id="bar" class="bar"></div></div></div></section>
@@ -511,6 +521,77 @@ function startFirestoreListeners() {
     tick();
   });
 }
+
+
+function sendKiss() {
+  const glow = document.createElement('div');
+  glow.className = 'kiss-flash';
+  document.body.appendChild(glow);
+
+  const kiss = document.createElement('div');
+  kiss.className = 'big-kiss';
+  kiss.textContent = '💋';
+  document.body.appendChild(kiss);
+
+  const sound = new Audio('kiss.mp3');
+  sound.volume = 0.7;
+  sound.play().catch(() => {});
+
+  for (let i = 0; i < 45; i++) {
+    const heart = document.createElement('div');
+    heart.className = 'falling-heart';
+    heart.textContent = ['♡', '♥', '💗', '💖'][i % 4];
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = Math.random() * 18 + 16 + 'px';
+    heart.style.animationDelay = Math.random() * .8 + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 3500);
+  }
+
+  setTimeout(() => {
+    glow.remove();
+    kiss.remove();
+  }, 1900);
+}
+window.sendKiss = sendKiss;
+
+function currentSeason() {
+  const month = new Date().getMonth();
+  if (month >= 2 && month <= 4) return { pieces: ['🌸','🌷'], speed: [9000, 14000] };
+  if (month >= 5 && month <= 7) return { pieces: ['☀️','✨'], speed: [11000, 16000] };
+  if (month >= 8 && month <= 10) return { pieces: ['🍂','🍁'], speed: [9000, 14000] };
+  return { pieces: ['❄️','✨'], speed: [10000, 16000] };
+}
+
+function startSeasonAnimation() {
+  let layer = document.querySelector('.season-layer');
+
+  if (!layer) {
+    layer = document.createElement('div');
+    layer.className = 'season-layer';
+    document.body.appendChild(layer);
+  }
+
+  setInterval(() => {
+    if (!document.body.classList.contains('logged-in')) return;
+
+    const season = currentSeason();
+    const piece = document.createElement('div');
+    piece.className = 'season-piece';
+    piece.textContent = season.pieces[Math.floor(Math.random() * season.pieces.length)];
+    piece.style.left = Math.random() * 100 + 'vw';
+    piece.style.fontSize = Math.random() * 10 + 14 + 'px';
+
+    const duration = Math.random() * (season.speed[1] - season.speed[0]) + season.speed[0];
+    piece.style.animationDuration = duration + 'ms';
+
+    layer.appendChild(piece);
+    setTimeout(() => piece.remove(), duration + 500);
+  }, 900);
+}
+
+startSeasonAnimation();
+
 
 const loginBtn = document.getElementById("loginBtn");
 const logoutBtn = document.getElementById("logoutBtn");
