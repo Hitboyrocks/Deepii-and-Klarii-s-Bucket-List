@@ -263,7 +263,28 @@
 .drag-hint{font-size:.95rem;opacity:.85;margin:0 0 14px}
 .drag-handle{display:inline-flex;align-items:center;justify-content:center;min-width:32px;font-size:1.25rem;opacity:.85;cursor:grab;touch-action:none;user-select:none}
 
-  </style>
+  
+.opening-letter{position:fixed;inset:0;z-index:9800;display:none;place-items:center;padding:24px;background:linear-gradient(rgba(20,18,16,.5),rgba(20,18,16,.68)),url("hero.jpg") 35% center/cover no-repeat}
+body.logged-in .opening-letter.show{display:grid}
+.envelope-wrap{text-align:center;color:white}
+.envelope{width:min(320px,78vw);height:210px;position:relative;margin:auto;cursor:pointer;filter:drop-shadow(0 24px 40px rgba(0,0,0,.35));animation:envelopeFloat 3s ease-in-out infinite}
+.envelope-body{position:absolute;inset:42px 0 0;background:linear-gradient(145deg,#fff8ee,#ead8c5);border-radius:18px}
+.envelope-flap{position:absolute;left:0;right:0;top:0;margin:auto;width:0;height:0;border-left:160px solid transparent;border-right:160px solid transparent;border-top:110px solid #efd9c5;transform-origin:top;transition:transform .7s ease}
+.envelope-heart{position:absolute;left:50%;top:104px;transform:translate(-50%,-50%);font-size:2.4rem;z-index:3;color:#d97f94}
+.envelope-label{margin-top:24px;font-family:'Playfair Display',Georgia,serif;font-size:1.35rem}
+.opening-letter.open .envelope-flap{transform:rotateX(180deg)}
+.letter-page{display:none;position:fixed;inset:0;z-index:9900;overflow-y:auto;padding:28px;background:linear-gradient(rgba(28,24,20,.58),rgba(28,24,20,.74)),url("hero.jpg") 35% center/cover no-repeat}
+.letter-page.show{display:block}
+.letter-paper{width:min(720px,94%);margin:36px auto 70px;background:rgba(255,250,240,.94);color:#3e342c;border-radius:28px;padding:clamp(26px,6vw,56px);box-shadow:0 30px 90px rgba(0,0,0,.35);position:relative}
+.letter-paper:before{content:"";position:absolute;inset:14px;border:1px solid rgba(214,168,95,.35);border-radius:20px;pointer-events:none}
+.letter-paper h2{font-size:clamp(2rem,6vw,3.4rem);margin-top:0}
+.letter-text{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.15rem,3.2vw,1.45rem);line-height:1.8;white-space:pre-line}
+.letter-close{margin-top:28px}
+@keyframes envelopeFloat{50%{transform:translateY(-10px)}}
+@media(max-width:650px){.envelope{width:min(290px,82vw);height:190px}.envelope-flap{border-left-width:145px;border-right-width:145px}.letter-page{padding:14px}.letter-paper{margin:22px auto 50px}}
+@media(prefers-reduced-motion:reduce){.envelope{animation:none}.envelope-flap{transition:none}}
+
+</style>
 </head>
 <body>
 <div id="authScreen" class="auth-screen">
@@ -298,6 +319,29 @@
     </div>
   </div>
 </div>
+
+<div class="opening-letter" id="openingLetter" aria-hidden="true">
+  <div class="envelope-wrap">
+    <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Open a love letter from Deepii">
+      <div class="envelope-body"></div>
+      <div class="envelope-flap"></div>
+      <div class="envelope-heart">♥</div>
+    </div>
+    <div class="envelope-label">A letter for my beautiful Klarii</div>
+  </div>
+</div>
+
+<div class="letter-page" id="letterPage" aria-hidden="true">
+  <article class="letter-paper">
+    <h2>My beautiful Klarii,</h2>
+    <div class="letter-text">I am so blessed to have you in my life. Such soul mate connections are very rare in life, and I am thankful to God every day for you. I want to spend my life with you by my side.
+
+I love you,
+Deepii</div>
+    <button class="btn letter-close" id="closeLetterBtn">Close Letter</button>
+  </article>
+</div>
+
 </div>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
@@ -1004,6 +1048,47 @@ window.addEventListener('resize', handleMobileHeroScroll);
 handleMobileHeroScroll();
 
 
+
+const openingLetter = document.getElementById('openingLetter');
+const envelope = document.getElementById('envelope');
+const letterPage = document.getElementById('letterPage');
+const closeLetterBtn = document.getElementById('closeLetterBtn');
+
+function showOpeningLetter() {
+  if (sessionStorage.dk_letter_seen === 'true') return;
+  openingLetter.classList.add('show');
+  openingLetter.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function openLoveLetter() {
+  openingLetter.classList.add('open');
+
+  setTimeout(() => {
+    openingLetter.classList.remove('show');
+    openingLetter.classList.remove('open');
+    openingLetter.setAttribute('aria-hidden', 'true');
+    letterPage.classList.add('show');
+    letterPage.setAttribute('aria-hidden', 'false');
+  }, 550);
+}
+
+function closeLoveLetter() {
+  letterPage.classList.remove('show');
+  letterPage.setAttribute('aria-hidden', 'true');
+  sessionStorage.dk_letter_seen = 'true';
+  document.body.style.overflow = '';
+}
+
+envelope.addEventListener('click', openLoveLetter);
+envelope.addEventListener('keydown', event => {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    openLoveLetter();
+  }
+});
+closeLetterBtn.addEventListener('click', closeLoveLetter);
+
 const loginBtn = document.getElementById("loginBtn");
 const logoutBtn = document.getElementById("logoutBtn");
 const authError = document.getElementById("authError");
@@ -1039,6 +1124,7 @@ onAuthStateChanged(auth, (user) => {
     document.body.classList.add("logged-in");
     if (signedInUser) signedInUser.textContent = user.email || "Signed in";
     startFirestoreListeners();
+    setTimeout(showOpeningLetter, 350);
   } else {
     stopFirestoreListeners();
     document.body.classList.remove("logged-in");
