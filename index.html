@@ -864,21 +864,25 @@ let unsubscribeBucketItems = null;
 let unsubscribeLoveNotes = null;
 let unsubscribeMemories = null;
 let unsubscribeVisit = null;
+let unsubscribeKisses = null;
+let latestKissTimestamp = Date.now();
 
 function stopFirestoreListeners() {
   if (unsubscribeBucketItems) unsubscribeBucketItems();
   if (unsubscribeLoveNotes) unsubscribeLoveNotes();
   if (unsubscribeMemories) unsubscribeMemories();
   if (unsubscribeVisit) unsubscribeVisit();
+  if (unsubscribeKisses) unsubscribeKisses();
 
   unsubscribeBucketItems = null;
   unsubscribeLoveNotes = null;
   unsubscribeMemories = null;
   unsubscribeVisit = null;
+  unsubscribeKisses = null;
 }
 
 function startFirestoreListeners() {
-  if (unsubscribeBucketItems || unsubscribeLoveNotes || unsubscribeMemories || unsubscribeVisit) return;
+  if (unsubscribeBucketItems || unsubscribeLoveNotes || unsubscribeMemories || unsubscribeVisit || unsubscribeKisses) return;
 
   unsubscribeBucketItems = onSnapshot(collection(db, 'bucketItems'), async snapshot => {
     await addDefaultItemsIfEmpty(snapshot);
@@ -915,26 +919,63 @@ function startFirestoreListeners() {
     }
     tick();
   });
+
+  unsubscribeKisses = onSnapshot(collection(db, 'kisses'), snapshot => {
+    snapshot.docChanges().forEach(change => {
+      if (change.type !== 'added') return;
+
+      const kissData = change.doc.data();
+      const createdAt = kissData.createdAt || 0;
+
+      if (createdAt <= latestKissTimestamp) return;
+
+      latestKissTimestamp = createdAt;
+      playKissAnimation();
+    });
+  });
 }
 
 
-function sendKiss(){
- const glow=document.createElement('div');glow.className='kiss-flash';document.body.appendChild(glow);
- const kiss=document.createElement('div');kiss.className='big-kiss';kiss.textContent='💋';document.body.appendChild(kiss);
- const audio=new Audio('kiss.mp3');audio.play().catch(()=>{});
- for(let i=0;i<40;i++){
-  const h=document.createElement('div');
-  h.className='falling-heart';
-  h.textContent=['♥','💖','💗','♡'][i%4];
-  h.style.left=Math.random()*100+'vw';
-  h.style.fontSize=(16+Math.random()*18)+'px';
-  h.style.animationDelay=(Math.random()*0.6)+'s';
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),3200);
- }
- setTimeout(()=>{glow.remove();kiss.remove();},1800);
+function playKissAnimation() {
+  const glow = document.createElement('div');
+  glow.className = 'kiss-flash';
+  document.body.appendChild(glow);
+
+  const kiss = document.createElement('div');
+  kiss.className = 'big-kiss';
+  kiss.textContent = '💋';
+  document.body.appendChild(kiss);
+
+  const audio = new Audio('kiss.mp3');
+  audio.play().catch(() => {});
+
+  for (let i = 0; i < 40; i++) {
+    const heart = document.createElement('div');
+    heart.className = 'falling-heart';
+    heart.textContent = ['♥','💖','💗','♡'][i % 4];
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = (16 + Math.random() * 18) + 'px';
+    heart.style.animationDelay = (Math.random() * 0.6) + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 3200);
+  }
+
+  setTimeout(() => {
+    glow.remove();
+    kiss.remove();
+  }, 1800);
 }
-window.sendKiss=sendKiss;
+
+async function sendKiss() {
+  if (!auth.currentUser) return;
+
+  await addDoc(collection(db, 'kisses'), {
+    senderUid: auth.currentUser.uid,
+    senderEmail: auth.currentUser.email || '',
+    createdAt: Date.now()
+  });
+}
+window.sendKiss = sendKiss;
 
 
 
