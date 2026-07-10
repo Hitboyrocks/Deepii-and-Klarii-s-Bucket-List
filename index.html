@@ -256,6 +256,13 @@
   100%{opacity:0;transform:translateY(18px) scale(.96)}
 }
 
+  
+.overlay-list .item[draggable="true"]{cursor:grab}
+.overlay-list .item[draggable="true"]:active{cursor:grabbing}
+.overlay-list .item.dragging{opacity:.45;transform:scale(.98)}
+.drag-hint{font-size:.95rem;opacity:.85;margin:0 0 14px}
+.drag-handle{display:inline-flex;align-items:center;justify-content:center;min-width:32px;font-size:1.25rem;opacity:.85;cursor:grab;touch-action:none;user-select:none}
+
   </style>
 </head>
 <body>
@@ -379,11 +386,14 @@ async function addItem() {
   const title = titleInput.value.trim();
   if (!title) return;
 
+  const now = Date.now();
+
   await addDoc(collection(db, 'bucketItems'), {
     t: title,
     c: categoryInput.value,
     s: statusInput.value,
-    createdAt: Date.now()
+    createdAt: now,
+    order: now
   });
 
   titleInput.value = '';
@@ -489,6 +499,10 @@ window.setFilter = setFilter;
 
 
 let currentOverlayStatus = null;
+let draggedOverlayItem = null;
+let touchDraggedItem = null;
+let touchMoveHandler = null;
+let touchEndHandler = null;
 
 function openSectionPage(status) {
   currentOverlayStatus = status;
@@ -497,18 +511,155 @@ function openSectionPage(status) {
   const overlayTitle = document.getElementById('overlayTitle');
   const overlayList = document.getElementById('overlayList');
 
+  const canReorder = status === 'Dreaming' || status === 'Planned';
   const statusItems = items.filter(item => item.s === status && (filter === 'All' || item.c === filter));
 
   overlayTitle.textContent = status;
-  overlayList.innerHTML = statusItems.length
-    ? statusItems.map(item => `<div class="item" data-overlay-item-id="${item.id}">${itemHTML(item)}</div>`).join('')
-    : `<p>No ${status.toLowerCase()} dreams here yet.</p>`;
+  overlayList.innerHTML = '';
+
+  if (canReorder && statusItems.length > 1) {
+    const hint = document.createElement('p');
+    hint.className = 'drag-hint';
+    hint.textContent = 'Drag dreams up or down to reorganize this list.';
+    overlayList.appendChild(hint);
+  }
+
+  if (!statusItems.length) {
+    overlayList.innerHTML += `<p>No ${status.toLowerCase()} dreams here yet.</p>`;
+  } else {
+    statusItems.forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'item';
+      row.dataset.overlayItemId = item.id;
+
+      if (canReorder) {
+        row.draggable = true;
+        row.innerHTML = `<span class="drag-handle" aria-label="Drag to reorder" title="Drag to reorder">⋮⋮</span>${itemHTML(item)}`;
+      } else {
+        row.innerHTML = itemHTML(item);
+      }
+
+      overlayList.appendChild(row);
+    });
+
+    if (canReorder) {
+      setupOverlayDragAndDrop();
+    }
+  }
 
   overlay.classList.add('open');
   overlay.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
 }
 window.openSectionPage = openSectionPage;
+
+function setupOverlayDragAndDrop() {
+  const overlayList = document.getElementById('overlayList');
+  const draggableRows = [...overlayList.querySelectorAll('.item[draggable="true"]')];
+
+  draggableRows.forEach(row => {
+    row.addEventListener('dragstart', event => {
+      draggedOverlayItem = row;
+      row.classList.add('dragging');
+      event.dataTransfer.effectAllowed = 'move';
+      event.dataTransfer.setData('text/plain', row.dataset.overlayItemId);
+    });
+
+    row.addEventListener('dragend', async () => {
+      row.classList.remove('dragging');
+      draggedOverlayItem = null;
+      await saveOverlayOrder();
+    });
+
+    const handle = row.querySelector('.drag-handle');
+    if (handle) {
+      handle.addEventListener('pointerdown', event => {
+        if (event.pointerType === 'mouse') return;
+
+        event.preventDefault();
+        touchDraggedItem = row;
+        row.classList.add('dragging');
+        handle.setPointerCapture(event.pointerId);
+
+        touchMoveHandler = moveEvent => {
+          if (!touchDraggedItem) return;
+          const afterElement = getDragAfterElement(overlayList, moveEvent.clientY);
+
+          if (afterElement == null) {
+            overlayList.appendChild(touchDraggedItem);
+          } else {
+            overlayList.insertBefore(touchDraggedItem, afterElement);
+          }
+        };
+
+        touchEndHandler = async endEvent => {
+          if (!touchDraggedItem) return;
+
+          touchDraggedItem.classList.remove('dragging');
+          touchDraggedItem = null;
+
+          try {
+            handle.releasePointerCapture(endEvent.pointerId);
+          } catch (error) {}
+
+          handle.removeEventListener('pointermove', touchMoveHandler);
+          handle.removeEventListener('pointerup', touchEndHandler);
+          handle.removeEventListener('pointercancel', touchEndHandler);
+
+          await saveOverlayOrder();
+        };
+
+        handle.addEventListener('pointermove', touchMoveHandler);
+        handle.addEventListener('pointerup', touchEndHandler);
+        handle.addEventListener('pointercancel', touchEndHandler);
+      });
+    }
+  });
+
+  overlayList.addEventListener('dragover', event => {
+    event.preventDefault();
+
+    if (!draggedOverlayItem) return;
+
+    const afterElement = getDragAfterElement(overlayList, event.clientY);
+
+    if (afterElement == null) {
+      overlayList.appendChild(draggedOverlayItem);
+    } else {
+      overlayList.insertBefore(draggedOverlayItem, afterElement);
+    }
+  });
+}
+
+function getDragAfterElement(container, y) {
+  const draggableElements = [...container.querySelectorAll('.item[draggable="true"]:not(.dragging)')];
+
+  return draggableElements.reduce((closest, child) => {
+    const box = child.getBoundingClientRect();
+    const offset = y - box.top - box.height / 2;
+
+    if (offset < 0 && offset > closest.offset) {
+      return { offset, element: child };
+    }
+
+    return closest;
+  }, { offset: Number.NEGATIVE_INFINITY, element: null }).element;
+}
+
+async function saveOverlayOrder() {
+  if (currentOverlayStatus !== 'Dreaming' && currentOverlayStatus !== 'Planned') return;
+
+  const rows = [...document.querySelectorAll('#overlayList .item[data-overlay-item-id]')];
+  const baseOrder = Date.now();
+
+  await Promise.all(
+    rows.map((row, index) =>
+      updateDoc(doc(db, 'bucketItems', row.dataset.overlayItemId), {
+        order: baseOrder + index
+      })
+    )
+  );
+}
 
 function closeSectionPage() {
   const overlay = document.getElementById('sectionOverlay');
@@ -688,21 +839,24 @@ async function addDefaultItemsIfEmpty(snapshot) {
     t: 'Watch a sunset together',
     c: 'Memories',
     s: 'Dreaming',
-    createdAt: 1
+    createdAt: 1,
+    order: 1
   });
 
   await setDoc(doc(db, 'bucketItems', 'default-trip'), {
     t: 'Take our first big trip',
     c: 'Travel',
     s: 'Planned',
-    createdAt: 2
+    createdAt: 2,
+    order: 2
   });
 
   await setDoc(doc(db, 'bucketItems', 'default-home'), {
     t: 'Build our future home traditions',
     c: 'Future Home',
     s: 'Dreaming',
-    createdAt: 3
+    createdAt: 3,
+    order: 3
   });
 }
 
@@ -731,7 +885,7 @@ function startFirestoreListeners() {
 
     items = snapshot.docs
       .map(document => ({ id: document.id, ...document.data() }))
-      .sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
+      .sort((a, b) => (a.order ?? a.createdAt ?? 0) - (b.order ?? b.createdAt ?? 0));
 
     render();
     if (currentOverlayStatus && document.getElementById('sectionOverlay').classList.contains('open')) {
