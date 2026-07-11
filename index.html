@@ -345,19 +345,6 @@
 </div>
 </div>
 
-
-<div class="notes-overlay" id="notesOverlay" aria-hidden="true">
-  <div class="notes-overlay-inner">
-    <div class="notes-overlay-card">
-      <div class="notes-overlay-head">
-        <h2>Older Love Notes</h2>
-        <button class="notes-overlay-close" onclick="closeNotesPage()">Close</button>
-      </div>
-      <div class="notes-overlay-list" id="notesOverlayList"></div>
-    </div>
-  </div>
-</div>
-
 <div class="section-overlay" id="sectionOverlay" aria-hidden="true">
   <div class="overlay-inner">
     <div class="overlay-card">
@@ -371,6 +358,10 @@
 </div>
 
     
+  </article>
+</div>
+
+</div>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
@@ -845,13 +836,10 @@ function openNotesPage() {
   const overlay = document.getElementById('notesOverlay');
   const list = document.getElementById('notesOverlayList');
 
-  const olderNotes = [...notes]
+  list.innerHTML = [...notes]
     .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0))
-    .slice(2);
-
-  list.innerHTML = olderNotes.length
-    ? olderNotes.map(note => noteHTML(note)).join('')
-    : '<p>No older love notes yet.</p>';
+    .map(note => noteHTML(note))
+    .join('');
 
   overlay.classList.add('open');
   overlay.setAttribute('aria-hidden', 'false');
