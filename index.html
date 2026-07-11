@@ -264,25 +264,35 @@
 .drag-handle{display:inline-flex;align-items:center;justify-content:center;min-width:32px;font-size:1.25rem;opacity:.85;cursor:grab;touch-action:none;user-select:none}
 
   
-.opening-letter{position:fixed;inset:0;z-index:9800;display:none;place-items:center;padding:24px;background:linear-gradient(rgba(20,18,16,.5),rgba(20,18,16,.68)),url("hero.jpg") 35% center/cover no-repeat}
-body.logged-in .opening-letter.show{display:grid}
-.envelope-wrap{text-align:center;color:white}
-.envelope{width:min(320px,78vw);height:210px;position:relative;margin:auto;cursor:pointer;filter:drop-shadow(0 24px 40px rgba(0,0,0,.35));animation:envelopeFloat 3s ease-in-out infinite}
-.envelope-body{position:absolute;inset:42px 0 0;background:linear-gradient(145deg,#fff8ee,#ead8c5);border-radius:18px}
-.envelope-flap{position:absolute;left:0;right:0;top:0;margin:auto;width:0;height:0;border-left:160px solid transparent;border-right:160px solid transparent;border-top:110px solid #efd9c5;transform-origin:top;transition:transform .7s ease}
-.envelope-heart{position:absolute;left:50%;top:104px;transform:translate(-50%,-50%);font-size:2.4rem;z-index:3;color:#d97f94}
-.envelope-label{margin-top:24px;font-family:'Playfair Display',Georgia,serif;font-size:1.35rem}
-.opening-letter.open .envelope-flap{transform:rotateX(180deg)}
-.letter-page{display:none;position:fixed;inset:0;z-index:9900;overflow-y:auto;padding:28px;background:linear-gradient(rgba(28,24,20,.58),rgba(28,24,20,.74)),url("hero.jpg") 35% center/cover no-repeat}
-.letter-page.show{display:block}
-.letter-paper{width:min(720px,94%);margin:36px auto 70px;background:rgba(255,250,240,.94);color:#3e342c;border-radius:28px;padding:clamp(26px,6vw,56px);box-shadow:0 30px 90px rgba(0,0,0,.35);position:relative}
-.letter-paper:before{content:"";position:absolute;inset:14px;border:1px solid rgba(214,168,95,.35);border-radius:20px;pointer-events:none}
-.letter-paper h2{font-size:clamp(2rem,6vw,3.4rem);margin-top:0}
-.letter-text{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.15rem,3.2vw,1.45rem);line-height:1.8;white-space:pre-line}
-.letter-close{margin-top:28px}
-@keyframes envelopeFloat{50%{transform:translateY(-10px)}}
-@media(max-width:650px){.envelope{width:min(290px,82vw);height:190px}.envelope-flap{border-left-width:145px;border-right-width:145px}.letter-page{padding:14px}.letter-paper{margin:22px auto 50px}}
-@media(prefers-reduced-motion:reduce){.envelope{animation:none}.envelope-flap{transition:none}}
+
+
+.love-note-envelope{position:fixed;right:22px;bottom:22px;z-index:9700;display:none;align-items:center;gap:12px;max-width:min(360px,calc(100vw - 32px));padding:14px 16px;border-radius:20px;box-shadow:0 18px 50px rgba(0,0,0,.28);cursor:pointer;animation:noteEnvelopeIn .45s ease}
+.love-note-envelope.show{display:flex}
+.love-note-envelope.yellow{background:linear-gradient(145deg,#fff7b8,#f4d96e);color:#5a4820}
+.love-note-envelope.pink{background:linear-gradient(145deg,#ffd8e6,#f3a9c3);color:#5b2f3f}
+.love-note-envelope .envelope-icon{font-size:2.1rem}
+.love-note-envelope .envelope-copy{display:flex;flex-direction:column;gap:2px}
+.love-note-envelope .envelope-copy strong{font-family:'Playfair Display',Georgia,serif;font-size:1.05rem}
+.love-note-envelope .envelope-copy span{font-size:.88rem;opacity:.82}
+@keyframes noteEnvelopeIn{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:none}}
+.note-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:14px;font-size:.82rem;opacity:.78}
+.note-react{border:0;background:rgba(255,255,255,.42);border-radius:999px;padding:7px 10px;cursor:pointer;color:#b84d6b;font-weight:700}
+.note-react.reacted{background:#ffd6df}
+.notes-see-more{display:inline-block;margin-top:16px;color:var(--sage2);font-weight:700;text-decoration:none;cursor:pointer}
+.notes-see-more:hover{text-decoration:underline}
+body.dark .notes-see-more{color:var(--gold)}
+.notes-overlay{position:fixed;inset:0;z-index:9200;display:none;overflow-y:auto;padding:28px 0;background:linear-gradient(rgba(20,18,16,.62),rgba(20,18,16,.72)),url("hero.jpg") center/cover no-repeat}
+.notes-overlay.open{display:block}
+.notes-overlay:before{content:"";position:fixed;inset:0;background:inherit;filter:blur(10px);transform:scale(1.05);z-index:-2}
+.notes-overlay:after{content:"";position:fixed;inset:0;background:rgba(20,18,16,.45);z-index:-1}
+.notes-overlay-inner{width:min(920px,92%);margin:40px auto 80px;color:white}
+.notes-overlay-card{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.24);backdrop-filter:blur(18px);border-radius:30px;padding:24px;box-shadow:0 20px 70px rgba(0,0,0,.28)}
+.notes-overlay-head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}
+.notes-overlay-head h2{margin:0;color:white}
+.notes-overlay-close{border:0;border-radius:999px;padding:10px 14px;background:rgba(255,255,255,.22);color:white;cursor:pointer;font-weight:700}
+.notes-overlay-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.notes-overlay-list .note{transform:none}
+@media(max-width:650px){.love-note-envelope{right:16px;left:16px;bottom:16px;max-width:none}.notes-overlay{padding:16px 0}.notes-overlay-inner{margin:22px auto 70px}.notes-overlay-card{padding:18px;border-radius:24px}.notes-overlay-head{align-items:flex-start}.notes-overlay-head h2{font-size:2rem}}
 
 </style>
 </head>
@@ -308,6 +318,27 @@ body.logged-in .opening-letter.show{display:grid}
 <section class="section"><h2>Countdown Until Our Next Visit</h2><div class="card"><input type="date" id="visitDate" onchange="saveVisit()"/><div class="countdown" id="countdown">Set a date</div></div></section>
 <section class="section" id="notes"><h2>Love Notes</h2><div class="card"><textarea id="noteText" placeholder="Leave a small note..."></textarea><button class="btn" onclick="addNote()">Leave Note</button></div><div class="grid" id="notesGrid"></div></section>
 </main><footer>Long distance is only temporary. Every completed adventure brings you closer to home. ∞♡</footer>
+
+<div class="love-note-envelope" id="loveNoteEnvelope" role="button" tabindex="0" aria-live="polite" aria-hidden="true">
+  <div class="envelope-icon">✉️</div>
+  <div class="envelope-copy">
+    <strong id="loveNoteEnvelopeTitle">New love note</strong>
+    <span id="loveNoteEnvelopeText">Tap to read</span>
+  </div>
+</div>
+
+<div class="notes-overlay" id="notesOverlay" aria-hidden="true">
+  <div class="notes-overlay-inner">
+    <div class="notes-overlay-card">
+      <div class="notes-overlay-head">
+        <h2>All Love Notes</h2>
+        <button class="notes-overlay-close" onclick="closeNotesPage()">Close</button>
+      </div>
+      <div class="notes-overlay-list" id="notesOverlayList"></div>
+    </div>
+  </div>
+</div>
+
 <div class="section-overlay" id="sectionOverlay" aria-hidden="true">
   <div class="overlay-inner">
     <div class="overlay-card">
@@ -320,24 +351,6 @@ body.logged-in .opening-letter.show{display:grid}
   </div>
 </div>
 
-<div class="opening-letter" id="openingLetter" aria-hidden="true">
-  <div class="envelope-wrap">
-    <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Open a love letter from Deepii">
-      <div class="envelope-body"></div>
-      <div class="envelope-flap"></div>
-      <div class="envelope-heart">♥</div>
-    </div>
-    <div class="envelope-label">A letter for my beautiful Klarii</div>
-  </div>
-</div>
-
-<div class="letter-page" id="letterPage" aria-hidden="true">
-  <article class="letter-paper">
-    <h2>My beautiful Klarii,</h2>
-    <div class="letter-text">I am so blessed to have you in my life. Such soul mate connections are very rare in life, and I am thankful to God every day for you. I want to spend my life with you by my side.
-
-I love you,
-Deepii</div>
     <button class="btn letter-close" id="closeLetterBtn">Close Letter</button>
   </article>
 </div>
@@ -715,7 +728,10 @@ function closeSectionPage() {
 window.closeSectionPage = closeSectionPage;
 
 document.addEventListener('keydown', event => {
-  if (event.key === 'Escape') closeSectionPage();
+  if (event.key === 'Escape') {
+    closeSectionPage();
+    closeNotesPage();
+  }
 });
 
 
@@ -727,11 +743,13 @@ filtersEl.innerHTML = cats.map(category => `
 
 async function addNote() {
   const text = noteTextEl.value.trim();
-  if (!text) return;
+  if (!text || !auth.currentUser) return;
 
   await addDoc(collection(db, 'loveNotes'), {
     text,
-    createdAt: Date.now()
+    createdAt: Date.now(),
+    senderEmail: auth.currentUser.email || '',
+    reactions: []
   });
 
   noteTextEl.value = '';
@@ -743,15 +761,136 @@ async function removeNote(id) {
 }
 window.removeNote = removeNote;
 
-function renderNotes() {
-  notesGridEl.innerHTML = notes.map(note => `
+function formatNoteDate(timestamp) {
+  if (!timestamp) return '';
+  return new Date(timestamp).toLocaleDateString(undefined, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  });
+}
+
+function noteHTML(note) {
+  const reactions = Array.isArray(note.reactions) ? note.reactions : [];
+  const currentUid = auth.currentUser ? auth.currentUser.uid : '';
+  const reacted = currentUid && reactions.includes(currentUid);
+
+  return `
     <div class="note">
       ${escapeHTML(note.text)}
-      <br><br>
+      <div class="note-meta">
+        <span>${formatNoteDate(note.createdAt)}</span>
+        <button class="note-react ${reacted ? 'reacted' : ''}" onclick="toggleNoteReaction('${note.id}')">♥ ${reactions.length}</button>
+      </div>
+      <br>
       <button class="btn small" onclick="removeNote('${note.id}')">Remove</button>
     </div>
-  `).join('');
+  `;
 }
+
+function renderNotes() {
+  const latestNotes = [...notes]
+    .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0))
+    .slice(0, 2);
+
+  notesGridEl.innerHTML = latestNotes.map(note => noteHTML(note)).join('');
+
+  if (notes.length > 2) {
+    const seeMore = document.createElement('a');
+    seeMore.href = '#';
+    seeMore.className = 'notes-see-more';
+    seeMore.textContent = 'See more love notes';
+    seeMore.onclick = event => {
+      event.preventDefault();
+      openNotesPage();
+    };
+    notesGridEl.appendChild(seeMore);
+  }
+}
+
+
+async function toggleNoteReaction(id) {
+  if (!auth.currentUser) return;
+  const note = notes.find(item => item.id === id);
+  if (!note) return;
+
+  const reactions = Array.isArray(note.reactions) ? [...note.reactions] : [];
+  const uid = auth.currentUser.uid;
+  const index = reactions.indexOf(uid);
+
+  if (index >= 0) reactions.splice(index, 1);
+  else reactions.push(uid);
+
+  await updateDoc(doc(db, 'loveNotes', id), { reactions });
+}
+window.toggleNoteReaction = toggleNoteReaction;
+
+function openNotesPage() {
+  const overlay = document.getElementById('notesOverlay');
+  const list = document.getElementById('notesOverlayList');
+
+  list.innerHTML = [...notes]
+    .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0))
+    .map(note => noteHTML(note))
+    .join('');
+
+  overlay.classList.add('open');
+  overlay.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+window.openNotesPage = openNotesPage;
+
+function closeNotesPage() {
+  const overlay = document.getElementById('notesOverlay');
+  overlay.classList.remove('open');
+  overlay.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+window.closeNotesPage = closeNotesPage;
+
+function showLatestNoteEnvelope(note) {
+  if (!note) return;
+
+  const envelope = document.getElementById('loveNoteEnvelope');
+  const title = document.getElementById('loveNoteEnvelopeTitle');
+  const text = document.getElementById('loveNoteEnvelopeText');
+
+  envelope.classList.remove('yellow', 'pink');
+
+  const sender = (note.senderEmail || '').toLowerCase();
+  if (sender === 'deepsoni2001@gmail.com') {
+    envelope.classList.add('yellow');
+    title.textContent = 'A new note from Deepii';
+  } else if (sender === 'klaratylsova@email.cz') {
+    envelope.classList.add('pink');
+    title.textContent = 'A new note from Klarii';
+  } else {
+    title.textContent = 'A new love note';
+  }
+
+  text.textContent = note.text.length > 70 ? note.text.slice(0, 70) + '…' : note.text;
+  envelope.classList.add('show');
+  envelope.setAttribute('aria-hidden', 'false');
+
+  clearTimeout(showLatestNoteEnvelope.timer);
+  showLatestNoteEnvelope.timer = setTimeout(() => {
+    envelope.classList.remove('show');
+    envelope.setAttribute('aria-hidden', 'true');
+  }, 7000);
+}
+
+const loveNoteEnvelope = document.getElementById('loveNoteEnvelope');
+loveNoteEnvelope.addEventListener('click', () => {
+  loveNoteEnvelope.classList.remove('show');
+  loveNoteEnvelope.setAttribute('aria-hidden', 'true');
+  openNotesPage();
+});
+loveNoteEnvelope.addEventListener('keydown', event => {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    loveNoteEnvelope.click();
+  }
+});
 
 function resizeImageFile(file, maxSize = 1100, quality = 0.78) {
   return new Promise((resolve, reject) => {
@@ -942,11 +1081,23 @@ function startFirestoreListeners() {
   });
 
   unsubscribeLoveNotes = onSnapshot(collection(db, 'loveNotes'), snapshot => {
+    const previousLatest = notes.length ? Math.max(...notes.map(note => note.createdAt || 0)) : 0;
+
     notes = snapshot.docs
       .map(document => ({ id: document.id, ...document.data() }))
       .sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
 
     renderNotes();
+
+    const newestNote = [...notes].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0))[0];
+
+    if (previousLatest && newestNote && (newestNote.createdAt || 0) > previousLatest) {
+      showLatestNoteEnvelope(newestNote);
+    }
+
+    if (document.getElementById('notesOverlay').classList.contains('open')) {
+      openNotesPage();
+    }
   });
 
   unsubscribeMemories = onSnapshot(collection(db, 'memories'), snapshot => {
@@ -1049,45 +1200,6 @@ handleMobileHeroScroll();
 
 
 
-const openingLetter = document.getElementById('openingLetter');
-const envelope = document.getElementById('envelope');
-const letterPage = document.getElementById('letterPage');
-const closeLetterBtn = document.getElementById('closeLetterBtn');
-
-function showOpeningLetter() {
-  if (sessionStorage.dk_letter_seen === 'true') return;
-  openingLetter.classList.add('show');
-  openingLetter.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-}
-
-function openLoveLetter() {
-  openingLetter.classList.add('open');
-
-  setTimeout(() => {
-    openingLetter.classList.remove('show');
-    openingLetter.classList.remove('open');
-    openingLetter.setAttribute('aria-hidden', 'true');
-    letterPage.classList.add('show');
-    letterPage.setAttribute('aria-hidden', 'false');
-  }, 550);
-}
-
-function closeLoveLetter() {
-  letterPage.classList.remove('show');
-  letterPage.setAttribute('aria-hidden', 'true');
-  sessionStorage.dk_letter_seen = 'true';
-  document.body.style.overflow = '';
-}
-
-envelope.addEventListener('click', openLoveLetter);
-envelope.addEventListener('keydown', event => {
-  if (event.key === 'Enter' || event.key === ' ') {
-    event.preventDefault();
-    openLoveLetter();
-  }
-});
-closeLetterBtn.addEventListener('click', closeLoveLetter);
 
 const loginBtn = document.getElementById("loginBtn");
 const logoutBtn = document.getElementById("logoutBtn");
@@ -1124,7 +1236,6 @@ onAuthStateChanged(auth, (user) => {
     document.body.classList.add("logged-in");
     if (signedInUser) signedInUser.textContent = user.email || "Signed in";
     startFirestoreListeners();
-    setTimeout(showOpeningLetter, 350);
   } else {
     stopFirestoreListeners();
     document.body.classList.remove("logged-in");
