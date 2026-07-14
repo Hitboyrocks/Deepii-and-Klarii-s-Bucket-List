@@ -339,6 +339,73 @@
   .bouquet-letter-signature{font-size:1.55rem;margin-top:24px}
   .bouquet-letter-close{display:block;width:100%;margin-top:24px;min-height:48px}
 }
+
+@keyframes bouquetBreathMobile{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(0,-5px,0) scale(1.012)}}
+@media(max-width:650px){
+  .bouquet-surprise{contain:strict}
+  .bouquet-background{
+    transition:transform .45s ease,opacity .45s ease;
+    will-change:transform,opacity;
+    transform:translateZ(0);
+  }
+  .bouquet-background:before{animation:none;opacity:.24}
+  .cartoon-bouquet{
+    width:108vw;
+    max-height:76dvh;
+    margin-top:-2dvh;
+    filter:none;
+    animation:bouquetBreathMobile 7.2s ease-in-out infinite;
+    transition:transform .45s ease,opacity .45s ease;
+    transform:translateZ(0);
+    transform-origin:50% 72%;
+    backface-visibility:hidden;
+    will-change:transform,opacity;
+    contain:paint;
+  }
+  .bouquet-surprise.open .bouquet-background{
+    filter:none;
+    transform:scale(1.015) translateZ(0);
+    opacity:.38;
+  }
+  .bouquet-surprise.open .cartoon-bouquet{
+    filter:none;
+    transform:translate3d(0,-4px,0) scale(1.015);
+    opacity:.5;
+    animation-play-state:paused;
+  }
+  .bouquet-tap-copy{
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+    box-shadow:0 10px 28px rgba(0,0,0,.26);
+    animation-duration:3.2s;
+    transform:translateZ(0);
+    will-change:transform,opacity;
+  }
+  .bouquet-petal{
+    text-shadow:none;
+    transform:translateZ(0);
+    backface-visibility:hidden;
+    will-change:transform,opacity;
+    contain:layout paint style;
+  }
+  .bouquet-petal.simple-petal{
+    width:11px;
+    height:16px;
+    border-radius:75% 8% 75% 8%;
+    background:var(--petal-color,#d72742);
+  }
+  .bouquet-letter{
+    transform:translate3d(0,20px,0) scale(.985);
+    transition:opacity .48s ease .08s,transform .48s ease .08s,visibility 0s linear .58s;
+    will-change:transform,opacity;
+  }
+  .bouquet-surprise.open .bouquet-letter{
+    transform:translate3d(0,0,0) scale(1);
+    transition:opacity .48s ease .08s,transform .48s ease .08s,visibility 0s;
+  }
+  .bouquet-letter-paper{box-shadow:0 18px 50px rgba(0,0,0,.38)}
+}
+
 @media(prefers-reduced-motion:reduce){.cartoon-bouquet,.bouquet-tap-copy,.bouquet-background:before{animation:none}.bouquet-petal{display:none}.bouquet-letter,.bouquet-tap-copy,.cartoon-bouquet{transition:none}}
 
 
@@ -1431,16 +1498,26 @@ function createBouquetPetals() {
 
   container.innerHTML = '';
 
-  for (let i = 0; i < 24; i++) {
+  const isMobile = window.matchMedia('(max-width: 650px)').matches;
+  const petalCount = isMobile ? 10 : 24;
+  const petalColors = ['#c91935', '#e13e56', '#b70f2d'];
+
+  for (let i = 0; i < petalCount; i++) {
     const petal = document.createElement('span');
-    petal.className = 'bouquet-petal';
-    petal.textContent = i % 4 === 0 ? '🌹' : '●';
+    petal.className = isMobile ? 'bouquet-petal simple-petal' : 'bouquet-petal';
+    petal.textContent = isMobile ? '' : (i % 4 === 0 ? '🌹' : '●');
     petal.style.left = Math.random() * 100 + 'vw';
-    petal.style.fontSize = (i % 4 === 0 ? 18 + Math.random() * 12 : 9 + Math.random() * 8) + 'px';
-    petal.style.animationDuration = (6 + Math.random() * 6) + 's';
-    petal.style.animationDelay = (Math.random() * 4) + 's';
-    petal.style.setProperty('--petal-drift', (-70 + Math.random() * 140) + 'px');
-    petal.style.color = ['#c91935', '#e13e56', '#b70f2d'][i % 3];
+
+    if (!isMobile) {
+      petal.style.fontSize = (i % 4 === 0 ? 18 + Math.random() * 12 : 9 + Math.random() * 8) + 'px';
+      petal.style.color = petalColors[i % petalColors.length];
+    } else {
+      petal.style.setProperty('--petal-color', petalColors[i % petalColors.length]);
+    }
+
+    petal.style.animationDuration = (isMobile ? 8 + Math.random() * 4 : 6 + Math.random() * 6) + 's';
+    petal.style.animationDelay = (Math.random() * (isMobile ? 2.5 : 4)) + 's';
+    petal.style.setProperty('--petal-drift', (isMobile ? -38 + Math.random() * 76 : -70 + Math.random() * 140) + 'px');
     container.appendChild(petal);
   }
 }
