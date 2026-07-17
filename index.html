@@ -298,116 +298,35 @@
 
 
 
-.bouquet-surprise{position:fixed;inset:0;z-index:9850;display:none;overflow:hidden;background:#291018;color:white}
-.bouquet-surprise.show{display:block}
-.bouquet-background{position:absolute;inset:0;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 30%,rgba(255,176,190,.28),transparent 34%),radial-gradient(circle at 18% 16%,rgba(255,235,196,.16),transparent 18%),radial-gradient(circle at 82% 18%,rgba(255,235,196,.13),transparent 18%),linear-gradient(160deg,#451727,#210b13 72%);transition:filter .8s ease,transform .8s ease,opacity .8s ease}
-.bouquet-background:before,.bouquet-background:after{content:'';position:absolute;inset:0;pointer-events:none}
-.bouquet-background:before{background-image:radial-gradient(circle,rgba(255,238,200,.7) 0 2px,transparent 3px),radial-gradient(circle,rgba(255,188,206,.55) 0 2px,transparent 3px);background-position:12% 18%,76% 24%;background-size:86px 86px,112px 112px;opacity:.42;animation:bouquetSparkle 8s linear infinite}
-.bouquet-background:after{background:linear-gradient(180deg,transparent 58%,rgba(19,6,10,.46));z-index:0}
-.cartoon-bouquet{position:relative;z-index:1;width:min(96vw,760px);height:min(88dvh,880px);filter:drop-shadow(0 30px 38px rgba(0,0,0,.42));transform-origin:50% 72%;animation:bouquetBreath 6.8s ease-in-out infinite;transition:filter .8s ease,transform .8s ease,opacity .8s ease}
-.bouquet-surprise.open .cartoon-bouquet{filter:blur(7px) brightness(.5) drop-shadow(0 30px 38px rgba(0,0,0,.42));transform:scale(1.08);opacity:.76}
-.bouquet-petal{position:absolute;top:-12vh;z-index:2;pointer-events:none;color:#d72742;text-shadow:0 4px 12px rgba(0,0,0,.24);animation:bouquetPetalFall linear forwards}
-.bouquet-tap{position:absolute;inset:0;z-index:3;width:100%;border:0;background:transparent;color:white;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:0 24px max(5vh,32px);text-align:center}
-.bouquet-tap-copy{display:inline-flex;flex-direction:column;align-items:center;gap:8px;padding:14px 22px;border-radius:999px;background:rgba(35,7,15,.56);border:1px solid rgba(255,255,255,.34);backdrop-filter:blur(14px);box-shadow:0 16px 50px rgba(0,0,0,.3);animation:bouquetPromptPulse 2.4s ease-in-out infinite;transition:opacity .45s ease,transform .45s ease}
-.bouquet-tap strong{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.3rem,4vw,2rem)}
-.bouquet-tap span{font-size:.95rem;opacity:.9}
-.bouquet-surprise.open .bouquet-tap{pointer-events:none}
-.bouquet-surprise.open .bouquet-tap-copy{opacity:0;transform:translateY(18px) scale(.95)}
-.bouquet-letter{position:absolute;inset:0;z-index:4;display:block;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:clamp(22px,5vh,58px) 22px 54px;opacity:0;visibility:hidden;transform:translateY(28px) scale(.97);transition:opacity .7s ease .25s,transform .7s ease .25s,visibility 0s linear .95s;scrollbar-gutter:stable}
-.bouquet-surprise.open .bouquet-letter{opacity:1;visibility:visible;transform:none;transition:opacity .7s ease .25s,transform .7s ease .25s,visibility 0s}
-.bouquet-letter-paper{width:min(760px,94%);margin:0 auto;background:linear-gradient(145deg,rgba(255,250,239,.99),rgba(250,236,222,.98));color:#3f2b28;border-radius:30px;padding:clamp(30px,6vw,64px);box-shadow:0 34px 100px rgba(0,0,0,.48);position:relative;overflow:visible}
-.bouquet-letter-paper:before{content:'';position:absolute;inset:15px;border:1px solid rgba(172,59,73,.28);border-radius:22px;pointer-events:none}
-.bouquet-letter-paper:after{content:'🌹';position:absolute;right:24px;top:18px;font-size:clamp(2.4rem,6vw,4rem);opacity:.22;transform:rotate(12deg)}
-.bouquet-letter-title{margin:0 0 24px;font-size:clamp(2.1rem,6vw,3.7rem);color:#8e2637;outline:none}
-.bouquet-letter-text{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.08rem,2.8vw,1.4rem);line-height:1.78;white-space:pre-line}
-.bouquet-letter-signature{margin-top:28px;font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.35rem,4vw,2rem);color:#8e2637}
-.bouquet-letter-close{margin-top:28px}
-@keyframes bouquetBreath{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-9px) scale(1.025)}}
-@keyframes bouquetPromptPulse{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes bouquetPetalFall{0%{transform:translate3d(0,-10vh,0) rotate(0deg);opacity:0}12%{opacity:.9}100%{transform:translate3d(var(--petal-drift),112vh,0) rotate(680deg);opacity:0}}
-@keyframes bouquetSparkle{to{background-position:98% 104%,4% 112%}}
+
+
+
+.note-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:14px;font-size:.82rem;opacity:.78}
+.note-react{border:0;background:rgba(255,255,255,.42);border-radius:999px;padding:7px 10px;cursor:pointer;color:#b84d6b;font-weight:700;min-height:38px}
+.note-react.reacted{background:#ffd6df}
+.notes-more-wrap{display:flex;justify-content:center;margin-top:18px}
+#seeMoreNotesBtn[hidden]{display:none}
+.notes-overlay{position:fixed;inset:0;z-index:9200;display:none;overflow-y:auto;overscroll-behavior:contain;padding:28px 0;background:linear-gradient(rgba(20,18,16,.62),rgba(20,18,16,.72)),url("hero.jpg") 35% center/cover no-repeat}
+.notes-overlay.open{display:block}
+.notes-overlay:before{content:"";position:fixed;inset:0;background:inherit;filter:blur(10px);transform:scale(1.05);z-index:-2}
+.notes-overlay:after{content:"";position:fixed;inset:0;background:rgba(20,18,16,.45);z-index:-1}
+.notes-overlay-inner{width:min(980px,92%);margin:40px auto 80px;color:white}
+.notes-overlay-card{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.24);backdrop-filter:blur(18px);border-radius:30px;padding:24px;box-shadow:0 20px 70px rgba(0,0,0,.28)}
+.notes-overlay-head{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:16px;margin:-4px -4px 18px;padding:4px;background:rgba(43,28,30,.58);backdrop-filter:blur(12px);border-radius:18px}
+.notes-overlay-head h2{margin:0;color:white;padding:8px 10px}
+.notes-overlay-close{border:0;border-radius:999px;padding:10px 14px;background:rgba(255,255,255,.22);color:white;cursor:pointer;font-weight:700;min-height:44px}
+.notes-overlay-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:18px}
+.notes-overlay-list .note{transform:none;min-width:0}
+.notes-empty{grid-column:1/-1;text-align:center;padding:24px;color:white}
 @media(max-width:650px){
-  .cartoon-bouquet{width:112vw;height:auto;max-height:78dvh;margin-top:-4dvh}
-  .bouquet-tap{padding:0 14px max(4vh,24px)}
-  .bouquet-tap-copy{max-width:94vw;padding:12px 18px}
-  .bouquet-letter{padding:max(14px,env(safe-area-inset-top)) 12px max(38px,env(safe-area-inset-bottom));}
-  .bouquet-letter-paper{width:100%;margin:0 auto;border-radius:22px;padding:30px 22px 34px}
-  .bouquet-letter-paper:before{inset:10px;border-radius:16px}
-  .bouquet-letter-paper:after{right:16px;top:12px;font-size:2.5rem}
-  .bouquet-letter-title{font-size:clamp(2rem,10vw,2.7rem);margin-bottom:18px;padding-right:44px}
-  .bouquet-letter-text{font-size:1.05rem;line-height:1.66}
-  .bouquet-letter-signature{font-size:1.55rem;margin-top:24px}
-  .bouquet-letter-close{display:block;width:100%;margin-top:24px;min-height:48px}
+  .notes-overlay{padding:12px 0 max(28px,env(safe-area-inset-bottom))}
+  .notes-overlay-inner{width:94%;margin:12px auto 44px}
+  .notes-overlay-card{padding:14px;border-radius:22px}
+  .notes-overlay-head{align-items:center;margin:0 0 14px;padding:4px}
+  .notes-overlay-head h2{font-size:1.8rem}
+  .notes-overlay-list{grid-template-columns:1fr;gap:14px}
+  #seeMoreNotesBtn{width:100%;max-width:360px;min-height:48px}
 }
-
-@keyframes bouquetBreathMobile{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(0,-5px,0) scale(1.012)}}
-@media(max-width:650px){
-  .bouquet-surprise{contain:strict}
-  .bouquet-background{
-    transition:transform .45s ease,opacity .45s ease;
-    will-change:transform,opacity;
-    transform:translateZ(0);
-  }
-  .bouquet-background:before{animation:none;opacity:.24}
-  .cartoon-bouquet{
-    width:108vw;
-    max-height:76dvh;
-    margin-top:-2dvh;
-    filter:none;
-    animation:bouquetBreathMobile 7.2s ease-in-out infinite;
-    transition:transform .45s ease,opacity .45s ease;
-    transform:translateZ(0);
-    transform-origin:50% 72%;
-    backface-visibility:hidden;
-    will-change:transform,opacity;
-    contain:paint;
-  }
-  .bouquet-surprise.open .bouquet-background{
-    filter:none;
-    transform:scale(1.015) translateZ(0);
-    opacity:.38;
-  }
-  .bouquet-surprise.open .cartoon-bouquet{
-    filter:none;
-    transform:translate3d(0,-4px,0) scale(1.015);
-    opacity:.5;
-    animation-play-state:paused;
-  }
-  .bouquet-tap-copy{
-    backdrop-filter:none;
-    -webkit-backdrop-filter:none;
-    box-shadow:0 10px 28px rgba(0,0,0,.26);
-    animation-duration:3.2s;
-    transform:translateZ(0);
-    will-change:transform,opacity;
-  }
-  .bouquet-petal{
-    text-shadow:none;
-    transform:translateZ(0);
-    backface-visibility:hidden;
-    will-change:transform,opacity;
-    contain:layout paint style;
-  }
-  .bouquet-petal.simple-petal{
-    width:11px;
-    height:16px;
-    border-radius:75% 8% 75% 8%;
-    background:var(--petal-color,#d72742);
-  }
-  .bouquet-letter{
-    transform:translate3d(0,20px,0) scale(.985);
-    transition:opacity .48s ease .08s,transform .48s ease .08s,visibility 0s linear .58s;
-    will-change:transform,opacity;
-  }
-  .bouquet-surprise.open .bouquet-letter{
-    transform:translate3d(0,0,0) scale(1);
-    transition:opacity .48s ease .08s,transform .48s ease .08s,visibility 0s;
-  }
-  .bouquet-letter-paper{box-shadow:0 18px 50px rgba(0,0,0,.38)}
-}
-
-@media(prefers-reduced-motion:reduce){.cartoon-bouquet,.bouquet-tap-copy,.bouquet-background:before{animation:none}.bouquet-petal{display:none}.bouquet-letter,.bouquet-tap-copy,.cartoon-bouquet{transition:none}}
-
 
 </style>
 </head>
@@ -424,126 +343,6 @@
 </div>
 
 
-<div class="bouquet-surprise" id="bouquetSurprise" role="dialog" aria-modal="true" aria-labelledby="bouquetLetterTitle" aria-hidden="true">
-  <div class="bouquet-background" aria-hidden="true">
-    <svg class="cartoon-bouquet" viewBox="0 0 800 900" xmlns="http://www.w3.org/2000/svg" focusable="false">
-      <defs>
-        <linearGradient id="wrapPink" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#ffd9df"/>
-          <stop offset="1" stop-color="#e89aad"/>
-        </linearGradient>
-        <linearGradient id="wrapCream" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#fff2df"/>
-          <stop offset="1" stop-color="#e7c6ad"/>
-        </linearGradient>
-        <linearGradient id="ribbon" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#c91f45"/>
-          <stop offset="1" stop-color="#7e0f2b"/>
-        </linearGradient>
-        <g id="roseRed">
-          <ellipse cy="-27" rx="32" ry="44" fill="#ef4560" stroke="#7f1028" stroke-width="4"/>
-          <ellipse cy="-27" rx="32" ry="44" fill="#d92248" stroke="#7f1028" stroke-width="4" transform="rotate(60)"/>
-          <ellipse cy="-27" rx="32" ry="44" fill="#ee3857" stroke="#7f1028" stroke-width="4" transform="rotate(120)"/>
-          <ellipse cy="-27" rx="32" ry="44" fill="#c9163b" stroke="#7f1028" stroke-width="4" transform="rotate(180)"/>
-          <ellipse cy="-27" rx="32" ry="44" fill="#e52a4e" stroke="#7f1028" stroke-width="4" transform="rotate(240)"/>
-          <ellipse cy="-27" rx="32" ry="44" fill="#f04d67" stroke="#7f1028" stroke-width="4" transform="rotate(300)"/>
-          <circle r="35" fill="#b80e32" stroke="#7f1028" stroke-width="4"/>
-          <path d="M-22 4C-15-20 16-26 25-5C13-13-7-7-7 8C2-2 18 2 17 17C0 31-26 24-22 4Z" fill="#ff7184" stroke="#7f1028" stroke-width="3"/>
-        </g>
-        <g id="rosePink">
-          <ellipse cy="-27" rx="32" ry="44" fill="#ff9eb5" stroke="#a23b5b" stroke-width="4"/>
-          <ellipse cy="-27" rx="32" ry="44" fill="#f1789a" stroke="#a23b5b" stroke-width="4" transform="rotate(60)"/>
-          <ellipse cy="-27" rx="32" ry="44" fill="#ffafc1" stroke="#a23b5b" stroke-width="4" transform="rotate(120)"/>
-          <ellipse cy="-27" rx="32" ry="44" fill="#e9658a" stroke="#a23b5b" stroke-width="4" transform="rotate(180)"/>
-          <ellipse cy="-27" rx="32" ry="44" fill="#fa86a4" stroke="#a23b5b" stroke-width="4" transform="rotate(240)"/>
-          <ellipse cy="-27" rx="32" ry="44" fill="#ffc0cf" stroke="#a23b5b" stroke-width="4" transform="rotate(300)"/>
-          <circle r="35" fill="#d95178" stroke="#a23b5b" stroke-width="4"/>
-          <path d="M-22 4C-15-20 16-26 25-5C13-13-7-7-7 8C2-2 18 2 17 17C0 31-26 24-22 4Z" fill="#ffd0dc" stroke="#a23b5b" stroke-width="3"/>
-        </g>
-        <g id="leaf">
-          <path d="M0 0C30-48 88-48 106-8C79 26 31 27 0 0Z" fill="#4f8a5b" stroke="#245338" stroke-width="5"/>
-          <path d="M8-1C38-4 69-5 96-9" fill="none" stroke="#c4dfae" stroke-width="4" stroke-linecap="round"/>
-        </g>
-      </defs>
-
-      <g opacity=".46" fill="#ffd8a8">
-        <circle cx="94" cy="138" r="9"/><circle cx="690" cy="124" r="12"/><circle cx="736" cy="318" r="7"/><circle cx="84" cy="352" r="7"/>
-      </g>
-
-      <path d="M128 448Q400 342 672 448L610 842Q400 906 190 842Z" fill="url(#wrapPink)" stroke="#8e4056" stroke-width="8" stroke-linejoin="round"/>
-      <path d="M128 448L348 748L190 842Z" fill="url(#wrapCream)" stroke="#b66b7c" stroke-width="6" stroke-linejoin="round"/>
-      <path d="M672 448L452 748L610 842Z" fill="#f6bdc9" stroke="#b66b7c" stroke-width="6" stroke-linejoin="round"/>
-      <path d="M348 748L400 894L452 748Z" fill="#eaa6b5" stroke="#9d4d62" stroke-width="6"/>
-
-      <g stroke="#3d754b" stroke-width="12" stroke-linecap="round" opacity=".92">
-        <path d="M400 770L188 330"/><path d="M400 770L285 245"/><path d="M400 770L396 225"/><path d="M400 770L525 255"/><path d="M400 770L630 350"/><path d="M400 770L250 478"/><path d="M400 770L550 474"/>
-      </g>
-
-      <use href="#leaf" transform="translate(145 395) rotate(-35) scale(.78)"/>
-      <use href="#leaf" transform="translate(268 310) rotate(205) scale(.72)"/>
-      <use href="#leaf" transform="translate(503 306) rotate(-24) scale(.72)"/>
-      <use href="#leaf" transform="translate(650 390) rotate(153) scale(.78)"/>
-      <use href="#leaf" transform="translate(176 527) rotate(-18) scale(.68)"/>
-      <use href="#leaf" transform="translate(585 534) rotate(171) scale(.72)"/>
-      <use href="#leaf" transform="translate(326 555) rotate(210) scale(.6)"/>
-      <use href="#leaf" transform="translate(470 570) rotate(-25) scale(.62)"/>
-
-      <use href="#rosePink" transform="translate(212 300) scale(.86) rotate(-8)"/>
-      <use href="#roseRed" transform="translate(322 246) scale(.94) rotate(5)"/>
-      <use href="#rosePink" transform="translate(438 232) scale(.9) rotate(-4)"/>
-      <use href="#roseRed" transform="translate(556 284) scale(.96) rotate(9)"/>
-      <use href="#rosePink" transform="translate(646 366) scale(.82) rotate(-5)"/>
-
-      <g transform="translate(506 418) rotate(9)">
-        <rect x="-90" y="-58" width="180" height="122" rx="13" fill="#fff3dc" stroke="#a96f69" stroke-width="6"/>
-        <path d="M-86-50L0 13L86-50" fill="#f4d9bd" stroke="#a96f69" stroke-width="5" stroke-linejoin="round"/>
-        <path d="M-86 57L-9-3Q0-12 9-3L86 57" fill="#ffe9cf" stroke="#a96f69" stroke-width="4"/>
-        <circle cy="17" r="15" fill="#c43a58"/>
-        <text y="-7" text-anchor="middle" font-family="Georgia,serif" font-size="21" fill="#784143">For You</text>
-      </g>
-
-      <use href="#roseRed" transform="translate(150 430) scale(.92) rotate(3)"/>
-      <use href="#roseRed" transform="translate(276 386) scale(1.06) rotate(-8)"/>
-      <use href="#rosePink" transform="translate(401 366) scale(1.08) rotate(4)"/>
-      <use href="#roseRed" transform="translate(530 404) scale(1.06) rotate(-4)"/>
-      <use href="#rosePink" transform="translate(667 472) scale(.9) rotate(7)"/>
-      <use href="#rosePink" transform="translate(225 530) scale(.92) rotate(-5)"/>
-      <use href="#roseRed" transform="translate(354 512) scale(1.08) rotate(7)"/>
-      <use href="#roseRed" transform="translate(493 526) scale(1.02) rotate(-8)"/>
-      <use href="#rosePink" transform="translate(603 574) scale(.88) rotate(4)"/>
-
-      <g transform="translate(400 760)">
-        <path d="M-12 0C-95-66-155-26-128 44C-87 76-34 48-4 18Z" fill="url(#ribbon)" stroke="#691127" stroke-width="7"/>
-        <path d="M12 0C95-66 155-26 128 44C87 76 34 48 4 18Z" fill="url(#ribbon)" stroke="#691127" stroke-width="7"/>
-        <ellipse rx="38" ry="31" fill="#e43d61" stroke="#691127" stroke-width="7"/>
-        <path d="M-18 24L-70 142L-4 108L34 148L18 25Z" fill="#b8143c" stroke="#691127" stroke-width="7" stroke-linejoin="round"/>
-        <path d="M18 24L80 140L14 108L-22 149L-18 25Z" fill="#d92750" stroke="#691127" stroke-width="7" stroke-linejoin="round"/>
-      </g>
-    </svg>
-  </div>
-  <div id="bouquetPetals" aria-hidden="true"></div>
-  <button class="bouquet-tap" id="bouquetTap" type="button" aria-label="Open the letter hidden in the cartoon bouquet">
-    <span class="bouquet-tap-copy">
-      <strong>A bouquet for my beautiful Klarii 🌹</strong>
-      <span>Tap the roses to find your letter</span>
-    </span>
-  </button>
-  <div class="bouquet-letter" id="bouquetLetter">
-    <article class="bouquet-letter-paper">
-      <h2 class="bouquet-letter-title" id="bouquetLetterTitle" tabindex="-1">My love,</h2>
-      <div class="bouquet-letter-text">I am so proud of you for giving an extraordinary performance in the interview. I am proud and happy to say that you are my beautiful Klarii and always will be.
-
-It's interesting how God postponed my trip so that we get to spend time with each other. I know you are going to do amazing things and I pray for you everyday.
-
-So proud of you má krásná budoucí manželko.
-
-I am glad you liked the roses I sent you this morning. Here are more (virtual) roses for the most beautiful girl in the world from your partner.</div>
-      <div class="bouquet-letter-signature">Your Deepii</div>
-      <button class="btn bouquet-letter-close" id="bouquetLetterClose" type="button">Close Letter</button>
-    </article>
-  </div>
-</div>
-
 <div class="app-shell">
 <div class="stars"></div>
 <header class="hero"><span class="heart">♡</span><span class="heart">♥</span><span class="heart">♡</span><div><h1>Deepii & Klarii's Bucket List</h1><p>“One adventure at a time, one memory forever.”</p><button class="kiss-btn" onclick="sendKiss()">Send a Kiss 💋</button></div></header>
@@ -553,7 +352,7 @@ I am glad you liked the roses I sent you this morning. Here are more (virtual) r
 <section class="section" id="list"><h2>Our Bucket List</h2><p>Dreaming, Planned, completing, and choosing each other every day.</p><div class="card"><input id="title" placeholder="Add a new dream..."/><select id="category"><option>Travel</option><option>Relationship</option><option>Food</option><option>Experiences</option><option>Memories</option><option>Adventures</option><option>Future Home</option><option>Family</option><option>Random Dreams</option></select><select id="status"><option>Dreaming</option><option>Planned</option><option>Completed</option></select><button class="btn" onclick="addItem()">Add Dream</button></div><div class="filters" id="filters"></div><div class="grid"><div class="card"><h3>Dreaming</h3><div id="Dreaming"></div></div><div class="card"><h3>Planned</h3><div id="Planned"></div></div><div class="card"><h3>Completed</h3><div id="Completed"></div></div></div></section>
 <section class="section" id="memories"><h2>Memory Wall</h2><div class="card"><input type="file" id="photoInput" accept="image/*"/><input id="photoCaption" placeholder="Caption for this memory"/><button class="btn" onclick="addPhoto()">Add Memory</button></div><div class="gallery" id="gallery"></div></section>
 <section class="section"><h2>Countdown Until Our Next Visit</h2><div class="card"><input type="date" id="visitDate" onchange="saveVisit()"/><div class="countdown" id="countdown">Set a date</div></div></section>
-<section class="section" id="notes"><h2>Love Notes</h2><div class="card"><textarea id="noteText" placeholder="Leave a small note..."></textarea><button class="btn" onclick="addNote()">Leave Note</button></div><div class="grid" id="notesGrid"></div></section>
+<section class="section" id="notes"><h2>Love Notes</h2><div class="card"><textarea id="noteText" placeholder="Leave a small note..."></textarea><button class="btn" onclick="addNote()">Leave Note</button></div><div class="grid" id="notesGrid"></div><div class="notes-more-wrap"><button class="btn" id="seeMoreNotesBtn" type="button" hidden>See previous love notes</button></div></section>
 </main><footer>Long distance is only temporary. Every completed adventure brings you closer to home. ∞♡</footer>
 
 <div class="love-note-envelope" id="loveNoteEnvelope" aria-hidden="true">
@@ -578,15 +377,13 @@ I am glad you liked the roses I sent you this morning. Here are more (virtual) r
     <button class="btn opened-note-close" id="openedNoteCloseBtn">Close Letter</button>
   </article>
 </div>
-</div>
 
-
-<div class="notes-overlay" id="notesOverlay" aria-hidden="true">
+<div class="notes-overlay" id="notesOverlay" role="dialog" aria-modal="true" aria-labelledby="notesOverlayTitle" aria-hidden="true">
   <div class="notes-overlay-inner">
     <div class="notes-overlay-card">
       <div class="notes-overlay-head">
-        <h2>All Love Notes</h2>
-        <button class="notes-overlay-close" onclick="closeNotesPage()">Close</button>
+        <h2 id="notesOverlayTitle">Previous Love Notes</h2>
+        <button class="notes-overlay-close" type="button" onclick="closeNotesPage()">Close</button>
       </div>
       <div class="notes-overlay-list" id="notesOverlayList"></div>
     </div>
@@ -605,10 +402,6 @@ I am glad you liked the roses I sent you this morning. Here are more (virtual) r
   </div>
 </div>
 
-    
-  </article>
-</div>
-
 </div>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
@@ -619,6 +412,7 @@ import {
   addDoc,
   doc,
   setDoc,
+  getDoc,
   updateDoc,
   deleteDoc,
   onSnapshot
@@ -663,6 +457,7 @@ const barEl = document.getElementById('bar');
 const filtersEl = document.getElementById('filters');
 const noteTextEl = document.getElementById('noteText');
 const notesGridEl = document.getElementById('notesGrid');
+const seeMoreNotesBtn = document.getElementById('seeMoreNotesBtn');
 const photoInputEl = document.getElementById('photoInput');
 const photoCaptionEl = document.getElementById('photoCaption');
 const galleryEl = document.getElementById('gallery');
@@ -986,7 +781,6 @@ document.addEventListener('keydown', event => {
     closeSectionPage();
     closeNotesPage();
     closeOpenedNote();
-    closeBouquetLetter();
   }
 });
 
@@ -1011,6 +805,21 @@ async function addNote() {
   noteTextEl.value = '';
 }
 window.addNote = addNote;
+
+
+async function ensureInterviewRoseLoveNote() {
+  const specialNoteRef = doc(db, 'loveNotes', 'deepii-interview-roses-note');
+  const specialNoteSnapshot = await getDoc(specialNoteRef);
+
+  if (specialNoteSnapshot.exists()) return;
+
+  await setDoc(specialNoteRef, {
+    text: `My love, I am so proud of you for giving an extraordinary performance in the interview. I am proud and happy to say that you are my beautiful Klarii and always will be. It's interesting how God postponed my trip so that we get to spend time with each other. I know you are going to do amazing things and I pray for you everyday. So proud of you má krásná budoucí manželko. I am glad you liked the roses I sent you this morning. Here are more (virtual) roses for the most beautiful girl in the world from your partner.\n\nYour Deepii`,
+    createdAt: Date.now(),
+    senderEmail: 'deepsoni2001@gmail.com',
+    reactions: []
+  });
+}
 
 async function removeNote(id) {
   await deleteDoc(doc(db, 'loveNotes', id));
@@ -1045,23 +854,16 @@ function noteHTML(note) {
 }
 
 function renderNotes() {
-  const latestNotes = [...notes]
-    .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0))
-    .slice(0, 2);
+  const sortedNotes = [...notes].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+  const latestNotes = sortedNotes.slice(0, 2);
+  const previousCount = Math.max(0, sortedNotes.length - 2);
 
   notesGridEl.innerHTML = latestNotes.map(note => noteHTML(note)).join('');
 
-  if (notes.length > 2) {
-    const seeMore = document.createElement('a');
-    seeMore.href = '#';
-    seeMore.className = 'notes-see-more';
-    seeMore.textContent = 'See more love notes';
-    seeMore.onclick = event => {
-      event.preventDefault();
-      openNotesPage();
-    };
-    notesGridEl.appendChild(seeMore);
-  }
+  seeMoreNotesBtn.hidden = previousCount === 0;
+  seeMoreNotesBtn.textContent = previousCount === 1
+    ? 'See 1 previous love note'
+    : `See ${previousCount} previous love notes`;
 }
 
 
@@ -1085,16 +887,20 @@ function openNotesPage() {
   const overlay = document.getElementById('notesOverlay');
   const list = document.getElementById('notesOverlayList');
 
-  const allNotes = [...notes]
-    .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+  const previousNotes = [...notes]
+    .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0))
+    .slice(2);
 
-  list.innerHTML = allNotes.length
-    ? allNotes.map(note => noteHTML(note)).join('')
-    : '<p>No love notes yet.</p>';
+  list.innerHTML = previousNotes.length
+    ? previousNotes.map(note => noteHTML(note)).join('')
+    : '<p class="notes-empty">No previous love notes yet.</p>';
 
   overlay.classList.add('open');
   overlay.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
+
+  const closeButton = overlay.querySelector('.notes-overlay-close');
+  if (closeButton) closeButton.focus();
 }
 window.openNotesPage = openNotesPage;
 
@@ -1105,6 +911,8 @@ function closeNotesPage() {
   document.body.style.overflow = '';
 }
 window.closeNotesPage = closeNotesPage;
+
+seeMoreNotesBtn.addEventListener('click', openNotesPage);
 
 let latestEnvelopeNote = null;
 
@@ -1378,7 +1186,12 @@ function startFirestoreListeners() {
 
     const newestNote = [...notes].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0))[0];
 
-    if (previousLatest && newestNote && (newestNote.createdAt || 0) > previousLatest) {
+    if (
+      previousLatest &&
+      newestNote &&
+      newestNote.id !== 'deepii-interview-roses-note' &&
+      (newestNote.createdAt || 0) > previousLatest
+    ) {
       showLatestNoteEnvelope(newestNote);
     }
 
@@ -1489,92 +1302,7 @@ handleMobileHeroScroll();
 
 
 
-let bouquetShownThisLoad = false;
-let bouquetLastFocusedElement = null;
 
-function createBouquetPetals() {
-  const container = document.getElementById('bouquetPetals');
-  if (!container) return;
-
-  container.innerHTML = '';
-
-  const isMobile = window.matchMedia('(max-width: 650px)').matches;
-  const petalCount = isMobile ? 10 : 24;
-  const petalColors = ['#c91935', '#e13e56', '#b70f2d'];
-
-  for (let i = 0; i < petalCount; i++) {
-    const petal = document.createElement('span');
-    petal.className = isMobile ? 'bouquet-petal simple-petal' : 'bouquet-petal';
-    petal.textContent = isMobile ? '' : (i % 4 === 0 ? '🌹' : '●');
-    petal.style.left = Math.random() * 100 + 'vw';
-
-    if (!isMobile) {
-      petal.style.fontSize = (i % 4 === 0 ? 18 + Math.random() * 12 : 9 + Math.random() * 8) + 'px';
-      petal.style.color = petalColors[i % petalColors.length];
-    } else {
-      petal.style.setProperty('--petal-color', petalColors[i % petalColors.length]);
-    }
-
-    petal.style.animationDuration = (isMobile ? 8 + Math.random() * 4 : 6 + Math.random() * 6) + 's';
-    petal.style.animationDelay = (Math.random() * (isMobile ? 2.5 : 4)) + 's';
-    petal.style.setProperty('--petal-drift', (isMobile ? -38 + Math.random() * 76 : -70 + Math.random() * 140) + 'px');
-    container.appendChild(petal);
-  }
-}
-
-function showBouquetSurprise() {
-  if (bouquetShownThisLoad) return;
-  bouquetShownThisLoad = true;
-
-  const overlay = document.getElementById('bouquetSurprise');
-  bouquetLastFocusedElement = document.activeElement;
-  overlay.classList.remove('open');
-  document.getElementById('bouquetLetter').scrollTop = 0;
-  overlay.classList.add('show');
-  overlay.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-  createBouquetPetals();
-
-  requestAnimationFrame(() => {
-    document.getElementById('bouquetTap').focus();
-  });
-}
-
-function openBouquetLetter() {
-  const overlay = document.getElementById('bouquetSurprise');
-  const letter = document.getElementById('bouquetLetter');
-  const title = document.getElementById('bouquetLetterTitle');
-
-  letter.scrollTop = 0;
-  overlay.classList.add('open');
-
-  requestAnimationFrame(() => {
-    letter.scrollTop = 0;
-  });
-
-  setTimeout(() => {
-    letter.scrollTop = 0;
-    title.focus({ preventScroll: true });
-  }, 700);
-}
-
-function closeBouquetLetter() {
-  const overlay = document.getElementById('bouquetSurprise');
-  if (!overlay || !overlay.classList.contains('show')) return;
-
-  overlay.classList.remove('show', 'open');
-  overlay.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-
-  if (bouquetLastFocusedElement && typeof bouquetLastFocusedElement.focus === 'function') {
-    bouquetLastFocusedElement.focus();
-  }
-}
-
-const bouquetTap = document.getElementById('bouquetTap');
-const bouquetLetterClose = document.getElementById('bouquetLetterClose');
-bouquetTap.addEventListener('click', openBouquetLetter);
-bouquetLetterClose.addEventListener('click', closeBouquetLetter);
 
 
 const loginBtn = document.getElementById("loginBtn");
@@ -1607,14 +1335,19 @@ if (logoutBtn) {
   });
 }
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
   if (user) {
     document.body.classList.add("logged-in");
     if (signedInUser) signedInUser.textContent = user.email || "Signed in";
+
+    try {
+      await ensureInterviewRoseLoveNote();
+    } catch (error) {
+      console.error('Could not add the interview love note:', error);
+    }
+
     startFirestoreListeners();
-    setTimeout(showBouquetSurprise, 450);
   } else {
-    closeBouquetLetter();
     stopFirestoreListeners();
     document.body.classList.remove("logged-in");
     if (signedInUser) signedInUser.textContent = "";
