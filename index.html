@@ -358,7 +358,7 @@ body.dark .salon-game-close{background:rgba(255,255,255,.09)}
 body.dark .salon-game-secondary{background:rgba(255,255,255,.09)}
 .salon-best-score{margin-top:16px;font-size:.92rem;opacity:.74}
 .salon-game-play{padding:0 2px 2px}
-.salon-game-hud{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px}
+.salon-game-hud{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:10px}
 .salon-hud-card{min-width:0;text-align:center;border-radius:18px;padding:10px;background:rgba(255,255,255,.7);box-shadow:0 8px 20px rgba(70,50,50,.09)}
 body.dark .salon-hud-card{background:rgba(255,255,255,.08)}
 .salon-hud-label{display:block;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;opacity:.68;font-weight:800}
@@ -370,6 +370,14 @@ body.dark .salon-game-board{background:radial-gradient(circle at 20% 16%,rgba(25
 .salon-heart-target{position:absolute;left:0;top:0;display:grid;place-items:center;border:0;background:transparent;padding:0;margin:0;width:58px;height:58px;font-size:42px;line-height:1;cursor:pointer;filter:drop-shadow(0 8px 10px rgba(90,40,55,.2));will-change:transform;transform:translate3d(0,0,0);touch-action:manipulation}
 .salon-heart-target:focus-visible{outline:3px solid #fff;outline-offset:2px;border-radius:50%}
 .salon-heart-target.caught{pointer-events:none;animation:salonCaught .28s ease forwards}
+.salon-heart-target.gold{font-size:38px;filter:drop-shadow(0 0 10px rgba(255,195,48,.72)) drop-shadow(0 8px 10px rgba(90,40,55,.18))}
+.salon-heart-target.broken{filter:grayscale(.28) drop-shadow(0 8px 10px rgba(60,35,50,.22))}
+.salon-game-board.rush{box-shadow:inset 0 0 0 3px rgba(255,213,80,.65),0 0 28px rgba(255,125,168,.28)}
+.salon-game-rush{position:absolute;left:50%;top:14px;z-index:3;transform:translate(-50%,-12px) scale(.96);opacity:0;pointer-events:none;padding:9px 14px;border-radius:999px;background:linear-gradient(135deg,#ffd75b,#ff8db4);color:#4a2330;font-weight:900;letter-spacing:.04em;box-shadow:0 10px 24px rgba(95,45,65,.2);transition:opacity .22s ease,transform .22s ease}
+.salon-game-rush.show{opacity:1;transform:translate(-50%,0) scale(1);animation:salonRushPulse .8s ease-in-out infinite alternate}
+.salon-point-pop{position:absolute;z-index:5;pointer-events:none;font-family:'Playfair Display',Georgia,serif;font-size:1.35rem;font-weight:800;color:#b84d72;text-shadow:0 2px #fff;animation:salonPointFloat .65s ease forwards}
+.salon-point-pop.penalty{color:#6c4054}
+.salon-combo-hot{color:#c7557d;text-shadow:0 0 14px rgba(232,183,183,.7)}
 .salon-game-hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);z-index:2;max-width:90%;padding:9px 13px;border-radius:999px;background:rgba(62,52,44,.66);color:#fff;font-size:.84rem;font-weight:700;text-align:center;pointer-events:none}
 .salon-game-paused{position:absolute;inset:0;z-index:4;display:none;place-items:center;background:rgba(42,30,38,.68);color:#fff;text-align:center;font-weight:800;font-size:1.25rem}
 .salon-game-paused.show{display:grid}
@@ -378,6 +386,8 @@ body.dark .salon-game-board{background:radial-gradient(circle at 20% 16%,rgba(25
 .salon-result-stars{font-size:2rem;letter-spacing:.18em;color:var(--gold);margin:12px 0}
 @keyframes salonArtFloat{50%{transform:translateY(-8px) rotate(5deg)}}
 @keyframes salonCaught{to{transform:scale(1.8);opacity:0}}
+@keyframes salonRushPulse{to{transform:translate(-50%,-1px) scale(1.04)}}
+@keyframes salonPointFloat{0%{opacity:0;transform:translate3d(0,4px,0) scale(.9)}20%{opacity:1}100%{opacity:0;transform:translate3d(0,-42px,0) scale(1.14)}}
 @media(max-width:650px){
   .salon-game-overlay{padding:0;align-items:stretch}
   .salon-game-panel{width:100%;max-height:100dvh;height:100dvh;border-radius:0;border:0;padding:12px 12px max(12px,env(safe-area-inset-bottom));display:flex;flex-direction:column}
@@ -394,13 +404,13 @@ body.dark .salon-game-board{background:radial-gradient(circle at 20% 16%,rgba(25
   .salon-game-play{display:flex;flex-direction:column;min-height:0;flex:1}
   .salon-game-hud{flex:0 0 auto;gap:7px;margin-bottom:8px}
   .salon-hud-card{padding:8px 5px;border-radius:15px}
-  .salon-hud-label{font-size:.65rem}
+  .salon-hud-label{font-size:.6rem}
   .salon-game-board{flex:1;min-height:0;height:auto;border-radius:20px}
   .salon-heart-target{width:54px;height:54px;font-size:39px}
   .salon-game-hint{font-size:.75rem;bottom:10px;padding:8px 11px}
 }
 @media(prefers-reduced-motion:reduce){
-  .salon-game-art:after,.salon-heart-target.caught{animation:none}
+  .salon-game-art:after,.salon-heart-target.caught,.salon-game-rush.show,.salon-point-pop{animation:none}
 }
 
 </style>
@@ -477,27 +487,31 @@ body.dark .salon-game-board{background:radial-gradient(circle at 20% 16%,rgba(25
     <div class="salon-screen salon-game-intro" id="salonGameIntro">
       <div class="salon-game-art" aria-hidden="true"><div class="salon-game-mirror"></div></div>
       <h2 id="salonGameTitle">Catch the Falling Hearts</h2>
-      <p>Salon boredom does not stand a chance. Catch as many hearts as you can before the 20-second timer runs out.</p>
+      <p>Salon boredom does not stand a chance. Build combos, catch rare golden hearts, avoid broken hearts, and survive the final Love Rush.</p>
       <div class="salon-game-rules" aria-label="Game instructions">
-        <span class="salon-game-rule">💗 Tap the hearts</span>
+        <span class="salon-game-rule">💗 Build combos</span>
+        <span class="salon-game-rule">💛 Gold = 3 points</span>
+        <span class="salon-game-rule">💔 Avoid broken hearts</span>
         <span class="salon-game-rule">⏱️ 20 seconds</span>
-        <span class="salon-game-rule">⌨️ Space also catches</span>
+        <span class="salon-game-rule">⌨️ Space catches safe hearts</span>
       </div>
       <div class="salon-game-actions">
         <button class="salon-game-primary" id="salonGameStartBtn" type="button">Start Game</button>
         <button class="salon-game-secondary" id="salonGameLaterBtn" type="button">Maybe Later</button>
       </div>
-      <div class="salon-best-score" id="salonBestScoreIntro">Best score: 0</div>
+      <div class="salon-best-score" id="salonBestScoreIntro">Best score: 0 · Target: 1</div>
     </div>
 
     <div class="salon-screen salon-game-play" id="salonGamePlay" hidden>
       <div class="salon-game-hud" aria-label="Game status">
         <div class="salon-hud-card"><span class="salon-hud-label">Time</span><span class="salon-hud-value" id="salonGameTime">20</span></div>
         <div class="salon-hud-card"><span class="salon-hud-label">Score</span><span class="salon-hud-value" id="salonGameScore">0</span></div>
+        <div class="salon-hud-card"><span class="salon-hud-label">Combo</span><span class="salon-hud-value" id="salonGameCombo">×0</span></div>
         <div class="salon-hud-card"><span class="salon-hud-label">Best</span><span class="salon-hud-value" id="salonGameBest">0</span></div>
       </div>
       <div class="salon-game-board" id="salonGameBoard" tabindex="0" aria-label="Heart catching game. Tap falling hearts or press Space to catch the lowest heart.">
         <div class="salon-board-decor" aria-hidden="true"></div>
+        <div class="salon-game-rush" id="salonGameRush" aria-live="polite">LOVE RUSH · DOUBLE POINTS</div>
         <div class="salon-game-paused" id="salonGamePaused">Game paused<br><small>Return to continue</small></div>
         <div class="salon-game-hint">Tap a heart — or press Space</div>
       </div>
@@ -510,8 +524,10 @@ body.dark .salon-game-board{background:radial-gradient(circle at 20% 16%,rgba(25
       <div class="salon-result-score" id="salonResultScore">0</div>
       <p class="salon-result-message" id="salonResultMessage">Too distracted thinking about Deepii.</p>
       <p id="salonResultBest">Best score: 0</p>
+      <p id="salonResultStats">Best combo: ×0 · Missed: 0</p>
+      <p id="salonResultChallenge">Next target: 1</p>
       <div class="salon-game-actions">
-        <button class="salon-game-primary" id="salonGameReplayBtn" type="button">Play Again</button>
+        <button class="salon-game-primary" id="salonGameReplayBtn" type="button">Next Round</button>
         <button class="salon-game-secondary" id="salonGameDoneBtn" type="button">Back to Our Website</button>
       </div>
     </div>
@@ -1053,10 +1069,18 @@ let salonGameLastFrame = 0;
 let salonGameSpawnElapsed = 0;
 let salonGameAnimationFrame = null;
 let salonGameScoreValue = 0;
+let salonGameComboValue = 0;
+let salonGameMaxCombo = 0;
+let salonGameLastCatchAt = 0;
+let salonGameMisses = 0;
+let salonGameRound = 1;
+let salonGameRushActive = false;
+let salonGameRushAnnounced = false;
 let salonGameHearts = [];
 let salonBoardWidth = 0;
 let salonBoardHeight = 0;
 const SALON_GAME_DURATION = 20000;
+const SALON_COMBO_WINDOW = 1050;
 const salonReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 const salonGameOverlay = document.getElementById('salonGameOverlay');
@@ -1065,25 +1089,40 @@ const salonGamePlay = document.getElementById('salonGamePlay');
 const salonGameResult = document.getElementById('salonGameResult');
 const salonGameBoard = document.getElementById('salonGameBoard');
 const salonGamePaused = document.getElementById('salonGamePaused');
+const salonGameRush = document.getElementById('salonGameRush');
 const salonGameTime = document.getElementById('salonGameTime');
 const salonGameScore = document.getElementById('salonGameScore');
+const salonGameCombo = document.getElementById('salonGameCombo');
 const salonGameBest = document.getElementById('salonGameBest');
 const salonBestScoreIntro = document.getElementById('salonBestScoreIntro');
 const salonResultScore = document.getElementById('salonResultScore');
 const salonResultMessage = document.getElementById('salonResultMessage');
 const salonResultBest = document.getElementById('salonResultBest');
+const salonResultStats = document.getElementById('salonResultStats');
+const salonResultChallenge = document.getElementById('salonResultChallenge');
 const salonGameLive = document.getElementById('salonGameLive');
+const salonGameReplayBtn = document.getElementById('salonGameReplayBtn');
 
 function getSalonBestScore() {
   const value = Number(localStorage.getItem('dk_salon_best') || 0);
   return Number.isFinite(value) ? value : 0;
 }
 
+function getSalonTarget() {
+  return Math.max(8, getSalonBestScore() + 1);
+}
+
 function updateSalonBestScoreDisplay() {
   const best = getSalonBestScore();
+  const target = getSalonTarget();
   salonGameBest.textContent = String(best);
-  salonBestScoreIntro.textContent = `Best score: ${best}`;
+  salonBestScoreIntro.textContent = `Best score: ${best} · Target: ${target}`;
   salonResultBest.textContent = `Best score: ${best}`;
+}
+
+function updateSalonComboDisplay() {
+  salonGameCombo.textContent = `×${salonGameComboValue}`;
+  salonGameCombo.classList.toggle('salon-combo-hot', salonGameComboValue >= 5);
 }
 
 function showSalonScreen(screen) {
@@ -1100,6 +1139,7 @@ function updateSalonBoardSize() {
 function openSalonGameIntro() {
   if (salonGameOpenedThisPage) return;
   salonGameOpenedThisPage = true;
+  salonGameRound = 1;
   stopSalonGameLoop();
   clearSalonHearts();
   showSalonScreen('intro');
@@ -1122,6 +1162,7 @@ window.closeSalonGame = closeSalonGame;
 function clearSalonHearts() {
   salonGameHearts.forEach(heart => heart.node.remove());
   salonGameHearts = [];
+  salonGameBoard.querySelectorAll('.salon-point-pop').forEach(node => node.remove());
 }
 
 function stopSalonGameLoop() {
@@ -1130,33 +1171,70 @@ function stopSalonGameLoop() {
   if (salonGameAnimationFrame) cancelAnimationFrame(salonGameAnimationFrame);
   salonGameAnimationFrame = null;
   salonGamePaused.classList.remove('show');
+  salonGameRush.classList.remove('show');
+  salonGameBoard.classList.remove('rush');
 }
 
-function createSalonHeart(now) {
+function currentSalonDifficulty(progress = 0) {
+  const bestBonus = Math.min(1.15, getSalonBestScore() / 70);
+  return 1 + (salonGameRound - 1) * 0.14 + progress * 0.58 + bestBonus;
+}
+
+function createSalonHeart(now, progress) {
   if (!salonGameRunning || salonBoardWidth < 80 || salonBoardHeight < 120) return;
 
-  const size = 48 + Math.random() * 14;
+  const maxHearts = window.matchMedia('(max-width:650px)').matches ? 9 : 12;
+  if (salonGameHearts.length >= maxHearts) return;
+
+  const difficulty = currentSalonDifficulty(progress);
+  const roll = Math.random();
+  const brokenChance = Math.min(.18, .08 + (salonGameRound - 1) * .018 + progress * .04);
+  const goldChance = salonGameRushActive ? .22 : .12;
+  const type = roll < brokenChance ? 'broken' : roll < brokenChance + goldChance ? 'gold' : 'normal';
+
+  const size = type === 'gold'
+    ? 40 + Math.random() * 9
+    : type === 'broken'
+      ? 45 + Math.random() * 10
+      : 48 + Math.random() * 14;
+
   const node = document.createElement('button');
   node.type = 'button';
-  node.className = 'salon-heart-target';
+  node.className = `salon-heart-target ${type === 'normal' ? '' : type}`.trim();
   node.tabIndex = -1;
-  node.setAttribute('aria-label', 'Catch heart');
-  node.textContent = ['💗', '💖', '💕', '❤️'][Math.floor(Math.random() * 4)];
+  node.setAttribute('aria-label', type === 'gold'
+    ? 'Catch golden heart for three points'
+    : type === 'broken'
+      ? 'Avoid broken heart'
+      : 'Catch heart');
+  node.textContent = type === 'gold'
+    ? '💛'
+    : type === 'broken'
+      ? '💔'
+      : ['💗', '💖', '💕', '❤️'][Math.floor(Math.random() * 4)];
   node.style.width = `${size}px`;
   node.style.height = `${size}px`;
   node.style.fontSize = `${size * 0.72}px`;
   salonGameBoard.appendChild(node);
 
+  const baseSpeed = type === 'gold'
+    ? 185 + Math.random() * 75
+    : type === 'broken'
+      ? 155 + Math.random() * 70
+      : 120 + Math.random() * 90;
+
   const heart = {
     node,
+    type,
+    points: type === 'gold' ? 3 : type === 'broken' ? -2 : 1,
     x: 5 + Math.random() * Math.max(10, salonBoardWidth - size - 10),
     y: salonReducedMotion.matches ? 30 + Math.random() * Math.max(40, salonBoardHeight - size - 90) : -size - 8,
     size,
-    speed: 115 + Math.random() * 95,
+    speed: baseSpeed * difficulty,
     phase: Math.random() * Math.PI * 2,
-    drift: 10 + Math.random() * 22,
+    drift: 9 + Math.random() * 23,
     born: now,
-    lifetime: salonReducedMotion.matches ? 1700 : Infinity,
+    lifetime: salonReducedMotion.matches ? 1450 : Infinity,
     caught: false
   };
 
@@ -1174,31 +1252,78 @@ function removeSalonHeart(heart) {
   heart.node.remove();
 }
 
+function showSalonPointPop(heart, amount, label = '') {
+  const pop = document.createElement('span');
+  pop.className = `salon-point-pop ${amount < 0 ? 'penalty' : ''}`.trim();
+  pop.textContent = label || `${amount > 0 ? '+' : ''}${amount}`;
+  pop.style.left = `${heart.x + heart.size * .35}px`;
+  pop.style.top = `${Math.max(12, heart.y)}px`;
+  salonGameBoard.appendChild(pop);
+  setTimeout(() => pop.remove(), 700);
+}
+
+function resetSalonCombo() {
+  salonGameComboValue = 0;
+  salonGameLastCatchAt = 0;
+  updateSalonComboDisplay();
+}
+
 function catchSalonHeart(heart) {
   if (!salonGameRunning || heart.caught) return;
   heart.caught = true;
-  salonGameScoreValue += 1;
+
+  if (heart.type === 'broken') {
+    salonGameScoreValue = Math.max(0, salonGameScoreValue - 2);
+    salonGameMisses += 1;
+    resetSalonCombo();
+    showSalonPointPop(heart, -2, 'OUCH −2');
+    salonGameLive.textContent = `Broken heart tapped. Score ${salonGameScoreValue}. Combo reset.`;
+    if (navigator.vibrate) navigator.vibrate([20, 30, 20]);
+  } else {
+    const now = performance.now();
+    salonGameComboValue = now - salonGameLastCatchAt <= SALON_COMBO_WINDOW
+      ? salonGameComboValue + 1
+      : 1;
+    salonGameLastCatchAt = now;
+    salonGameMaxCombo = Math.max(salonGameMaxCombo, salonGameComboValue);
+
+    const comboMultiplier = Math.min(3, 1 + Math.floor((salonGameComboValue - 1) / 5));
+    const rushMultiplier = salonGameRushActive ? 2 : 1;
+    const gained = heart.points * comboMultiplier * rushMultiplier;
+    salonGameScoreValue += gained;
+    updateSalonComboDisplay();
+    showSalonPointPop(heart, gained, `${heart.type === 'gold' ? 'GOLD ' : ''}+${gained}`);
+    salonGameLive.textContent = `Heart caught. Score ${salonGameScoreValue}. Combo ${salonGameComboValue}.`;
+    if (navigator.vibrate) navigator.vibrate(18);
+  }
+
   salonGameScore.textContent = String(salonGameScoreValue);
-  salonGameLive.textContent = `Heart caught. Score ${salonGameScoreValue}.`;
   heart.node.classList.add('caught');
-  if (navigator.vibrate) navigator.vibrate(18);
   setTimeout(() => removeSalonHeart(heart), 260);
 }
 
 function catchLowestSalonHeart() {
-  const available = salonGameHearts.filter(heart => !heart.caught);
+  const available = salonGameHearts.filter(heart => !heart.caught && heart.type !== 'broken');
   if (!available.length) return;
   available.sort((a, b) => b.y - a.y);
   catchSalonHeart(available[0]);
 }
 
-function startSalonGame() {
+function startSalonGame({ nextRound = false } = {}) {
   stopSalonGameLoop();
   clearSalonHearts();
+  if (nextRound) salonGameRound = Math.min(6, salonGameRound + 1);
   showSalonScreen('play');
   salonGameScoreValue = 0;
+  salonGameComboValue = 0;
+  salonGameMaxCombo = 0;
+  salonGameLastCatchAt = 0;
+  salonGameMisses = 0;
+  salonGameRushActive = false;
+  salonGameRushAnnounced = false;
   salonGameScore.textContent = '0';
   salonGameTime.textContent = '20';
+  updateSalonComboDisplay();
   updateSalonBestScoreDisplay();
   updateSalonBoardSize();
 
@@ -1208,6 +1333,7 @@ function startSalonGame() {
   salonGameEndTime = now + SALON_GAME_DURATION;
   salonGameSpawnElapsed = 999;
   salonGameBoard.focus({ preventScroll: true });
+  salonGameLive.textContent = `Round ${salonGameRound}. Beat ${getSalonTarget()} points.`;
   salonGameAnimationFrame = requestAnimationFrame(runSalonGameFrame);
 }
 
@@ -1220,12 +1346,22 @@ function runSalonGameFrame(now) {
   salonGameTime.textContent = String(Math.ceil(remaining / 1000));
 
   const progress = 1 - remaining / SALON_GAME_DURATION;
-  const spawnInterval = Math.max(340, 650 - progress * 230);
+  salonGameRushActive = remaining <= 5000;
+  salonGameRush.classList.toggle('show', salonGameRushActive);
+  salonGameBoard.classList.toggle('rush', salonGameRushActive);
+
+  if (salonGameRushActive && !salonGameRushAnnounced) {
+    salonGameRushAnnounced = true;
+    salonGameLive.textContent = 'Love Rush. Double points for the final five seconds.';
+  }
+
+  const difficulty = currentSalonDifficulty(progress);
+  const spawnInterval = Math.max(225, 655 - progress * 250 - (difficulty - 1) * 75 - (salonGameRushActive ? 70 : 0));
   salonGameSpawnElapsed += delta;
 
   while (salonGameSpawnElapsed >= spawnInterval) {
     salonGameSpawnElapsed -= spawnInterval;
-    createSalonHeart(now);
+    createSalonHeart(now, progress);
   }
 
   const seconds = delta / 1000;
@@ -1233,16 +1369,29 @@ function runSalonGameFrame(now) {
     if (heart.caught) return;
 
     if (salonReducedMotion.matches) {
-      if (now - heart.born > heart.lifetime) removeSalonHeart(heart);
-      else heart.node.style.transform = `translate3d(${heart.x}px,${heart.y}px,0)`;
+      if (now - heart.born > heart.lifetime) {
+        if (heart.type !== 'broken') {
+          salonGameMisses += 1;
+          resetSalonCombo();
+        }
+        removeSalonHeart(heart);
+      } else {
+        heart.node.style.transform = `translate3d(${heart.x}px,${heart.y}px,0)`;
+      }
       return;
     }
 
     heart.y += heart.speed * seconds;
-    const sway = Math.sin(now / 420 + heart.phase) * heart.drift;
+    const sway = Math.sin(now / 390 + heart.phase) * heart.drift;
     heart.node.style.transform = `translate3d(${heart.x + sway}px,${heart.y}px,0)`;
 
-    if (heart.y > salonBoardHeight + heart.size) removeSalonHeart(heart);
+    if (heart.y > salonBoardHeight + heart.size) {
+      if (heart.type !== 'broken') {
+        salonGameMisses += 1;
+        resetSalonCombo();
+      }
+      removeSalonHeart(heart);
+    }
   });
 
   if (remaining <= 0) {
@@ -1254,10 +1403,11 @@ function runSalonGameFrame(now) {
 }
 
 function salonResultForScore(score) {
-  if (score <= 5) return 'Too distracted thinking about Deepii.';
-  if (score <= 15) return 'Certified heart catcher.';
-  if (score <= 25) return 'Klarii wins unlimited kisses.';
-  return 'Salon superstar — every heart belongs to Klarii.';
+  if (score <= 8) return 'Too distracted thinking about Deepii.';
+  if (score <= 22) return 'Certified heart catcher.';
+  if (score <= 42) return 'Klarii wins unlimited kisses.';
+  if (score <= 70) return 'Salon superstar — every heart belongs to Klarii.';
+  return 'Legendary love reflexes. Deepii never stood a chance.';
 }
 
 function finishSalonGame() {
@@ -1265,16 +1415,25 @@ function finishSalonGame() {
   clearSalonHearts();
 
   const previousBest = getSalonBestScore();
-  if (salonGameScoreValue > previousBest) {
+  const isNewBest = salonGameScoreValue > previousBest;
+  if (isNewBest) {
     localStorage.setItem('dk_salon_best', String(salonGameScoreValue));
   }
 
+  const currentBest = getSalonBestScore();
   salonResultScore.textContent = String(salonGameScoreValue);
-  salonResultMessage.textContent = salonResultForScore(salonGameScoreValue);
+  salonResultMessage.textContent = isNewBest
+    ? `New best! ${salonResultForScore(salonGameScoreValue)}`
+    : salonResultForScore(salonGameScoreValue);
+  salonResultStats.textContent = `Best combo: ×${salonGameMaxCombo} · Missed: ${salonGameMisses} · Round: ${salonGameRound}`;
+  salonResultChallenge.textContent = salonGameScoreValue >= currentBest
+    ? `Next target: ${currentBest + Math.max(3, Math.ceil(currentBest * .08))}`
+    : `You were ${currentBest - salonGameScoreValue} point${currentBest - salonGameScoreValue === 1 ? '' : 's'} from your best.`;
+  salonGameReplayBtn.textContent = salonGameRound >= 6 ? 'Replay Final Round' : `Next Round · Level ${salonGameRound + 1}`;
   updateSalonBestScoreDisplay();
   showSalonScreen('result');
-  salonGameLive.textContent = `Game over. Final score ${salonGameScoreValue}. ${salonResultMessage.textContent}`;
-  setTimeout(() => document.getElementById('salonGameReplayBtn').focus(), 80);
+  salonGameLive.textContent = `Game over. Final score ${salonGameScoreValue}. Best combo ${salonGameMaxCombo}. ${salonResultMessage.textContent}`;
+  setTimeout(() => salonGameReplayBtn.focus(), 80);
 }
 
 function pauseSalonGame() {
@@ -1295,8 +1454,11 @@ function resumeSalonGame() {
   salonGameAnimationFrame = requestAnimationFrame(runSalonGameFrame);
 }
 
-document.getElementById('salonGameStartBtn').addEventListener('click', startSalonGame);
-document.getElementById('salonGameReplayBtn').addEventListener('click', startSalonGame);
+document.getElementById('salonGameStartBtn').addEventListener('click', () => {
+  salonGameRound = 1;
+  startSalonGame();
+});
+salonGameReplayBtn.addEventListener('click', () => startSalonGame({ nextRound: true }));
 document.getElementById('salonGameLaterBtn').addEventListener('click', closeSalonGame);
 document.getElementById('salonGameDoneBtn').addEventListener('click', closeSalonGame);
 document.getElementById('salonGameCloseBtn').addEventListener('click', closeSalonGame);
@@ -1317,7 +1479,6 @@ document.addEventListener('visibilitychange', () => {
 window.addEventListener('resize', () => {
   if (salonGameRunning) updateSalonBoardSize();
 });
-
 
 let latestEnvelopeNote = null;
 
