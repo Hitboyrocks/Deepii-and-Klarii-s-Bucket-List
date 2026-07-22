@@ -342,39 +342,6 @@ body.dark .cmh-feature{background:linear-gradient(145deg,rgba(255,255,255,.1),rg
 @media(prefers-reduced-motion:reduce){.cmh-preview-heart,.cmh-object.fading,.cmh-particle,.cmh-object.caught,.cmh-float{animation:none!important}}
 
 
-/* About Time story invitation */
-.hero-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:18px}.hero-actions .kiss-btn{margin-top:0}
-.amd-overlay{position:fixed;inset:0;z-index:9950;display:none;align-items:center;justify-content:center;padding:18px;background:linear-gradient(180deg,rgba(5,9,24,.72),rgba(14,8,20,.92));backdrop-filter:blur(12px);overscroll-behavior:contain}
-.amd-overlay.open{display:flex;animation:amdOverlayIn .65s ease both}
-.amd-panel{position:relative;width:min(1180px,97vw);height:min(780px,94dvh);overflow:hidden;border-radius:34px;background:#071224;box-shadow:0 40px 130px rgba(0,0,0,.5);isolation:isolate}
-.amd-story-image-wrap{position:absolute;inset:0;overflow:hidden;background:#071224}
-.amd-story-image{width:100%;height:100%;display:block;object-fit:cover;object-position:center;transform:scale(1.06);filter:saturate(1.02) contrast(1.02);animation:amdStoryCamera 24s cubic-bezier(.45,.05,.55,.95) infinite alternate;will-change:transform}
-.amd-story-image-wrap:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,8,20,.08),transparent 34%,rgba(5,7,18,.22) 76%,rgba(5,7,18,.62));pointer-events:none}
-.amd-glow{position:absolute;inset:-20%;background:radial-gradient(circle at 22% 18%,rgba(255,201,178,.16),transparent 24%),radial-gradient(circle at 80% 25%,rgba(255,162,187,.14),transparent 24%),radial-gradient(circle at 50% 86%,rgba(255,218,160,.13),transparent 22%);mix-blend-mode:screen;animation:amdGlow 8s ease-in-out infinite alternate;pointer-events:none}
-.amd-close{position:absolute;right:16px;top:16px;z-index:10;border:1px solid rgba(255,255,255,.28);border-radius:999px;width:48px;height:48px;background:rgba(8,13,28,.5);color:#fff;font-size:1.15rem;cursor:pointer;backdrop-filter:blur(12px);transition:transform .25s ease,background .25s ease}.amd-close:hover{transform:rotate(8deg) scale(1.06);background:rgba(8,13,28,.72)}
-.amd-petals{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:4}.amd-petal{position:absolute;top:-8%;width:12px;height:18px;border-radius:65% 35% 65% 35%;background:linear-gradient(180deg,#ffd2df,#ef91aa);opacity:.78;animation:amdPetalFall linear forwards;filter:drop-shadow(0 3px 5px rgba(255,154,185,.25))}
-.amd-fireflies{position:absolute;inset:0;pointer-events:none;z-index:3}.amd-firefly{position:absolute;width:5px;height:5px;border-radius:50%;background:#ffeaa8;box-shadow:0 0 8px #ffeaa8,0 0 18px rgba(255,229,145,.8);animation:amdFirefly 5s ease-in-out infinite alternate}
-.amd-story-ui{position:absolute;left:50%;bottom:20px;z-index:6;transform:translateX(-50%) translateY(28px);width:min(760px,calc(100% - 32px));padding:16px 18px;border-radius:24px;background:rgba(9,14,30,.66);border:1px solid rgba(255,255,255,.2);box-shadow:0 16px 45px rgba(0,0,0,.25);backdrop-filter:blur(14px);color:#fff;text-align:center;opacity:0;animation:amdUiRise .8s ease 1.05s forwards}
-.amd-story-ui h2{margin:0 0 6px;font-size:clamp(1.35rem,3vw,2rem)}.amd-story-ui p{margin:0;color:rgba(255,255,255,.86);line-height:1.55}
-.amd-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:14px}.amd-yes,.amd-replay{border:none;border-radius:999px;padding:12px 18px;font-weight:700;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease}.amd-yes{background:linear-gradient(135deg,#f39cb2,#e97898);color:#fff;box-shadow:0 12px 28px rgba(232,124,153,.34)}.amd-replay{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.22)}.amd-yes:hover,.amd-replay:hover{transform:translateY(-2px) scale(1.02)}
-.amd-confirmation{position:absolute;inset:0;z-index:7;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(7,10,24,.52);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .7s ease}.amd-confirmation.show{opacity:1;pointer-events:auto}.amd-confirmation-card{width:min(560px,92%);padding:28px;border-radius:28px;background:rgba(255,248,243,.95);color:#412e36;text-align:center;box-shadow:0 24px 70px rgba(0,0,0,.3);transform:translateY(24px) scale(.96);transition:transform .75s cubic-bezier(.2,.8,.2,1)}.amd-confirmation.show .amd-confirmation-card{transform:translateY(0) scale(1)}.amd-confirmation-card h3{margin:0 0 10px;font-size:clamp(1.5rem,3.5vw,2.15rem)}.amd-confirmation-card p{margin:0;line-height:1.65}.amd-confirmation-card .amd-actions{margin-top:18px}.amd-confirmation-card .amd-replay{color:#573d48;border-color:rgba(87,61,72,.16);background:rgba(87,61,72,.06)}
-.amd-heart-burst{position:absolute;inset:0;z-index:8;pointer-events:none;overflow:hidden}.amd-burst-heart{position:absolute;left:50%;bottom:18%;font-size:1.4rem;color:#fff;animation:amdBurstHeart 1.55s ease forwards;text-shadow:0 5px 15px rgba(232,124,153,.65)}
-.amd-live{position:absolute;left:-9999px}
-@keyframes amdOverlayIn{from{opacity:0}to{opacity:1}}
-@keyframes amdStoryCamera{0%{transform:scale(1.06) translate3d(-1.5%,0,0)}50%{transform:scale(1.11) translate3d(1%,-1.2%,0)}100%{transform:scale(1.08) translate3d(0,1%,0)}}
-@keyframes amdGlow{0%{opacity:.55;transform:scale(1)}100%{opacity:1;transform:scale(1.06)}}
-@keyframes amdUiRise{to{opacity:1;transform:translateX(-50%) translateY(0)}}
-@keyframes amdPetalFall{0%{transform:translate3d(0,-12%,0) rotate(0)}100%{transform:translate3d(var(--drift,0),112vh,0) rotate(var(--spin,180deg))}}
-@keyframes amdFirefly{0%{opacity:.2;transform:translate(0,0) scale(.7)}50%{opacity:1}100%{opacity:.3;transform:translate(var(--fx,18px),var(--fy,-20px)) scale(1.15)}}
-@keyframes amdBurstHeart{0%{opacity:0;transform:translate(0,0) scale(.55) rotate(0)}15%{opacity:1}100%{opacity:0;transform:translate(var(--x),calc(-1 * var(--y))) scale(1.35) rotate(var(--r))}}
-@media(max-width:760px){.amd-overlay{padding:0}.amd-panel{width:100%;height:100dvh;max-height:none;border-radius:0}.amd-story-image{object-position:center top;animation-duration:20s}.amd-story-ui{bottom:12px;width:calc(100% - 18px);padding:14px}.amd-story-ui p{font-size:.92rem}.amd-actions>*{width:100%}}
-@media(prefers-reduced-motion:reduce){.amd-story-image,.amd-glow,.amd-petal,.amd-firefly{animation:none}.amd-overlay.open,.amd-story-ui{animation:none;opacity:1;transform:translateX(-50%)}}
-.cmh-overlay{position:fixed;inset:0;z-index:9805;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(22,15,24,.88);color:#fff;overscroll-behavior:contain}.cmh-overlay.open{display:flex}.cmh-panel{width:min(1040px,98vw);height:min(94dvh,900px);display:flex;flex-direction:column;overflow:hidden;border-radius:30px;background:linear-gradient(150deg,#fffdf8,#ffeef3);color:var(--ink);box-shadow:0 30px 100px rgba(0,0,0,.4)}body.dark .cmh-panel{background:linear-gradient(150deg,#172238,#211c31);color:#fff4de}.cmh-topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid rgba(110,80,90,.12)}.cmh-topbar strong{font-family:'Playfair Display',Georgia,serif;font-size:1.35rem}.cmh-icon-btn{border:0;border-radius:999px;min-width:46px;min-height:46px;background:rgba(62,52,44,.08);color:inherit;font-weight:800;cursor:pointer}.cmh-screen{min-height:0;flex:1;overflow:auto;padding:18px}.cmh-screen[hidden]{display:none!important}.cmh-dashboard{display:grid;grid-template-columns:1fr 1fr;gap:16px}.cmh-card{border-radius:24px;padding:18px;background:rgba(255,255,255,.72);box-shadow:0 10px 30px rgba(90,50,65,.09)}body.dark .cmh-card{background:rgba(255,255,255,.08)}.cmh-level-map{display:grid;grid-template-columns:repeat(10,1fr);gap:8px}.cmh-level{aspect-ratio:1;border:0;border-radius:14px;background:rgba(156,173,143,.2);font-weight:800;color:inherit;cursor:pointer;position:relative}.cmh-level.locked{opacity:.42;cursor:not-allowed}.cmh-level.boss{background:linear-gradient(135deg,#d6a85f,#e8b7b7);color:#fff}.cmh-level.current{outline:3px solid var(--sage2)}.cmh-level-stars{font-size:.62rem;position:absolute;bottom:3px;left:0;right:0}.cmh-challenges{display:grid;grid-template-columns:1fr 1fr;gap:12px}.cmh-progressbar{height:10px;border-radius:99px;background:rgba(62,52,44,.09);overflow:hidden}.cmh-progressbar>span{display:block;height:100%;background:linear-gradient(90deg,var(--sage),var(--gold));width:0}.cmh-theme-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}.cmh-theme{border:1px solid rgba(100,70,80,.12);border-radius:18px;padding:12px;background:rgba(255,255,255,.5);cursor:pointer;color:inherit}.cmh-theme.locked{opacity:.5}.cmh-game{display:flex;flex-direction:column;gap:10px;height:100%}.cmh-hud{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}.cmh-hud-card{text-align:center;border-radius:16px;padding:8px;background:rgba(255,255,255,.74)}body.dark .cmh-hud-card{background:rgba(255,255,255,.08)}.cmh-hud-card small{display:block;text-transform:uppercase;font-weight:800;font-size:.62rem;opacity:.68}.cmh-hud-card b{font-family:'Playfair Display',Georgia,serif;font-size:1.35rem}.cmh-board{position:relative;flex:1;min-height:380px;overflow:hidden;border-radius:24px;background:linear-gradient(180deg,#f7dce5,#efe5dc);touch-action:none;user-select:none;contain:layout paint}.cmh-board[data-theme="rainy-window"]{background:linear-gradient(180deg,#8ea7b7,#cbd9df)}.cmh-board[data-theme="autumn-walk"]{background:linear-gradient(180deg,#e8b37f,#7f8c63)}.cmh-board[data-theme="winter-evening"]{background:linear-gradient(180deg,#9db4cf,#eef5fb)}.cmh-board[data-theme="cherry-blossom"]{background:linear-gradient(180deg,#ffd9e8,#f8f3e8)}.cmh-board[data-theme="toronto-night"]{background:linear-gradient(180deg,#14213d,#394867)}.cmh-board[data-theme="prague-sunset"]{background:linear-gradient(180deg,#f7a072,#6d597a)}.cmh-board[data-theme="cozy-apartment"]{background:linear-gradient(180deg,#f1cfaa,#b58b6b)}.cmh-board[data-theme="northern-lights"]{background:linear-gradient(180deg,#102542,#2f8f83)}.cmh-board[data-theme="infinity-sky"]{background:linear-gradient(180deg,#33224f,#b86b8b)}.cmh-object{position:absolute;left:0;top:0;border:0;background:transparent;width:58px;height:58px;font-size:42px;display:grid;place-items:center;cursor:pointer;will-change:transform;filter:drop-shadow(0 7px 9px rgba(70,35,55,.22));touch-action:none}.cmh-object.caught{pointer-events:none;animation:cmhCaught .28s ease forwards}.cmh-object.fading{animation:cmhFade 1.1s ease-in-out infinite}.cmh-object.boss-heart{font-size:76px;width:100px;height:100px}.cmh-weather{position:absolute;inset:0;pointer-events:none;overflow:hidden;opacity:.65}.cmh-particle{position:absolute;top:-30px;animation:cmhWeatherFall linear infinite}.cmh-paused{position:absolute;inset:0;display:none;place-items:center;background:rgba(30,20,30,.7);color:#fff;z-index:8;font-size:1.4rem;font-weight:800}.cmh-paused.show{display:grid}.cmh-float{position:absolute;pointer-events:none;font-size:1.15rem;font-weight:900;color:#b64f75;text-shadow:0 2px #fff;animation:cmhFloat .65s ease forwards}.cmh-result{text-align:center;max-width:650px;margin:auto}.cmh-result-score{font-family:'Playfair Display',Georgia,serif;font-size:clamp(4rem,14vw,8rem);color:#cf6e8d;line-height:1}.cmh-result-stars{font-size:2.5rem;color:var(--gold);letter-spacing:.15em}.cmh-toast{position:fixed;top:22px;left:50%;transform:translateX(-50%) translateY(-20px);opacity:0;z-index:9999;max-width:min(90vw,520px);padding:14px 18px;border-radius:18px;background:#fff;color:#3e342c;box-shadow:0 18px 60px rgba(0,0,0,.28);font-weight:800;transition:.25s}.cmh-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-@keyframes cmhPreviewFloat{50%{transform:translateY(-16px) rotate(6deg)}}@keyframes cmhCaught{to{transform:scale(1.8);opacity:0}}@keyframes cmhFade{50%{opacity:.22}}@keyframes cmhFloat{to{transform:translateY(-40px);opacity:0}}@keyframes cmhWeatherFall{to{transform:translateY(110vh) rotate(360deg)}}
-@media(max-width:800px){.cmh-feature-grid,.cmh-dashboard{grid-template-columns:1fr}.cmh-stats{grid-template-columns:repeat(2,1fr)}.cmh-level-map{grid-template-columns:repeat(5,1fr)}.cmh-hud{grid-template-columns:repeat(4,1fr)}.cmh-overlay{padding:0}.cmh-panel{width:100%;height:100dvh;border-radius:0}.cmh-screen{padding:12px}.cmh-challenges{grid-template-columns:1fr}.cmh-board{min-height:0}.cmh-game{height:calc(100dvh - 84px)}}
-@media(prefers-reduced-motion:reduce){.cmh-preview-heart,.cmh-object.fading,.cmh-particle,.cmh-object.caught,.cmh-float{animation:none!important}}
-
-
 /* About Time movie-date invitation */
 .hero-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:18px}.hero-actions .kiss-btn{margin-top:0}
 .amd-overlay{position:fixed;inset:0;z-index:9950;display:none;align-items:center;justify-content:center;padding:18px;background:radial-gradient(circle at 50% 12%,rgba(255,214,223,.24),transparent 25%),linear-gradient(180deg,rgba(10,14,30,.56),rgba(20,12,26,.9));backdrop-filter:blur(10px);color:#fff;overscroll-behavior:contain}
@@ -491,11 +458,64 @@ body.dark .cmh-feature{background:linear-gradient(145deg,rgba(255,255,255,.1),rg
 
 /* About Time movie-date invitation */
 .hero-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:18px}.hero-actions .kiss-btn{margin-top:0}
-.amd-overlay{position:fixed;inset:0;z-index:9950;display:none;align-items:center;justify-content:center;padding:18px;background:radial-gradient(circle at 50% 12%,rgba(255,214,223,.24),transparent 25%),linear-gradient(180deg,rgba(11,15,31,.58),rgba(20,12,26,.9));backdrop-filter:blur(10px);color:#fff;overscroll-behavior:contain}.amd-overlay.open{display:flex}.amd-panel{position:relative;width:min(980px,96vw);height:min(760px,94dvh);overflow:hidden;border-radius:34px;background:linear-gradient(180deg,#6a8aa0 0%,#8199a8 18%,#8f95a0 35%,#dcb3a8 70%,#f4e2d6 100%);box-shadow:0 36px 120px rgba(0,0,0,.42);isolation:isolate}.amd-panel:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 14%,rgba(255,251,231,.46),transparent 18%),radial-gradient(circle at 82% 18%,rgba(255,229,215,.34),transparent 18%),linear-gradient(180deg,rgba(255,255,255,.1),transparent 35%,rgba(79,43,54,.12) 82%,rgba(39,19,30,.2));pointer-events:none;z-index:-1}.amd-sky-glow{position:absolute;inset:0;background:radial-gradient(circle at 50% 8%,rgba(255,247,210,.25),transparent 24%),radial-gradient(circle at 72% 23%,rgba(255,232,213,.28),transparent 18%);pointer-events:none}.amd-stars{position:absolute;inset:0;opacity:.42;background-image:radial-gradient(circle,#fff 0 1px,transparent 1.8px);background-size:72px 72px;animation:amdStarDrift 28s linear infinite}.amd-moon{position:absolute;right:8%;top:8%;width:88px;aspect-ratio:1;border-radius:50%;background:#fff4cc;box-shadow:0 0 50px rgba(255,244,204,.5)}.amd-moon:after{content:"";position:absolute;width:74px;aspect-ratio:1;border-radius:50%;background:#7a92a2;left:-18px;top:-10px;opacity:.88}.amd-cloud{position:absolute;border-radius:999px;background:rgba(255,255,255,.28);filter:blur(1px);animation:amdCloudFloat 13s ease-in-out infinite}.amd-cloud:before,.amd-cloud:after{content:"";position:absolute;border-radius:inherit;background:inherit}.amd-cloud.one{left:8%;top:18%;width:120px;height:30px}.amd-cloud.one:before{width:52px;height:52px;left:10px;top:-18px}.amd-cloud.one:after{width:44px;height:44px;right:18px;top:-14px}.amd-cloud.two{right:16%;top:24%;width:150px;height:34px;animation-delay:1.4s}.amd-cloud.two:before{width:60px;height:60px;left:18px;top:-21px}.amd-cloud.two:after{width:48px;height:48px;right:26px;top:-14px}.amd-hills{position:absolute;left:-4%;right:-4%;bottom:15%;height:28%;background:linear-gradient(180deg,rgba(76,106,100,.2),rgba(74,97,88,.8));clip-path:polygon(0 76%,14% 60%,26% 65%,38% 48%,53% 64%,65% 42%,79% 57%,90% 45%,100% 59%,100% 100%,0 100%)}.amd-city{position:absolute;left:0;right:0;bottom:0;height:24%;opacity:.52;background:linear-gradient(90deg,#2e3348 0 8%,transparent 8% 10%,#2e3348 10% 20%,transparent 20% 24%,#2e3348 24% 35%,transparent 35% 39%,#2e3348 39% 50%,transparent 50% 54%,#2e3348 54% 66%,transparent 66% 69%,#2e3348 69% 80%,transparent 80% 84%,#2e3348 84% 100%);clip-path:polygon(0 34%,8% 34%,8% 9%,13% 9%,13% 48%,22% 48%,22% 18%,29% 18%,29% 56%,38% 56%,38% 27%,45% 27%,45% 46%,55% 46%,55% 6%,62% 6%,62% 40%,71% 40%,71% 22%,79% 22%,79% 52%,89% 52%,89% 16%,95% 16%,95% 38%,100% 38%,100% 100%,0 100%)}.amd-lake{position:absolute;left:-2%;right:-2%;bottom:10%;height:10%;background:linear-gradient(180deg,rgba(241,215,208,.28),rgba(118,142,156,.08));filter:blur(1px)}.amd-petals{position:absolute;inset:0;pointer-events:none;overflow:hidden}.amd-petal{position:absolute;top:-6%;width:12px;height:18px;border-radius:60% 40% 65% 35%;background:linear-gradient(180deg,#ffd5df,#f3a7ba);opacity:.82;animation:amdPetalFall linear forwards}.amd-petal:before{content:"";position:absolute;inset:2px 4px auto 4px;height:5px;border-radius:99px;background:rgba(255,255,255,.38)}.amd-close{position:absolute;right:16px;top:16px;z-index:12;border:1px solid rgba(255,255,255,.24);border-radius:999px;width:48px;height:48px;background:rgba(30,24,39,.3);color:#fff;font-size:1.15rem;cursor:pointer;backdrop-filter:blur(12px)}.amd-story{position:relative;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:78px clamp(18px,4vw,44px) clamp(24px,5vw,44px)}.amd-title{position:absolute;left:clamp(20px,4vw,44px);top:25px;margin:0;font-size:clamp(1.6rem,4vw,2.6rem);text-shadow:0 8px 30px rgba(0,0,0,.26)}.amd-subtitle{position:absolute;left:clamp(20px,4vw,44px);top:66px;margin:8px 0 0;color:rgba(255,255,255,.86);font-size:.98rem}.amd-stage{position:relative;flex:1;min-height:360px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 clamp(2px,3vw,32px) 94px}.amd-character{position:relative;margin:0;width:clamp(132px,22vw,210px);height:clamp(266px,43vw,396px);filter:drop-shadow(0 20px 18px rgba(12,8,16,.2));transform-origin:50% 100%;will-change:transform,opacity}.amd-character.deepii{transform:translateX(-145%) scale(.94);opacity:0}.amd-character.klarii{transform:translateX(145%) scale(.94);opacity:0}.amd-stage.story-start .amd-character.deepii{animation:amdWalkInLeft 1.75s cubic-bezier(.18,.8,.25,1) .15s forwards}.amd-stage.story-start .amd-character.klarii{animation:amdWalkInRight 1.75s cubic-bezier(.18,.8,.25,1) .55s forwards}.amd-stage.story-ready .amd-character{opacity:1;transform:translateX(0);animation:amdBreathe 3.4s ease-in-out infinite}.amd-stage.accepted .amd-character.deepii{animation:amdMeetLeft 1.2s cubic-bezier(.2,.8,.25,1) forwards}.amd-stage.accepted .amd-character.klarii{animation:amdMeetRight 1.2s cubic-bezier(.2,.8,.25,1) forwards}.amd-stage.story-start .deepii .amd-arm.left,.amd-stage.story-start .klarii .amd-arm.right{animation:amdArmWalkA .62s ease-in-out 3}.amd-stage.story-start .deepii .amd-arm.right,.amd-stage.story-start .klarii .amd-arm.left{animation:amdArmWalkB .62s ease-in-out 3}.amd-stage.story-start .amd-leg.left{animation:amdLegWalkA .62s ease-in-out 3}.amd-stage.story-start .amd-leg.right{animation:amdLegWalkB .62s ease-in-out 3}.amd-stage.accepted .deepii .amd-arm.right{animation:amdReachRight 1s ease forwards}.amd-stage.accepted .klarii .amd-arm.left{animation:amdReachLeft 1s ease forwards}.amd-person{position:absolute;inset:0}.amd-head{position:absolute;left:50%;top:8%;width:44%;aspect-ratio:.82;border-radius:48% 48% 45% 45%;transform:translateX(-50%);background:var(--skin);z-index:5;box-shadow:inset 0 -7px rgba(100,55,45,.08)}.amd-hair{position:absolute;left:50%;top:3%;width:54%;height:30%;transform:translateX(-50%);z-index:7}.deepii .amd-hair{border-radius:50% 50% 33% 30%;background:linear-gradient(180deg,#2b242b,#171216);clip-path:polygon(2% 22%,22% 3%,55% 0,90% 15%,96% 44%,84% 54%,75% 30%,61% 18%,43% 16%,22% 27%,10% 51%)}.klarii .amd-hair{width:70%;height:60%;border-radius:48% 48% 43% 43%;background:linear-gradient(180deg,#f6ddb4,#d3ad6b 58%,#f0d092);box-shadow:-16px 14px 0 #d9b56f,14px 16px 0 #efcf90}.amd-face{position:absolute;left:50%;top:18%;width:33%;height:16%;transform:translateX(-50%);z-index:9}.amd-eye{position:absolute;top:19%;width:10%;aspect-ratio:1;border-radius:50%;background:#302531;box-shadow:0 0 0 2px rgba(255,255,255,.1) inset}.amd-eye.left{left:19%}.amd-eye.right{right:19%}.klarii .amd-eye{background:#7f9baa}.amd-blush{position:absolute;top:55%;width:16%;height:10%;border-radius:999px;background:rgba(232,143,164,.35);filter:blur(2px)}.amd-blush.left{left:14%}.amd-blush.right{right:14%}.amd-smile{position:absolute;left:50%;bottom:8%;width:32%;height:22%;transform:translateX(-50%);border-bottom:3px solid #8b5460;border-radius:0 0 50% 50%}.amd-glasses{position:absolute;left:50%;top:14%;width:42%;height:8%;transform:translateX(-50%);z-index:10}.amd-glasses:before,.amd-glasses:after{content:"";position:absolute;top:0;width:40%;height:100%;border:2px solid #d4d9e2;border-radius:6px;background:rgba(84,72,88,.25)}.amd-glasses:before{left:0}.amd-glasses:after{right:0}.amd-glasses span{position:absolute;left:40%;right:40%;top:38%;height:2px;background:#d4d9e2}.amd-beard{position:absolute;left:50%;top:23%;width:37%;height:21%;transform:translateX(-50%);border-radius:20% 20% 48% 48%;background:#241b20;z-index:8;clip-path:polygon(0 0,17% 28%,30% 8%,50% 32%,70% 8%,83% 28%,100% 0,92% 75%,50% 100%,8% 75%)}.amd-neck{position:absolute;left:50%;top:34%;width:17%;height:10%;transform:translateX(-50%);background:var(--skin);z-index:3}.amd-body{position:absolute;left:50%;top:39%;width:56%;height:43%;transform:translateX(-50%);z-index:4}.deepii .amd-body{border-radius:26% 26% 15% 15%;background:linear-gradient(90deg,#424049,#5a5660 50%,#343039);clip-path:polygon(16% 0,42% 8%,50% 31%,58% 8%,84% 0,100% 100%,0 100%)}.deepii .amd-body:before{content:"";position:absolute;left:45%;top:0;width:10%;height:74%;background:#222027;clip-path:polygon(0 0,100% 0,69% 100%,31% 100%)}.klarii .amd-body{border-radius:35% 35% 12% 12%;background:linear-gradient(90deg,#0e0d13,#313039 50%,#111015);clip-path:polygon(23% 0,77% 0,100% 100%,0 100%)}.amd-arm{position:absolute;top:43%;width:16%;height:38%;background:var(--outfit);border-radius:999px;z-index:3;transform-origin:50% 10%}.amd-arm.left{left:15%;transform:rotate(7deg)}.amd-arm.right{right:15%;transform:rotate(-7deg)}.deepii .amd-arm{--outfit:#4a4650}.klarii .amd-arm{--outfit:#141318}.amd-hand{position:absolute;bottom:-2%;left:50%;width:65%;aspect-ratio:1;border-radius:50%;transform:translateX(-50%);background:var(--skin)}.amd-leg{position:absolute;top:76%;width:20%;height:24%;background:var(--legs);border-radius:0 0 20px 20px;z-index:2}.amd-leg.left{left:28%}.amd-leg.right{right:28%}.deepii .amd-leg{--legs:#2b2a31}.klarii .amd-leg{--legs:#eee3db;height:18%}.amd-shoe{position:absolute;bottom:-3%;width:140%;height:18%;border-radius:999px;background:#16141b}.amd-leg.left .amd-shoe{right:-5%}.amd-leg.right .amd-shoe{left:-5%}.amd-earring{position:absolute;top:22%;width:7px;height:7px;border-radius:50%;background:#e9c06b;z-index:11}.amd-earring.left{left:30%}.amd-earring.right{right:30%}.amd-speech{position:absolute;left:50%;bottom:20px;transform:translateX(-50%) translateY(16px);width:min(720px,92%);padding:18px 20px 20px;border-radius:26px;background:rgba(255,250,244,.94);color:#433641;box-shadow:0 18px 60px rgba(20,10,20,.2);text-align:center;opacity:0;transition:opacity .34s ease,transform .34s ease;z-index:10}.amd-speech.show{opacity:1;transform:translateX(-50%) translateY(0)}.amd-speaker{display:block;margin-bottom:6px;color:#ad5c78;font-weight:900;letter-spacing:.05em;text-transform:uppercase;font-size:.72rem}.amd-line{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.06rem,2.8vw,1.5rem);line-height:1.45}.amd-controls{display:none;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:14px}.amd-controls.show{display:flex}.amd-yes,.amd-skip,.amd-replay{border:0;border-radius:999px;min-height:48px;padding:12px 21px;font:inherit;font-weight:800;cursor:pointer}.amd-yes{background:linear-gradient(135deg,#8fa97f,#df93a9);color:#fff;box-shadow:0 10px 28px rgba(155,74,106,.22)}.amd-skip,.amd-replay{background:rgba(56,45,54,.09);color:#382d36}.amd-ticket-wrap{position:absolute;inset:86px 22px 28px;z-index:11;display:none;place-items:center;perspective:1200px}.amd-ticket-wrap.show{display:grid}.amd-ticket{width:min(720px,94%);min-height:330px;display:grid;grid-template-columns:1fr 170px;border-radius:28px;overflow:hidden;color:#3d3140;background:linear-gradient(135deg,#fff8ef,#ffe6eb);box-shadow:0 30px 100px rgba(0,0,0,.32);transform:rotateX(82deg) scale(.72);opacity:0;transform-origin:50% 50%;animation:amdTicketReveal .95s cubic-bezier(.18,.8,.22,1) forwards}.amd-ticket-main{padding:clamp(24px,5vw,48px);position:relative}.amd-ticket-main:after{content:"";position:absolute;right:-1px;top:18px;bottom:18px;border-right:2px dashed rgba(86,64,72,.25)}.amd-ticket-kicker{font-weight:900;letter-spacing:.2em;text-transform:uppercase;color:#ad5c78;font-size:.76rem}.amd-ticket h3{font-size:clamp(2.7rem,8vw,5.1rem);margin:10px 0 12px;line-height:.9}.amd-ticket-reserved{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.22rem,3vw,1.78rem);color:#7b4c5f}.amd-ticket-copy{margin-top:20px;line-height:1.75}.amd-ticket-stub{padding:25px 18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:rgba(217,150,169,.16)}.amd-ticket-stub .heart-mark{font-size:3rem;animation:amdPulse 1.5s ease-in-out infinite}.amd-ticket-code{font-family:'Press Start 2P',monospace;font-size:.62rem;line-height:1.7;word-break:break-word;margin-top:12px}.amd-ticket-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:18px}.amd-heart-burst{position:absolute;inset:0;pointer-events:none;z-index:14;overflow:hidden}.amd-burst-heart{position:absolute;left:50%;top:55%;font-size:clamp(1.2rem,4vw,2rem);animation:amdBurst 1.6s ease-out forwards}.amd-live{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
-@keyframes amdStarDrift{to{background-position:72px 72px}}@keyframes amdCloudFloat{50%{transform:translateY(-10px) translateX(10px)}}@keyframes amdPetalFall{0%{transform:translate3d(0,0,0) rotate(0deg);opacity:0}10%{opacity:.85}100%{transform:translate3d(var(--drift,40px),108%,0) rotate(var(--spin,180deg));opacity:0}}@keyframes amdWalkInLeft{0%{transform:translateX(-145%) translateY(0) scale(.94);opacity:0}18%{opacity:1}42%{transform:translateX(-65%) translateY(-4px)}68%{transform:translateX(-22%) translateY(0) rotate(-.6deg)}100%{transform:translateX(0) scale(1);opacity:1}}@keyframes amdWalkInRight{0%{transform:translateX(145%) translateY(0) scale(.94);opacity:0}18%{opacity:1}42%{transform:translateX(65%) translateY(-4px)}68%{transform:translateX(22%) translateY(0) rotate(.6deg)}100%{transform:translateX(0) scale(1);opacity:1}}@keyframes amdBreathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}@keyframes amdMeetLeft{to{transform:translateX(32%) scale(1.02);opacity:1}}@keyframes amdMeetRight{to{transform:translateX(-32%) scale(1.02);opacity:1}}@keyframes amdTicketReveal{to{transform:rotateX(0) scale(1);opacity:1}}@keyframes amdPulse{50%{transform:scale(1.16)}}@keyframes amdArmWalkA{50%{transform:rotate(-15deg)}}@keyframes amdArmWalkB{50%{transform:rotate(15deg)}}@keyframes amdLegWalkA{50%{transform:rotate(7deg) translateY(-3px)}}@keyframes amdLegWalkB{50%{transform:rotate(-7deg) translateY(-3px)}}@keyframes amdReachRight{to{transform:rotate(-40deg) translate(-4px,-4px)}}@keyframes amdReachLeft{to{transform:rotate(40deg) translate(4px,-4px)}}@keyframes amdBurst{to{transform:translate(var(--x),var(--y)) rotate(var(--r));opacity:0}}
-@media(max-width:700px){.amd-overlay{padding:0}.amd-panel{width:100%;height:100dvh;border-radius:0}.amd-story{padding:76px 12px 18px}.amd-stage{min-height:350px;padding:0 0 118px}.amd-character{width:clamp(118px,39vw,170px);height:clamp(250px,73vw,330px)}.amd-speech{bottom:8px;padding:14px 13px 15px;border-radius:20px}.amd-line{font-size:1rem}.amd-ticket-wrap{inset:70px 10px 16px}.amd-ticket{grid-template-columns:1fr;max-height:calc(100dvh - 105px);overflow:auto}.amd-ticket-main{padding:24px 20px}.amd-ticket-main:after{display:none}.amd-ticket-stub{padding:16px;border-top:2px dashed rgba(86,64,72,.22)}.amd-ticket h3{font-size:clamp(2.5rem,16vw,4.4rem)}.amd-subtitle{display:none}.amd-title{top:22px;font-size:1.45rem}.amd-close{right:10px;top:10px}.amd-cloud.two{right:8%}.amd-moon{width:72px}}
-@media(max-width:390px){.amd-stage{padding-bottom:138px}.amd-character{width:108px;height:238px}.amd-speech{width:97%}.amd-controls{gap:7px}.amd-yes,.amd-skip{padding:10px 15px;min-height:44px}}
-@media(prefers-reduced-motion:reduce){.amd-stars,.amd-character,.amd-ticket,.amd-ticket-stub .heart-mark,.amd-burst-heart,.amd-cloud,.amd-petal{animation-duration:.01ms!important;animation-iteration-count:1!important}.amd-speech{transition:none}}
+.amd-overlay{position:fixed;inset:0;z-index:9950;display:none;background:rgba(8,10,20,.82);backdrop-filter:blur(10px);color:#fff}
+.amd-overlay.open{display:block}
+.amd-panel{position:relative;width:100vw;height:100dvh;overflow:hidden;background:linear-gradient(180deg,#08142c 0%,#102446 28%,#18335d 48%,#21456a 58%,#294d63 68%,#335055 76%,#4d5256 100%);isolation:isolate}
+.amd-panel:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 15%,rgba(255,244,197,.16),transparent 16%),linear-gradient(180deg,rgba(255,255,255,.06),transparent 30%,rgba(14,7,17,.12) 76%,rgba(7,7,11,.25));pointer-events:none}
+.amd-sky-glow{position:absolute;inset:0;background:radial-gradient(circle at 20% 18%,rgba(255,220,238,.08),transparent 18%),radial-gradient(circle at 82% 16%,rgba(255,233,181,.10),transparent 18%)}
+.amd-stars{position:absolute;inset:0;opacity:.45;background-image:radial-gradient(circle,#fff 0 1px,transparent 1.8px);background-size:72px 72px;animation:amdStarDrift 28s linear infinite}
+.amd-moon{position:absolute;left:8%;top:7%;width:min(14vw,110px);aspect-ratio:1;border-radius:50%;background:#fff0c6;box-shadow:0 0 60px rgba(255,240,198,.5)}
+.amd-moon:after{content:"";position:absolute;width:84%;aspect-ratio:1;border-radius:50%;background:#122847;left:14%;top:8%;opacity:.36}
+.amd-cloud{position:absolute;border-radius:999px;background:rgba(255,255,255,.18);filter:blur(1px);animation:amdCloudFloat 15s ease-in-out infinite}.amd-cloud:before,.amd-cloud:after{content:"";position:absolute;border-radius:inherit;background:inherit}
+.amd-cloud.one{left:18%;top:18%;width:140px;height:34px}.amd-cloud.one:before{width:56px;height:56px;left:18px;top:-16px}.amd-cloud.one:after{width:46px;height:46px;right:18px;top:-12px}
+.amd-cloud.two{right:12%;top:22%;width:170px;height:36px;animation-delay:1.6s}.amd-cloud.two:before{width:62px;height:62px;left:18px;top:-20px}.amd-cloud.two:after{width:48px;height:48px;right:24px;top:-14px}
+.amd-hills{position:absolute;left:-5%;right:-5%;bottom:13%;height:28%;background:linear-gradient(180deg,rgba(72,118,106,.15),rgba(42,88,74,.86));clip-path:polygon(0 74%,12% 56%,24% 62%,38% 44%,50% 60%,63% 41%,76% 57%,88% 44%,100% 58%,100% 100%,0 100%)}
+.amd-lake{position:absolute;left:-2%;right:-2%;bottom:11%;height:8%;background:linear-gradient(180deg,rgba(255,219,214,.25),rgba(145,187,220,.05));filter:blur(1px)}
+.amd-path{position:absolute;left:50%;transform:translateX(-50%);bottom:0;width:min(50vw,340px);height:30%;background:linear-gradient(180deg,rgba(255,248,213,.9),rgba(228,196,129,.55),rgba(182,136,82,.16));clip-path:polygon(45% 0,55% 0,100% 100%,0 100%);filter:blur(1px);opacity:.9}
+.amd-lanterns{position:absolute;inset:0;pointer-events:none}.amd-lantern{position:absolute;width:12px;height:18px;border-radius:4px;background:linear-gradient(180deg,#ffd79d,#ffbd6c);box-shadow:0 0 18px rgba(255,205,120,.55),0 0 34px rgba(255,205,120,.3)}
+.amd-lantern:before{content:"";position:absolute;left:50%;transform:translateX(-50%);top:-8px;width:2px;height:8px;background:rgba(255,240,220,.55)}
+.amd-fireflies,.amd-petals{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.amd-fly{position:absolute;width:8px;height:8px;border-radius:50%;background:#ffe694;box-shadow:0 0 12px rgba(255,230,148,.75);animation:amdFirefly 5s ease-in-out infinite}
+.amd-petal{position:absolute;top:-8%;width:12px;height:18px;border-radius:60% 40% 65% 35%;background:linear-gradient(180deg,#ffd5df,#f2aab8);opacity:.82;animation:amdPetalFall linear forwards}
+.amd-panel-head{position:relative;z-index:5;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:18px clamp(16px,3vw,28px) 8px}
+.amd-head-copy h2{margin:0;font-size:clamp(1.5rem,3vw,2.4rem);text-shadow:0 10px 28px rgba(0,0,0,.24)}
+.amd-head-copy p{margin:6px 0 0;max-width:min(760px,75vw);color:rgba(255,255,255,.88);line-height:1.55;font-size:.98rem}
+.amd-progress{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:40vw}.amd-dot{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.28)}.amd-dot.active{background:#ffd2db;box-shadow:0 0 0 4px rgba(255,210,219,.18)}.amd-dot.done{background:#ffb1c1}
+.amd-close{border:1px solid rgba(255,255,255,.24);border-radius:999px;width:46px;height:46px;background:rgba(30,24,39,.3);color:#fff;font-size:1.05rem;cursor:pointer;backdrop-filter:blur(12px);flex:0 0 auto}
+.amd-story{position:relative;z-index:2;display:grid;grid-template-rows:1fr auto auto auto;height:calc(100dvh - 72px);padding:0 clamp(12px,2.4vw,24px) clamp(16px,2.5vw,22px)}
+.amd-stage{position:relative;min-height:0;height:100%;display:flex;align-items:flex-end;justify-content:space-between;gap:14px;padding:10px 6px 12px}
+.amd-character{position:relative;display:flex;align-items:flex-end;justify-content:center;filter:drop-shadow(0 20px 22px rgba(12,8,16,.22));transform-origin:50% 100%;will-change:transform,opacity;transition:transform .95s cubic-bezier(.22,.8,.28,1),opacity .7s ease}
+.amd-character.deepii,.amd-character.klarii{width:min(30vw,280px);height:min(56vh,460px)}
+.amd-character.couple{position:absolute;left:50%;bottom:14px;transform:translate(-50%,12px) scale(.92);width:min(34vw,340px);height:min(58vh,500px);opacity:0;pointer-events:none}
+.amd-character-img{display:block;max-width:100%;max-height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none;backface-visibility:hidden}
+.amd-character.deepii{opacity:0;transform:translateX(-38vw) translateY(8px) scale(.96)}
+.amd-character.klarii{opacity:0;transform:translateX(38vw) translateY(8px) scale(.96)}
+.amd-stage[data-step="deepii"] .amd-character.deepii,.amd-stage[data-step="klarii"] .amd-character.deepii,.amd-stage[data-step="meet"] .amd-character.deepii,.amd-stage[data-step="ask"] .amd-character.deepii{opacity:1;transform:translateX(0) translateY(0) scale(1)}
+.amd-stage[data-step="klarii"] .amd-character.klarii,.amd-stage[data-step="meet"] .amd-character.klarii,.amd-stage[data-step="ask"] .amd-character.klarii{opacity:1;transform:translateX(0) translateY(0) scale(1)}
+.amd-stage[data-step="meet"] .amd-character.deepii,.amd-stage[data-step="ask"] .amd-character.deepii{transform:translateX(4vw) translateY(0) scale(1)}
+.amd-stage[data-step="meet"] .amd-character.klarii,.amd-stage[data-step="ask"] .amd-character.klarii{transform:translateX(-4vw) translateY(0) scale(1)}
+.amd-stage[data-step="accepted"] .amd-character.deepii,.amd-stage[data-step="accepted"] .amd-character.klarii,.amd-stage[data-step="ticket"] .amd-character.deepii,.amd-stage[data-step="ticket"] .amd-character.klarii{opacity:0;transform:translateY(18px) scale(.9)}
+.amd-stage[data-step="accepted"] .amd-character.couple,.amd-stage[data-step="ticket"] .amd-character.couple{opacity:1;transform:translate(-50%,0) scale(1)}
+.amd-character.deepii,.amd-character.klarii{animation:amdFloatBreathe 4.4s ease-in-out infinite}
+.amd-stage[data-step="accepted"] .amd-character.couple,.amd-stage[data-step="ticket"] .amd-character.couple{animation:amdFloatBreathe 4.2s ease-in-out infinite}
+.amd-dialog{position:relative;z-index:6;align-self:end;margin:0 auto 12px;width:min(860px,100%);background:rgba(255,250,246,.92);color:#402f36;border-radius:28px;border:1px solid rgba(255,255,255,.82);backdrop-filter:blur(14px);box-shadow:0 18px 52px rgba(30,15,24,.18);padding:18px 18px 16px}
+.amd-speaker{display:inline-block;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:#925f71;margin-bottom:8px;font-weight:700}.amd-line{font-size:clamp(1rem,1.7vw,1.25rem);line-height:1.72;color:#422f37;min-height:3.4em}.amd-hint{margin-top:10px;font-size:.9rem;color:#785764}
+.amd-actions{position:relative;z-index:6;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.amd-btn{border:none;border-radius:999px;padding:12px 18px;font-weight:700;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease}.amd-btn:hover{transform:translateY(-2px)}.amd-btn.primary{background:linear-gradient(135deg,#f39cb2,#e87c99);color:#fff;box-shadow:0 12px 26px rgba(232,124,153,.32)}.amd-btn.secondary{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.24)}.amd-btn.soft{background:rgba(87,57,69,.08);color:#533642;border:1px solid rgba(87,57,69,.12)}
+.amd-ticket-wrap{display:none;position:relative;z-index:7;margin:14px auto 0;width:min(920px,100%)}.amd-ticket-wrap.show{display:block;animation:amdTicketUp .8s cubic-bezier(.2,.82,.2,1) both}
+.amd-ticket{display:grid;grid-template-columns:minmax(0,1fr) 132px;background:rgba(255,248,243,.97);color:#443039;border-radius:28px;overflow:hidden;box-shadow:0 18px 60px rgba(32,18,24,.18);border:1px solid rgba(255,255,255,.8)}
+.amd-ticket-main{padding:22px 24px 20px}.amd-ticket-kicker{text-transform:uppercase;letter-spacing:.12em;font-size:.74rem;color:#9b6e7e;margin-bottom:8px;font-weight:700}.amd-ticket h3{margin:0 0 6px;font-size:clamp(1.55rem,2.6vw,2rem);color:#34242b}.amd-ticket-reserved{font-weight:700;color:#7e5562;margin-bottom:10px}.amd-ticket-copy{margin:0;color:#57414a;line-height:1.65}.amd-ticket-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.amd-ticket-stub{position:relative;padding:20px 14px;border-left:2px dashed rgba(155,110,126,.3);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:linear-gradient(180deg,rgba(244,222,229,.9),rgba(255,244,240,.9));color:#765361}.amd-ticket-stub:before,.amd-ticket-stub:after{content:"";position:absolute;left:-12px;width:24px;height:24px;border-radius:50%;background:#dcb3a8}.amd-ticket-stub:before{top:-12px}.amd-ticket-stub:after{bottom:-12px}.heart-mark{font-size:1.5rem;margin-bottom:10px}.amd-ticket-stub strong{font-size:.95rem;letter-spacing:.12em}.amd-ticket-stub span{margin-top:8px;font-size:.82rem;letter-spacing:.08em}.amd-ticket-tag{margin-top:10px;padding:6px 10px;border-radius:999px;background:rgba(118,83,97,.12);font-size:.74rem;font-weight:700}
+.amd-heart-burst{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:8}.amd-burst-heart{position:absolute;left:50%;bottom:180px;font-size:1.35rem;color:#fff;animation:amdBurstHeart 1.45s ease forwards;text-shadow:0 4px 12px rgba(232,124,153,.55)}.amd-live{position:absolute;left:-9999px}
+@keyframes amdStarDrift{from{background-position:0 0}to{background-position:72px 144px}}
+@keyframes amdCloudFloat{0%,100%{transform:translateX(0)}50%{transform:translateX(16px)}}
+@keyframes amdFloatBreathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-8px) scale(1.01)}}
+@keyframes amdTicketUp{0%{opacity:0;transform:translateY(18px) scale(.97)}100%{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes amdBurstHeart{0%{opacity:0;transform:translate(0,0) scale(.6) rotate(0)}15%{opacity:1}100%{opacity:0;transform:translate(var(--x),calc(-1 * var(--y))) scale(1.25) rotate(var(--r))}}
+@keyframes amdPetalFall{0%{transform:translate3d(0,-10%,0) rotate(0deg)}100%{transform:translate3d(var(--drift,0),108vh,0) rotate(var(--spin,180deg))}}
+@keyframes amdFirefly{0%,100%{transform:translate(0,0) scale(.8);opacity:.25}25%{transform:translate(12px,-18px) scale(1)}50%{transform:translate(-10px,16px) scale(.9);opacity:1}75%{transform:translate(8px,-10px) scale(1.05)}}
+@media (max-width: 920px){.amd-character.deepii,.amd-character.klarii{width:min(34vw,250px);height:min(46vh,360px)}.amd-character.couple{width:min(42vw,280px);height:min(42vh,360px)}.amd-story{height:calc(100dvh - 76px)}}
+@media (max-width: 640px){.amd-panel-head{padding:14px 12px 6px;align-items:flex-start}.amd-head-copy h2{font-size:1.38rem;padding-right:6px}.amd-head-copy p{font-size:.9rem;max-width:100%}.amd-progress{max-width:unset;gap:6px}.amd-dot{width:10px;height:10px}.amd-close{width:42px;height:42px}.amd-story{padding:0 8px 12px;height:calc(100dvh - 70px);grid-template-rows:1fr auto auto auto}.amd-stage{padding:8px 2px 8px;align-items:flex-end}.amd-character.deepii,.amd-character.klarii{width:44vw;height:34vh}.amd-character.couple{width:56vw;height:38vh;bottom:10px}.amd-stage[data-step="meet"] .amd-character.deepii,.amd-stage[data-step="ask"] .amd-character.deepii{transform:translateX(7vw) translateY(0) scale(1)}.amd-stage[data-step="meet"] .amd-character.klarii,.amd-stage[data-step="ask"] .amd-character.klarii{transform:translateX(-7vw) translateY(0) scale(1)}.amd-dialog{padding:14px 14px 12px;border-radius:22px}.amd-line{font-size:1rem;line-height:1.6;min-height:4.6em}.amd-hint{font-size:.84rem}.amd-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.amd-actions .amd-btn.full{grid-column:1 / -1}.amd-btn{padding:12px 14px;font-size:.95rem}.amd-ticket{grid-template-columns:1fr}.amd-ticket-main{padding:18px 16px 16px}.amd-ticket-stub{border-left:none;border-top:2px dashed rgba(155,110,126,.3);padding:14px 12px;gap:6px}.amd-ticket-stub:before,.amd-ticket-stub:after{display:none}.amd-burst-heart{bottom:240px}}
+@media(prefers-reduced-motion:reduce){.amd-stars,.amd-character,.amd-burst-heart,.amd-cloud,.amd-petal,.amd-fly{animation:none!important}}
 </style>
 </head>
 <body>
@@ -581,34 +601,73 @@ body.dark .cmh-feature{background:linear-gradient(145deg,rgba(255,255,255,.1),rg
 
 
 <div class="amd-overlay" id="aboutTimeOverlay" role="dialog" aria-modal="true" aria-labelledby="aboutTimeTitle" aria-hidden="true">
-  <section class="amd-panel">
-    <div class="amd-story-image-wrap" aria-hidden="true">
-      <img class="amd-story-image" src="about-time-story.png" alt="">
+  <section class="amd-panel" id="aboutTimePanel" data-step="intro">
+    <div class="amd-sky-glow" aria-hidden="true"></div>
+    <div class="amd-stars" aria-hidden="true"></div>
+    <div class="amd-moon" aria-hidden="true"></div>
+    <div class="amd-cloud one" aria-hidden="true"></div>
+    <div class="amd-cloud two" aria-hidden="true"></div>
+    <div class="amd-hills" aria-hidden="true"></div>
+    <div class="amd-lake" aria-hidden="true"></div>
+    <div class="amd-path" aria-hidden="true"></div>
+    <div class="amd-lanterns" aria-hidden="true">
+      <span class="amd-lantern" style="left:8%;bottom:15%"></span>
+      <span class="amd-lantern" style="left:19%;bottom:20%"></span>
+      <span class="amd-lantern" style="left:28%;bottom:17%"></span>
+      <span class="amd-lantern" style="right:29%;bottom:21%"></span>
+      <span class="amd-lantern" style="right:16%;bottom:17%"></span>
+      <span class="amd-lantern" style="right:7%;bottom:14%"></span>
     </div>
-    <div class="amd-glow" aria-hidden="true"></div>
-    <div class="amd-petals" id="aboutTimePetals" aria-hidden="true"></div>
     <div class="amd-fireflies" id="aboutTimeFireflies" aria-hidden="true"></div>
-    <button class="amd-close" id="aboutTimeCloseBtn" type="button" aria-label="Close the virtual date invitation">✕</button>
-    <div class="amd-story-ui">
-      <h2 id="aboutTimeTitle">A little story, just for you, my love ♡</h2>
-      <p>Our virtual date invitation will appear every time you visit, because every moment with you feels like the first time.</p>
-      <div class="amd-actions">
-        <button class="amd-yes" id="aboutTimeYesBtn" type="button">Yes, my love ✨</button>
-        <button class="amd-replay" id="aboutTimeReplayBtn" type="button">Replay the story</button>
+    <div class="amd-petals" id="aboutTimePetals" aria-hidden="true"></div>
+    <div class="amd-panel-head">
+      <div class="amd-head-copy">
+        <h2 id="aboutTimeTitle">A little story, just for you, my love ♡</h2>
+        <p>Follow the little journey step by step. Tap <strong>Next</strong> to move the story forward until your virtual date invitation appears.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="amd-progress" id="aboutTimeProgress" aria-label="Story progress"></div>
+        <button class="amd-close" id="aboutTimeCloseBtn" type="button" aria-label="Close the movie invitation">✕</button>
       </div>
     </div>
-    <div class="amd-confirmation" id="aboutTimeConfirmation">
-      <div class="amd-confirmation-card">
-        <h3>Our virtual date is waiting ♡</h3>
-        <p>I cannot wait to watch <strong>About Time</strong> with you, heart to heart, even across the distance.</p>
-        <div class="amd-actions">
-          <button class="amd-yes" id="aboutTimeKeepTicketBtn" type="button">See you at our movie date ♡</button>
-          <button class="amd-replay" id="aboutTimeBackBtn" type="button">See the story again</button>
-        </div>
+    <div class="amd-story">
+      <div class="amd-stage" id="aboutTimeStage" data-step="intro">
+        <figure class="amd-character deepii" aria-hidden="false">
+          <img class="amd-character-img" id="aboutTimeDeepiiImg" src="confident_stride_in_a_sleek_suit.png" alt="Illustrated Deepii in a charcoal suit">
+        </figure>
+        <figure class="amd-character klarii" aria-hidden="false">
+          <img class="amd-character-img" id="aboutTimeKlariiImg" src="friendly_wave_in_minimalist_chic_outfit.png" alt="Illustrated Klarii smiling in a black outfit">
+        </figure>
+        <figure class="amd-character couple" id="aboutTimeCouple" aria-hidden="true">
+          <img class="amd-character-img" src="romantic_embrace_in_monochrome_elegance.png" alt="Illustrated Deepii and Klarii together in a romantic embrace">
+        </figure>
       </div>
+      <div class="amd-dialog" id="aboutTimeSpeech">
+        <span class="amd-speaker" id="aboutTimeSpeaker">Deepii</span>
+        <div class="amd-line" id="aboutTimeLine">My sweetest Klarii, there is a little story waiting for you tonight.</div>
+        <div class="amd-hint" id="aboutTimeHint">Tap Next to begin the journey.</div>
+      </div>
+      <div class="amd-actions" id="aboutTimeControls">
+        <button class="amd-btn secondary" id="aboutTimeBackBtn" type="button">Back</button>
+        <button class="amd-btn primary" id="aboutTimeNextBtn" type="button">Next</button>
+        <button class="amd-btn primary full" id="aboutTimeYesBtn" type="button" hidden>Yes, my love ✨</button>
+        <button class="amd-btn soft full" id="aboutTimeFinishBtn" type="button" hidden>See you at our virtual date ♡</button>
+      </div>
+      <div class="amd-ticket-wrap" id="aboutTimeTicketWrap">
+        <article class="amd-ticket" aria-label="Virtual date ticket for About Time reserved for Klarii">
+          <div class="amd-ticket-main">
+            <div class="amd-ticket-kicker">Deepii &amp; Klarii Virtual Date</div>
+            <h3>About Time</h3>
+            <div class="amd-ticket-reserved">Reserved for Klarii, with all of Deepii's heart</div>
+            <p class="amd-ticket-copy">No flights, no trains, just two hearts meeting through a screen for one soft, beautiful evening together. Let this little ticket be your doorway to our virtual date.</p>
+            <div class="amd-ticket-actions"><button class="amd-btn soft" id="aboutTimeReplayBtn" type="button">Replay our story</button><button class="amd-btn primary" id="aboutTimeKeepTicketBtn" type="button">Keep this invitation ♡</button></div>
+          </div>
+          <aside class="amd-ticket-stub"><div class="heart-mark">∞♡</div><strong>VIRTUAL DATE</strong><span>ABOUT TIME</span><div class="amd-ticket-tag">For Klarii</div></aside>
+        </article>
+      </div>
+      <div class="amd-heart-burst" id="aboutTimeHeartBurst" aria-hidden="true"></div>
+      <div class="amd-live" id="aboutTimeLive" aria-live="polite"></div>
     </div>
-    <div class="amd-heart-burst" id="aboutTimeHeartBurst" aria-hidden="true"></div>
-    <div class="amd-live" id="aboutTimeLive" aria-live="polite"></div>
   </section>
 </div>
 
@@ -1607,117 +1666,165 @@ handleMobileHeroScroll();
 
 
 
-// About Time animated virtual-date story
+// About Time animated movie-date invitation
 const aboutTimeOverlay = document.getElementById('aboutTimeOverlay');
+const aboutTimePanel = document.getElementById('aboutTimePanel');
+const aboutTimeStage = document.getElementById('aboutTimeStage');
+const aboutTimeSpeaker = document.getElementById('aboutTimeSpeaker');
+const aboutTimeLine = document.getElementById('aboutTimeLine');
+const aboutTimeHint = document.getElementById('aboutTimeHint');
+const aboutTimeProgress = document.getElementById('aboutTimeProgress');
+const aboutTimeTicketWrap = document.getElementById('aboutTimeTicketWrap');
+const aboutTimeHeartBurst = document.getElementById('aboutTimeHeartBurst');
+const aboutTimeLive = document.getElementById('aboutTimeLive');
 const aboutTimePetals = document.getElementById('aboutTimePetals');
 const aboutTimeFireflies = document.getElementById('aboutTimeFireflies');
-const aboutTimeHeartBurst = document.getElementById('aboutTimeHeartBurst');
-const aboutTimeConfirmation = document.getElementById('aboutTimeConfirmation');
-const aboutTimeLive = document.getElementById('aboutTimeLive');
+const aboutTimeDeepiiImg = document.getElementById('aboutTimeDeepiiImg');
+const aboutTimeKlariiImg = document.getElementById('aboutTimeKlariiImg');
+const aboutTimeBackBtn = document.getElementById('aboutTimeBackBtn');
+const aboutTimeNextBtn = document.getElementById('aboutTimeNextBtn');
+const aboutTimeYesBtn = document.getElementById('aboutTimeYesBtn');
+const aboutTimeFinishBtn = document.getElementById('aboutTimeFinishBtn');
 let aboutTimeCurrentUser = null;
 let aboutTimeLastFocus = null;
-
+let aboutTimeStepIndex = 0;
+const ABOUT_TIME_INVITE_VERSION = 6;
+const aboutTimeSteps = [
+  { id:'intro', speaker:'Deepii', line:'My sweetest Klarii, there is a little story waiting for you tonight.', hint:'Tap Next to begin the journey.' },
+  { id:'deepii', speaker:'Deepii', line:'Even with miles between us, my heart always knows the way back to you.', hint:'Deepii walks into the story.' },
+  { id:'klarii', speaker:'Deepii', line:'And then, as if the night grew even softer, here comes my beautiful Klarii.', hint:'Klarii steps into the story.' },
+  { id:'meet', speaker:'Deepii', line:'When our eyes meet, distance feels smaller and the whole world grows quiet around us.', hint:'Their hearts meet in the middle.' },
+  { id:'ask', speaker:'Deepii', line:'Would you join me for a little virtual date and watch About Time with me, my love?', hint:'This is the question moment.', ask:true },
+  { id:'accepted', speaker:'Klarii', line:'Yes, my love. I will meet you there, heart to heart, across the distance. ♡', hint:'Klarii says yes.', accepted:true },
+  { id:'ticket', speaker:'Deepii', line:'Then this little ticket is yours, my love, a doorway into our evening together.', hint:'Your virtual date invitation is ready.', ticket:true, finish:true }
+];
+function aboutTimeBuildProgress() {
+  aboutTimeProgress.innerHTML = '';
+  aboutTimeSteps.forEach((step, index) => {
+    const dot = document.createElement('span');
+    dot.className = 'amd-dot';
+    dot.setAttribute('aria-hidden', 'true');
+    if (index < aboutTimeStepIndex) dot.classList.add('done');
+    if (index === aboutTimeStepIndex) dot.classList.add('active');
+    aboutTimeProgress.appendChild(dot);
+  });
+}
 function aboutTimeSpawnPetals() {
+  if (!aboutTimePetals) return;
   aboutTimePetals.innerHTML = '';
-  for (let i = 0; i < 24; i += 1) {
+  for (let i = 0; i < 18; i++) {
     const petal = document.createElement('span');
     petal.className = 'amd-petal';
-    petal.style.left = `${2 + Math.random() * 96}%`;
-    petal.style.animationDuration = `${7 + Math.random() * 7}s`;
-    petal.style.animationDelay = `${Math.random() * 5}s`;
-    petal.style.setProperty('--drift', `${Math.round(Math.random() * 180 - 90)}px`);
-    petal.style.setProperty('--spin', `${Math.round(Math.random() * 520 - 260)}deg`);
+    petal.style.left = `${Math.random() * 100}%`;
+    petal.style.animationDuration = `${10 + Math.random() * 6}s`;
+    petal.style.animationDelay = `${Math.random() * 4}s`;
+    petal.style.setProperty('--drift', `${-40 + Math.random() * 80}px`);
+    petal.style.setProperty('--spin', `${120 + Math.random() * 280}deg`);
     aboutTimePetals.appendChild(petal);
   }
 }
-
 function aboutTimeSpawnFireflies() {
+  if (!aboutTimeFireflies) return;
   aboutTimeFireflies.innerHTML = '';
-  for (let i = 0; i < 18; i += 1) {
+  for (let i = 0; i < 16; i++) {
     const fly = document.createElement('span');
-    fly.className = 'amd-firefly';
+    fly.className = 'amd-fly';
     fly.style.left = `${4 + Math.random() * 92}%`;
-    fly.style.top = `${18 + Math.random() * 68}%`;
+    fly.style.top = `${18 + Math.random() * 62}%`;
     fly.style.animationDelay = `${Math.random() * 4}s`;
-    fly.style.animationDuration = `${3.8 + Math.random() * 4}s`;
-    fly.style.setProperty('--fx', `${Math.round(Math.random() * 50 - 25)}px`);
-    fly.style.setProperty('--fy', `${Math.round(Math.random() * 42 - 21)}px`);
+    fly.style.animationDuration = `${4 + Math.random() * 3}s`;
     aboutTimeFireflies.appendChild(fly);
   }
 }
-
-function aboutTimeStartStory() {
-  aboutTimeConfirmation.classList.remove('show');
-  aboutTimeSpawnPetals();
-  aboutTimeSpawnFireflies();
-  const image = aboutTimeOverlay.querySelector('.amd-story-image');
-  image.style.animation = 'none';
-  void image.offsetWidth;
-  image.style.animation = '';
-  aboutTimeLive.textContent = 'The animated virtual date story has started.';
-}
-
-function openAboutTimeInvite() {
-  aboutTimeLastFocus = document.activeElement;
-  aboutTimeOverlay.classList.add('open');
-  aboutTimeOverlay.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-  aboutTimeStartStory();
-  document.getElementById('aboutTimeCloseBtn').focus({preventScroll:true});
-}
-
-function closeAboutTimeInvite() {
-  aboutTimeOverlay.classList.remove('open');
-  aboutTimeOverlay.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-  aboutTimeConfirmation.classList.remove('show');
-  if (aboutTimeLastFocus && typeof aboutTimeLastFocus.focus === 'function') aboutTimeLastFocus.focus({preventScroll:true});
-}
-
 function aboutTimeBurst() {
   aboutTimeHeartBurst.innerHTML = '';
-  const symbols = ['♡','♥','✦','∞','♡'];
-  for (let i = 0; i < 34; i += 1) {
+  for (let i = 0; i < 14; i++) {
     const heart = document.createElement('span');
     heart.className = 'amd-burst-heart';
-    heart.textContent = symbols[i % symbols.length];
-    const angle = (Math.PI * 2 * i) / 34;
-    const distance = 110 + Math.random() * 240;
-    heart.style.setProperty('--x', `${Math.cos(angle) * distance}px`);
-    heart.style.setProperty('--y', `${Math.sin(angle) * distance}px`);
-    heart.style.setProperty('--r', `${Math.round(Math.random() * 480 - 240)}deg`);
-    heart.style.animationDelay = `${Math.random() * .2}s`;
+    heart.textContent = i % 3 === 0 ? '♡' : '♥';
+    heart.style.setProperty('--x', `${-150 + Math.random() * 300}px`);
+    heart.style.setProperty('--y', `${110 + Math.random() * 150}px`);
+    heart.style.setProperty('--r', `${-35 + Math.random() * 70}deg`);
+    heart.style.animationDelay = `${Math.random() * .16}s`;
     aboutTimeHeartBurst.appendChild(heart);
   }
   setTimeout(() => { aboutTimeHeartBurst.innerHTML = ''; }, 1900);
 }
-
+function aboutTimeInviteRef(user) {
+  return doc(db, 'users', user.uid, 'movieDates', 'about-time');
+}
 async function aboutTimeSaveAcceptance() {
   if (!aboutTimeCurrentUser) return;
-  const acceptedData = { movie: 'About Time', reservedFor: 'Klarii', accepted: true, type: 'virtual-date', acceptedAt: Date.now(), updatedAt: Date.now() };
-  try { await setDoc(doc(db, 'users', aboutTimeCurrentUser.uid, 'movieDates', 'about-time'), acceptedData, { merge: true }); } catch (error) { console.warn('Movie invitation acceptance was not saved:', error); }
+  const acceptedData = { movie: 'About Time', reservedFor: 'Klarii', accepted: true, type: 'virtual-date', inviteVersion: ABOUT_TIME_INVITE_VERSION, acceptedAt: Date.now(), updatedAt: Date.now() };
+  localStorage.setItem(`about_time_invite_${aboutTimeCurrentUser.uid}`, JSON.stringify(acceptedData));
+  try { await setDoc(aboutTimeInviteRef(aboutTimeCurrentUser), acceptedData, { merge: true }); } catch (error) { console.warn('Movie invitation saved locally:', error); }
 }
-
+function aboutTimeRenderStep() {
+  const step = aboutTimeSteps[aboutTimeStepIndex];
+  aboutTimePanel.dataset.step = step.id;
+  aboutTimeStage.dataset.step = step.id;
+  aboutTimeSpeaker.textContent = step.speaker;
+  aboutTimeLine.textContent = step.line;
+  aboutTimeHint.textContent = step.hint;
+  aboutTimeLive.textContent = `${step.speaker}: ${step.line}`;
+  aboutTimeTicketWrap.classList.toggle('show', !!step.ticket);
+  aboutTimeBackBtn.hidden = aboutTimeStepIndex === 0 || !!step.ticket;
+  aboutTimeNextBtn.hidden = !!step.ask || !!step.finish;
+  aboutTimeYesBtn.hidden = !step.ask;
+  aboutTimeFinishBtn.hidden = !step.finish;
+  if (step.id === 'ask') {
+    aboutTimeDeepiiImg.src = 'inviting_gesture_with_event_ticket.png';
+    aboutTimeKlariiImg.src = 'friendly_wave_in_minimalist_chic_outfit.png';
+  } else if (step.id === 'accepted' || step.id === 'ticket') {
+    aboutTimeDeepiiImg.src = 'confident_stride_in_a_sleek_suit.png';
+    aboutTimeKlariiImg.src = 'stylized_portrait_of_a_young_woman.png';
+  } else {
+    aboutTimeDeepiiImg.src = 'confident_stride_in_a_sleek_suit.png';
+    aboutTimeKlariiImg.src = 'friendly_wave_in_minimalist_chic_outfit.png';
+  }
+  aboutTimeBuildProgress();
+}
+function aboutTimeGoToStep(index) { aboutTimeStepIndex = Math.max(0, Math.min(index, aboutTimeSteps.length - 1)); aboutTimeRenderStep(); }
+function aboutTimeNext() { if (aboutTimeStepIndex < aboutTimeSteps.length - 1) aboutTimeGoToStep(aboutTimeStepIndex + 1); }
+function aboutTimeBack() { if (aboutTimeStepIndex > 0) aboutTimeGoToStep(aboutTimeStepIndex - 1); }
 async function aboutTimeAccept() {
+  aboutTimeGoToStep(5);
   aboutTimeBurst();
-  aboutTimeConfirmation.classList.add('show');
-  aboutTimeLive.textContent = 'Klarii accepted the About Time virtual date invitation.';
   await aboutTimeSaveAcceptance();
+  setTimeout(() => aboutTimeGoToStep(6), 1150);
 }
-
+function openAboutTimeInvite() {
+  if (!aboutTimeOverlay) return;
+  aboutTimeLastFocus = document.activeElement;
+  aboutTimeOverlay.classList.add('open');
+  aboutTimeOverlay.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  aboutTimeStepIndex = 0;
+  aboutTimeSpawnPetals();
+  aboutTimeSpawnFireflies();
+  aboutTimeRenderStep();
+  document.getElementById('aboutTimeCloseBtn').focus({preventScroll:true});
+}
+function closeAboutTimeInvite() {
+  if (!aboutTimeOverlay) return;
+  aboutTimeOverlay.classList.remove('open');
+  aboutTimeOverlay.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  if (aboutTimeLastFocus && typeof aboutTimeLastFocus.focus === 'function') aboutTimeLastFocus.focus({preventScroll:true});
+}
 async function aboutTimeMaybeAutoOpen(user) {
   aboutTimeCurrentUser = user;
-  setTimeout(() => openAboutTimeInvite(), 700);
+  setTimeout(() => openAboutTimeInvite(), 850);
 }
-
 document.getElementById('aboutTimeCloseBtn').addEventListener('click', closeAboutTimeInvite);
-document.getElementById('aboutTimeYesBtn').addEventListener('click', aboutTimeAccept);
-document.getElementById('aboutTimeReplayBtn').addEventListener('click', aboutTimeStartStory);
-document.getElementById('aboutTimeBackBtn').addEventListener('click', aboutTimeStartStory);
+aboutTimeBackBtn.addEventListener('click', aboutTimeBack);
+aboutTimeNextBtn.addEventListener('click', aboutTimeNext);
+aboutTimeYesBtn.addEventListener('click', aboutTimeAccept);
+document.getElementById('aboutTimeReplayBtn').addEventListener('click', () => { aboutTimeTicketWrap.classList.remove('show'); aboutTimeStepIndex = 0; aboutTimeRenderStep(); });
 document.getElementById('aboutTimeKeepTicketBtn').addEventListener('click', closeAboutTimeInvite);
+aboutTimeFinishBtn.addEventListener('click', closeAboutTimeInvite);
 aboutTimeOverlay.addEventListener('click', event => { if (event.target === aboutTimeOverlay) closeAboutTimeInvite(); });
 document.addEventListener('keydown', event => { if (event.key === 'Escape' && aboutTimeOverlay.classList.contains('open')) closeAboutTimeInvite(); });
-
 
 const loginBtn = document.getElementById("loginBtn");
 const logoutBtn = document.getElementById("logoutBtn");
