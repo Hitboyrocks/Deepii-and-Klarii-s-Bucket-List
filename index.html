@@ -1496,6 +1496,7 @@ const aboutTimePetals = document.getElementById('aboutTimePetals');
 let aboutTimeTimers = [];
 let aboutTimeCurrentUser = null;
 let aboutTimeLastFocus = null;
+const ABOUT_TIME_INVITE_VERSION = 3;
 
 function aboutTimeClearTimers() {
   aboutTimeTimers.forEach(clearTimeout);
@@ -1600,7 +1601,7 @@ function aboutTimeInviteRef(user) {
 
 async function aboutTimeSaveAcceptance() {
   if (!aboutTimeCurrentUser) return;
-  const acceptedData = { movie: 'About Time', reservedFor: 'Klarii', accepted: true, acceptedAt: Date.now(), updatedAt: Date.now() };
+  const acceptedData = { movie: 'About Time', reservedFor: 'Klarii', accepted: true, inviteVersion: ABOUT_TIME_INVITE_VERSION, acceptedAt: Date.now(), updatedAt: Date.now() };
   localStorage.setItem(`about_time_invite_${aboutTimeCurrentUser.uid}`, JSON.stringify(acceptedData));
   try {
     await setDoc(aboutTimeInviteRef(aboutTimeCurrentUser), acceptedData, { merge: true });
@@ -1625,21 +1626,31 @@ async function aboutTimeAccept() {
 
 async function aboutTimeMaybeAutoOpen(user) {
   aboutTimeCurrentUser = user;
-  const email = (user.email || '').toLowerCase();
-  const isKlarii = email === 'klaratylsova@email.cz' || email.startsWith('klara');
-  if (!isKlarii) return;
-  let accepted = false;
+
+  // The invitation is saved separately for every Firebase account. Using a
+  // version number ensures this redesigned invitation still appears even if
+  // an older About Time invitation was accepted previously.
+  let acceptedCurrentVersion = false;
   try {
     const local = JSON.parse(localStorage.getItem(`about_time_invite_${user.uid}`) || '{}');
-    accepted = local.accepted === true;
+    acceptedCurrentVersion = local.accepted === true && Number(local.inviteVersion || 0) >= ABOUT_TIME_INVITE_VERSION;
   } catch {}
+
   try {
     const snapshot = await getDoc(aboutTimeInviteRef(user));
-    accepted = accepted || (snapshot.exists() && snapshot.data().accepted === true);
+    if (snapshot.exists()) {
+      const saved = snapshot.data() || {};
+      acceptedCurrentVersion = acceptedCurrentVersion || (
+        saved.accepted === true && Number(saved.inviteVersion || 0) >= ABOUT_TIME_INVITE_VERSION
+      );
+    }
   } catch (error) {
     console.warn('Could not check movie invitation status:', error);
   }
-  if (!accepted) aboutTimeLater(() => openAboutTimeInvite(true), 950);
+
+  if (!acceptedCurrentVersion) {
+    aboutTimeLater(() => openAboutTimeInvite(true), 950);
+  }
 }
 
 document.getElementById('aboutTimeCloseBtn').addEventListener('click', closeAboutTimeInvite);
